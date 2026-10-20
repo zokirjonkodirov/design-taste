@@ -12,7 +12,7 @@
       "name": "design-taste",
       "source": "./",
       "description": "Opinionated UI review, design, and implementation guidance distilled from 24 designers' published philosophies.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "design"
     }
   ]
