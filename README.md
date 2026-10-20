@@ -1,12 +1,30 @@
 # design-taste
 
-An agent skill for reviewing, suggesting, and implementing web and mobile UI with more craft and less default output. It is aimed at generic generated UI: boilerplate cards, arbitrary spacing, decorative gradients, missing interaction states, and desktop layouts shrunk onto phones.
+An agent skill that makes the agent ask what a screen is for before it touches a token. It starts from the user's question, builds the one object that answers it, reviews from five chairs, and only then applies the floor: tokens, states, targets, contrast. Aimed at generic generated UI and at screens that show data without answering anything.
 
 The guidance is **inspired by** public work from 24 designers. It was written by an AI and is **not endorsed by any of them**. Each entry is marked **Checked** or **Partial** according to what the designer's own page supported. See [NOTICE.md](NOTICE.md).
 
-## Example
+## The difference it is for
 
-Same prompt, same model. The left agent had no skill. The right agent read `SKILL.md`. Nothing was edited afterwards.
+A real redesign, done with the same references the skill is built from. Same data, same screen. Before answered "what will I get, and where?" in grey text. After answers it with one object, does the user's arithmetic, and gives one action.
+
+| Before | After |
+|:---:|:---:|
+| <img src="examples/kurs/before/today.png" width="320" alt="Kurs before: hero number, bank name in grey, a plain list with negative deltas, empty lower half"> | <img src="examples/kurs/after/today.png" width="320" alt="Kurs after: one slip with amount, result, best bank, distance and a Directions button; other banks with shortfall bars; amount presets in thumb reach"> |
+
+Four screens, the five-chair critique, and the vocabulary rules that removed the inconsistencies are in [`examples/kurs/`](examples/kurs/). The principles they demonstrate are in [`references/vision.md`](skills/design-taste/references/vision.md).
+
+## The vision test, with and without the skill
+
+Same data, same model, prompt withholds the user's question. Both agents found it. The skill run has one action, a decision sentence with its threshold and assumption, comparisons as "N less" with bars, and no overflow. The no-skill run has no action on screen and is 80px wider than the phone. Scores for all four runs, including where the skill run slipped, are in [`examples/rates-screen/`](examples/rates-screen/).
+
+| Without skill | With skill |
+|:---:|:---:|
+| <img src="examples/rates-screen/question-withheld/without-skill-phone.png" width="320" alt="Rates screen built without the skill: hero card wider than the phone, two explanation boxes, bank list with buy, sell and taxi per row, no action button"> | <img src="examples/rates-screen/question-withheld/with-skill-phone.png" width="320" alt="Rates screen built with the skill: amount, bank, address, decision sentence with threshold, one Directions button, banks as N more or N less with bars"> |
+
+## The floor, with and without the skill
+
+Same prompt, same model. The left agent had no skill. The right agent read `SKILL.md` (0.3.0, before the vision layer). Nothing was edited afterwards. A settings page has no question to answer, so this shows only the floor.
 
 | Without skill | With skill |
 |:---:|:---:|
@@ -22,14 +40,17 @@ Both pages are competent. The skill's version is quieter, uses one token scale, 
 
 ```
 design-taste/
-  skills/design-taste/SKILL.md          entry point: modes, core rules, quick reference
+  skills/design-taste/SKILL.md          entry point: the three sentences, modes, core rules, quick reference
   skills/design-taste/references/
+    vision.md                           the question, the answer object, five chairs, one vocabulary, say no (Q1–Q10)
     philosophy.md                       one entry per designer, with status and a problem → entry table
     anti-slop-checklist.md              observable checks for review, including mobile and responsive
     tokens.md                           starter CSS tokens (spacing, type, color, motion, touch, a11y) + Tailwind map
     sources.md                          links, what each page showed, and removed entries
-  tests/                                fixture, expected findings, and how to re-run the with/without test
-  examples/settings-page/               with/without pages, captures, and a side-by-side compare.html
+  tests/                                fixtures, expected results, and how to re-run the with/without tests
+  examples/kurs/                        the real before/after redesign the vision layer is built from
+  examples/rates-screen/                the vision test: four runs scored item by item
+  examples/settings-page/               the floor test: with/without pages, captures, compare.html
   .claude-plugin/                       plugin and marketplace manifests
   scripts/install.sh                    copy-install script
   NOTICE.md                             not-endorsed statement and removal policy
@@ -70,9 +91,11 @@ To update, run `git pull` and re-run the script.
 
 ## Use
 
-- **Review:** critique existing screens or components against the checklist. Findings come back as `file:line · severity · principle · fix`, Blocking first.
-- **Suggest:** offer 2–3 directions, each tied to a named principle and its trade-off
-- **Implement:** build with the token scale, phone first, with complete interaction states, then verify at 375px and 1280px
+Every mode starts with three sentences: the user's question, the answer object, the one action.
+
+- **Review:** opens with "What this screen is for" and five-chair findings, then the checklist. Findings come back as `file:line · severity · principle · fix`, Blocking first, and end with what should be removed.
+- **Suggest:** 2–3 directions that answer the question differently, each with its principle and what it loses.
+- **Implement:** the answer object first, then evidence, comparisons in the user's unit, one action in thumb reach, then the floor; verified at 320, 375, and 1280px.
 
 If the project has its own design system, the project wins on conflicts.
 
@@ -81,13 +104,13 @@ If the project has its own design system, the project wins on conflicts.
 | Area | Designers |
 |---|---|
 | Restraint and utility | Rams, Maeda, Reichenstein, Butterick, Case |
-| Structure and system | Vinh, Spiekermann, Andersson, Frost, Shadeed |
+| Structure and system | Vinh, Spiekermann, Frost, Shadeed |
 | Usability and access | Nielsen, Norman, Yablonski, Pickering |
 | Mobile and responsive | Wroblewski, Clark, Marcotte |
-| Craft and feedback | Kowalski, Freiberg, Comeau, Coursey |
-| Character | Chimero, van Schneider, Appleton |
+| Craft and feedback | Kowalski, Freiberg, Comeau, Taylor |
+| Character | Chimero, van Schneider, Appleton, Allen |
 
-18 of 24 entries are **Checked** against the designer's own text. Removed entries and the reason for each are listed in `sources.md`.
+20 of 24 entries are **Checked** against the designer's own text. Removed entries and the reason for each are listed in `sources.md`.
 
 ## Reliability
 

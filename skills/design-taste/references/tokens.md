@@ -20,6 +20,7 @@ A neutral starting point, written from scratch. If the project already has token
   --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
   --text-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
   --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --text-display: clamp(2.5rem, 2rem + 3vw, 3.5rem); /* the answer object only */
   --leading-body: 1.55;
   --leading-tight: 1.2;
   --measure: 65ch;
@@ -119,9 +120,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline-offset: 0; /* avoids a double ring on bordered fields */
 }
 
-/* Hover only where a pointer can hover */
+/* Hover only where a pointer can hover. Scoped so a primary button keeps its accent. */
 @media (hover: hover) {
-  button:hover { background: var(--color-surface-hover); }
+  button:not(.primary):hover { background: var(--color-surface-hover); }
+  button.primary:hover { background: var(--color-accent-hover); }
 }
 
 /* Sticky bottom actions on phones */
@@ -132,10 +134,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 }
 
 /* Motion: respect user preference.
-   Removes decorative motion. Add .motion-essential to state-change
-   feedback (a switch knob, a dialog fade) to keep it, shortened. */
+   Deliberately heavy-handed: removes every transition and animation,
+   including state-change feedback, unless the element carries
+   .motion-essential. Add that class to a switch knob or dialog fade
+   to keep it, shortened. */
 @media (prefers-reduced-motion: reduce) {
-  *:not(.motion-essential), *::before, *::after {
+  *:not(.motion-essential), *:not(.motion-essential)::before, *:not(.motion-essential)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

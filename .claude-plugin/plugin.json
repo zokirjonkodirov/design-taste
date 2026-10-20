@@ -1,7 +1,7 @@
 {
   "name": "design-taste",
-  "version": "0.3.0",
-  "description": "Opinionated UI review, design, and implementation guidance for web and mobile, inspired by 24 designers' public work. AI-written; not endorsed by the designers. Counters generic AI-generated UI.",
+  "version": "0.4.0",
+  "description": "UI review, design, and implementation guidance for web and mobile that starts from the user's question and the one object that answers it, then applies the floor: tokens, states, targets, contrast. Inspired by 24 designers' public work. AI-written; not endorsed by the designers.",
   "author": {
     "name": "zokirjonkodirov",
     "url": "https://github.com/zokirjonkodirov"

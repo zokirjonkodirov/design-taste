@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kurs Toshkent</title>
+<style>
+  :root {
+    --bg: #f4f2ec;
+    --surface: #ffffff;
+    --surface-2: #f8f7f3;
+    --ink: #17191c;
+    --ink-2: #4e5560;
+    --ink-3: #8a9099;
+    --line: #e4e1d8;
+    --accent: #0e6b5e;
+    --accent-ink: #ffffff;
+    --accent-soft: #dcefe9;
+    --up: #1b7f4b;
+    --down: #b5382f;
+    --warn-bg: #fff4dc;
+    --warn-ink: #7a4b00;
+    --shadow: 0 1px 2px rgba(20, 24, 28, .05), 0 8px 24px rgba(20, 24, 28, .06);
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121416;
+      --surface: #1b1e21;
+      --surface-2: #22262a;
+      --ink: #eef0f2;
+      --ink-2: #aab1ba;
+      --ink-3: #727a84;
+      --line: #2d3238;
+      --accent: #37b89f;
+      --accent-ink: #0b1512;
+      --accent-soft: #163a33;
+      --up: #4fc97f;
+      --down: #f0776b;
+      --warn-bg: #3a2d10;
+      --warn-ink: #f2c771;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121416;
+    --surface: #1b1e21;
+    --surface-2: #22262a;
+    --ink: #eef0f2;
+    --ink-2: #aab1ba;
+    --ink-3: #727a84;
+    --line: #2d3238;
+    --accent: #37b89f;
+    --accent-ink: #0b1512;
+    --accent-soft: #163a33;
+    --up: #4fc97f;
+    --down: #f0776b;
+    --warn-bg: #3a2d10;
+    --warn-ink: #f2c771;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+    font-feature-settings: "tnum" 1, "cv11" 1;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  button { font: inherit; color: inherit; }
+  input { font: inherit; color: inherit; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px 48px; }
+
+  /* Header */
+  .top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0 14px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand h1 { font-size: 18px; margin: 0; letter-spacing: -0.01em; font-weight: 700; }
+  .brand .city { color: var(--ink-2); font-size: 14px; }
+  .brand .city::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin: 0 7px 2px 0; }
+  .updated { font-size: 13px; color: var(--ink-3); text-align: right; }
+  .updated b { color: var(--ink-2); font-weight: 600; }
+
+  /* Layout */
+  .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 420px 1fr; gap: 24px; align-items: start; }
+    .col-left { position: sticky; top: 16px; display: grid; gap: 24px; }
+  }
+  .col-left { display: grid; gap: 16px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* Hero */
+  .hero { padding: 18px 18px 16px; }
+  .seg { display: inline-flex; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  .seg button {
+    border: 0; background: transparent; padding: 7px 16px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--ink-2);
+  }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .amount {
+    display: flex; align-items: center; gap: 10px; margin-top: 14px;
+    border: 1px solid var(--line); border-radius: 12px; padding: 6px 6px 6px 14px; background: var(--surface-2);
+  }
+  .amount label { color: var(--ink-2); font-size: 14px; white-space: nowrap; }
+  .amount input {
+    flex: 1; min-width: 0; border: 0; background: transparent; font-size: 22px; font-weight: 600; text-align: right; outline: none; padding: 4px 0;
+  }
+  .amount .unit { font-weight: 700; font-size: 14px; background: var(--surface); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; }
+
+  .result { margin-top: 20px; }
+  .result .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; }
+  .result .big { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 4px 0 2px; }
+  .result .big small { font-size: 18px; font-weight: 600; color: var(--ink-2); letter-spacing: 0; margin-left: 4px; }
+  .result .where { font-size: 15px; color: var(--ink-2); }
+  .result .where b { color: var(--ink); font-weight: 600; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); vertical-align: middle; }
+  .note {
+    margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); font-size: 14px; color: var(--ink-2);
+  }
+  .note b { color: var(--ink); font-weight: 600; }
+  .note.warn { background: var(--warn-bg); color: var(--warn-ink); border-color: transparent; }
+  .note.warn b { color: inherit; }
+
+  /* Central bank */
+  .cb { padding: 16px 18px 14px; }
+  .cb .head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .cb .head h2 { font-size: 13px; margin: 0; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; }
+  .cb .rate { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 2px; }
+  .cb .rate small { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 4px; }
+  .chg { font-size: 14px; font-weight: 600; }
+  .chg.up { color: var(--up); }
+  .chg.down { color: var(--down); }
+  .spark { width: 100%; height: 88px; display: block; margin-top: 8px; overflow: visible; }
+  .spark .line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .spark .area { fill: var(--accent); opacity: .08; }
+  .spark .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+  .spark .lab { font-size: 11px; fill: var(--ink-3); }
+  .cb .range { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+  .cb .range b { color: var(--ink-2); font-weight: 600; }
+
+  /* Bank list */
+  .banks { padding: 0; overflow: hidden; }
+  .banks .head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px 12px; flex-wrap: wrap;
+  }
+  .banks h2 { font-size: 17px; margin: 0; font-weight: 700; }
+  .banks .sub { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+  .sort { display: inline-flex; gap: 4px; }
+  .sort button {
+    border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-2);
+  }
+  .sort button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+  .cols {
+    display: grid; grid-template-columns: 1.6fr .9fr .9fr .9fr 1.2fr; gap: 12px; padding: 8px 18px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; border-top: 1px solid var(--line); background: var(--surface-2);
+  }
+  .cols span:not(:first-child) { text-align: right; }
+  @media (max-width: 899px) { .cols { display: none; } }
+
+  .row { border-top: 1px solid var(--line); }
+  .row summary { list-style: none; cursor: pointer; padding: 12px 18px; }
+  .row summary::-webkit-details-marker { display: none; }
+  .row summary:hover { background: var(--surface-2); }
+  .row[open] summary { background: var(--surface-2); }
+  .row.best summary { box-shadow: inset 3px 0 0 var(--accent); }
+  .row.closed { opacity: .55; }
+  .r { display: grid; grid-template-columns: 1.6fr .9fr .9fr .9fr 1.2fr; gap: 12px; align-items: center; }
+  .r > div:not(:first-child) { text-align: right; }
+  .bank { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .logo {
+    width: 36px; height: 36px; border-radius: 10px; flex: 0 0 36px; display: grid; place-items: center; font-weight: 700; font-size: 11px; letter-spacing: .02em;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2);
+  }
+  .best .logo { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .bank .name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bank .meta { font-size: 12px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bank .meta .open { color: var(--up); }
+  .bank .meta .shut { color: var(--down); }
+  .rate-cell { font-weight: 600; }
+  .rate-cell.dim { font-weight: 400; color: var(--ink-3); }
+  .rate-cell .d { display: block; font-size: 11px; font-weight: 500; color: var(--ink-3); }
+  .dist .d { display: block; font-size: 11px; color: var(--ink-3); }
+  .get { font-weight: 700; }
+  .get .d { display: block; font-size: 11px; font-weight: 500; color: var(--ink-3); }
+  .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); margin-left: 6px; vertical-align: 2px; text-transform: uppercase; letter-spacing: .05em; }
+
+  @media (max-width: 899px) {
+    .r { grid-template-columns: 1fr auto; grid-template-areas: "bank get" "rates rates"; row-gap: 8px; }
+    .bank { grid-area: bank; }
+    .get { grid-area: get; }
+    .rates-m { grid-area: rates; display: flex; gap: 14px; font-size: 13px; color: var(--ink-2); padding-left: 46px; }
+    .rates-m b { color: var(--ink); font-weight: 600; }
+    .rates-m .muted { color: var(--ink-3); }
+    .rate-cell, .dist { display: none; }
+  }
+  @media (min-width: 900px) { .rates-m { display: none; } }
+
+  .branches { padding: 0 18px 14px 18px; font-size: 13px; color: var(--ink-2); }
+  .branches ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .branches li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 10px; background: var(--surface-2); border-radius: 10px; border: 1px solid var(--line); }
+  .branches li span:last-child { white-space: nowrap; color: var(--ink-3); }
+  .branches .hint { margin-top: 8px; font-size: 12px; color: var(--ink-3); }
+
+  .foot { margin-top: 18px; font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Kurs</h1>
+      <span class="city" id="city"></span>
+    </div>
+    <div class="updated" id="updated"></div>
+  </header>
+
+  <main class="grid">
+    <div class="col-left">
+      <section class="card hero" aria-label="Exchange calculator">
+        <div class="seg" role="group" aria-label="Mode">
+          <button type="button" id="modeSell" aria-pressed="true">Sell USD</button>
+          <button type="button" id="modeBuy" aria-pressed="false">Buy USD</button>
+        </div>
+        <div class="amount">
+          <label for="amt" id="amtLabel">You have</label>
+          <input id="amt" class="num" type="number" inputmode="numeric" min="1" step="1" value="100" aria-label="Amount in USD">
+          <span class="unit">USD</span>
+        </div>
+        <div class="result" id="result"></div>
+        <div id="notes"></div>
+      </section>
+
+      <section class="card cb" aria-label="Central bank rate">
+        <div class="head">
+          <h2>Central bank · 1 USD</h2>
+          <span class="chg num" id="cbChg"></span>
+        </div>
+        <div class="rate num" id="cbRate"></div>
+        <svg class="spark" id="spark" viewBox="0 0 360 88" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="range" id="cbRange"></div>
+      </section>
+    </div>
+
+    <section class="card banks" aria-label="Bank rates">
+      <div class="head">
+        <div>
+          <h2 id="banksTitle">Banks in Toshkent</h2>
+          <div class="sub" id="banksSub"></div>
+        </div>
+        <div class="sort" role="group" aria-label="Sort">
+          <button type="button" id="sortRate" aria-pressed="true">Best rate</button>
+          <button type="button" id="sortDist" aria-pressed="false">Nearest</button>
+        </div>
+      </div>
+      <div class="cols" id="cols"></div>
+      <div id="rows"></div>
+    </section>
+  </main>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+const DATA = {
+  "locale": "uz",
+  "words": { "currency": "so'm", "usd_in_sentences": "dollar", "usd_in_controls": "USD" },
+  "now": "2026-10-20T13:34:00+05:00",
+  "rates_updated_at": "2026-10-20T08:01:00+05:00",
+  "user": { "has_usd": 100, "mode": "sell_usd", "location_known": true, "city": "Toshkent" },
+  "central_bank": { "usd_som": 12045, "change_30d_som": 205, "change_30d_pct": 1.73, "high_30d": 12055, "low_30d": 11773, "low_30d_date": "2026-10-03" },
+  "taxi_som_per_km": 2400,
+  "banks": [
+    { "id": "xalq", "name": "Xalq Banki", "short": "Xalq", "buy_usd_som": 12060, "sell_usd_som": 12100, "distance_km": 7.2, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100100, Toshkent sh., Yakkasaroy tumani, ko'ch. Bobur, 45", "distance_km": 7.2 } ] },
+    { "id": "universal", "name": "Universal bank", "short": "UB", "buy_usd_som": 12015, "sell_usd_som": 12060, "distance_km": 1.0, "open_now": true, "open_until": "18:00",
+      "branches": [
+        { "address_raw": "100047, Toshkent sh., Yashnobod tumani, Maxtumquli ko`chasi, 2a uy", "distance_km": 1.0 },
+        { "address_raw": "190100, Surxondaryo viloyati, Termiz sh., ko'ch. At-Termiziy, 12", "distance_km": 1.0 },
+        { "address_raw": "100015, Toshkent sh., Mirobod tumani, ko'ch. Shahrisabz, 36", "distance_km": 3.8 }
+      ] },
+    { "id": "asia", "name": "Asia Alliance Bank", "short": "AAB", "buy_usd_som": 12010, "sell_usd_som": 12060, "distance_km": 1.4, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100000, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 107B", "distance_km": 1.4 } ] },
+    { "id": "brb", "name": "BRB", "short": "BRB", "buy_usd_som": 12005, "sell_usd_som": 12050, "distance_km": 0.6, "open_now": true, "open_until": "17:30",
+      "branches": [ { "address_raw": "100011, Toshkent sh., Shayxontoxur tumani, ko'ch. Navoiy, 18A", "distance_km": 0.6 } ] },
+    { "id": "kapital", "name": "Kapitalbank", "short": "KB", "buy_usd_som": 12060, "sell_usd_som": 12060, "distance_km": 4.1, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100096, Toshkent sh., Chilonzor tumani, ko'ch. Bunyodkor, 8", "distance_km": 4.1 } ] },
+    { "id": "orient", "name": "Orient Finans Bank", "short": "OFB", "buy_usd_som": 12000, "sell_usd_som": 12050, "distance_km": 2.3, "open_now": false, "opens_at": "09:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Abdulla Qodiriy, 1", "distance_km": 2.3 } ] },
+    { "id": "nbu", "name": "O'zbekiston Milliy banki", "short": "Milliy", "buy_usd_som": 11990, "sell_usd_som": 12040, "distance_km": 1.8, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 101", "distance_km": 1.8 } ] },
+    { "id": "trast", "name": "Trastbank", "short": "TB", "buy_usd_som": 11980, "sell_usd_som": 12030, "distance_km": 3.5, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100017, Toshkent sh., Mirobod tumani, ko'ch. Afrosiyob, 12", "distance_km": 3.5 } ] }
+  ],
+  "history_30d_usd_som": [11840, 11812, 11795, 11830, 11822, 11818, 11801, 11810, 11790, 11785, 11780, 11773, 11778, 11790, 11805, 11830, 11860, 11905, 11950, 11952, 11955, 11960, 11962, 11990, 12010, 12030, 12040, 12050, 12055, 12045]
+};
+
+const W = DATA.words;
+const CUR = W.currency;           // so'm
+const USD_S = W.usd_in_sentences; // dollar
+const USD_C = W.usd_in_controls;  // USD
+const CB = DATA.central_bank;
+const TAXI = DATA.taxi_som_per_km;
+
+// Thousands grouped with a narrow no-break space (local convention), tabular digits via CSS.
+const fmt = n => Math.round(n).toLocaleString('en-US').replace(/,/g, ' ');
+const signed = n => (n > 0 ? '+' : n < 0 ? '−' : '') + fmt(Math.abs(n));
+const km = d => d.toFixed(1).replace(/\.0$/, '') + ' km';
+const taxiCost = d => Math.round(d * TAXI);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let mode = DATA.user.mode === 'buy_usd' ? 'buy' : 'sell';
+let sortBy = 'rate';
+let amount = DATA.user.has_usd;
+
+// --- Header ---
+document.getElementById('city').textContent = DATA.user.city;
+(function updated() {
+  const now = new Date(DATA.now), upd = new Date(DATA.rates_updated_at);
+  const mins = Math.round((now - upd) / 60000);
+  const h = Math.floor(mins / 60), m = mins % 60;
+  const ago = h ? `${h} h${m ? ' ' + m + ' min' : ''} ago` : `${m} min ago`;
+  const hhmm = DATA.rates_updated_at.slice(11, 16);
+  document.getElementById('updated').innerHTML = `Rates as of <b>${hhmm}</b><br>${ago}`;
+})();
+
+// --- Per-bank numbers for the current mode/amount ---
+function compute(b) {
+  const rate = mode === 'sell' ? b.buy_usd_som : b.sell_usd_som;
+  const gross = rate * amount;
+  const taxi = taxiCost(b.distance_km);
+  // Selling: you receive gross, minus the ride there. Buying: you pay gross, plus the ride.
+  const net = mode === 'sell' ? gross - taxi : gross + taxi;
+  return { rate, gross, taxi, net };
+}
+function better(a, b) { return mode === 'sell' ? a > b : a < b; }
+
+function ranked() {
+  const open = DATA.banks.filter(b => b.open_now);
+  let bestRate = null, bestNet = null;
+  for (const b of open) {
+    const c = compute(b);
+    if (!bestRate || better(c.rate, compute(bestRate).rate)) bestRate = b;
+    if (!bestNet || better(c.net, compute(bestNet).net)) bestNet = b;
+  }
+  return { bestRate, bestNet };
+}
+
+// --- Hero ---
+function renderHero() {
+  const { bestRate, bestNet } = ranked();
+  const pick = compute(bestNet);
+  const top = compute(bestRate);
+  const r = document.getElementById('result');
+  const verb = mode === 'sell' ? 'You get' : 'You pay';
+  r.innerHTML = `
+    <div class="eyebrow">${verb} · best after the ride there</div>
+    <div class="big num">${fmt(pick.gross)}<small>${CUR}</small></div>
+    <div class="where"><b>${esc(bestNet.name)}</b> · ${km(bestNet.distance_km)} · ${fmt(pick.rate)} ${CUR} per ${USD_S}
+      ${bestNet.open_until ? `· open until ${bestNet.open_until}` : ''}</div>`;
+
+  const notes = [];
+  if (bestNet.id !== bestRate.id) {
+    const diff = Math.abs(top.gross - pick.gross);
+    const ride = top.taxi;
+    notes.push(`<div class="note">Best rate in town is <b>${esc(bestRate.name)}</b> at ${fmt(top.rate)} —
+      ${mode === 'sell' ? `<b>${fmt(diff)} ${CUR} more</b>` : `<b>${fmt(diff)} ${CUR} less</b>`} on ${fmt(amount)} ${USD_S},
+      but it is ${km(bestRate.distance_km)} away and a taxi there is about <b>${fmt(ride)} ${CUR}</b>.
+      ${diff > ride ? 'Worth the trip.' : 'Not worth the trip for this amount.'}</div>`);
+  } else {
+    notes.push(`<div class="note"><b>${esc(bestNet.name)}</b> is both the best rate and the best deal once the ride is counted.</div>`);
+  }
+  // Spread across open banks for this amount
+  const opens = DATA.banks.filter(b => b.open_now).map(compute);
+  const grossVals = opens.map(c => c.gross);
+  const span = Math.max(...grossVals) - Math.min(...grossVals);
+  const cbVal = CB.usd_som * amount;
+  const cbDiff = pick.gross - cbVal;
+  notes.push(`<div class="note">Across ${opens.length} open banks the difference on ${fmt(amount)} ${USD_S} is <b>${fmt(span)} ${CUR}</b>.
+    Against the central bank rate (${fmt(CB.usd_som)}) this deal is <b>${signed(cbDiff)} ${CUR}</b>.</div>`);
+  document.getElementById('notes').innerHTML = notes.join('');
+  document.getElementById('amtLabel').textContent = mode === 'sell' ? 'You have' : 'You want';
+}
+
+// --- Central bank ---
+(function renderCB() {
+  document.getElementById('cbRate').innerHTML = `${fmt(CB.usd_som)}<small>${CUR}</small>`;
+  const chg = document.getElementById('cbChg');
+  const up = CB.change_30d_som >= 0;
+  chg.className = 'chg num ' + (up ? 'up' : 'down');
+  chg.textContent = `${up ? '▲' : '▼'} ${signed(CB.change_30d_som)} (${up ? '+' : ''}${CB.change_30d_pct.toFixed(2)}%) · 30 d`;
+
+  const h = DATA.history_30d_usd_som;
+  const n = h.length, Wd = 360, Ht = 88, padT = 16, padB = 14;
+  const lo = Math.min(...h), hi = Math.max(...h);
+  const x = i => (i / (n - 1)) * Wd;
+  const y = v => padT + (1 - (v - lo) / (hi - lo || 1)) * (Ht - padT - padB);
+  const pts = h.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`);
+  const iHi = h.indexOf(hi), iLo = h.indexOf(lo), iLast = n - 1;
+  const anchor = i => i < 3 ? 'start' : i > n - 4 ? 'end' : 'middle';
+  document.getElementById('spark').innerHTML = `
+    <path class="area" d="M${pts[0]} L${pts.join(' L')} L${Wd},${Ht} L0,${Ht} Z"/>
+    <path class="line" d="M${pts.join(' L')}"/>
+    <circle class="dot" cx="${x(iHi)}" cy="${y(hi)}" r="3"/>
+    <text class="lab" x="${x(iHi)}" y="${y(hi) - 7}" text-anchor="${anchor(iHi)}">${fmt(hi)}</text>
+    <circle class="dot" cx="${x(iLo)}" cy="${y(lo)}" r="3"/>
+    <text class="lab" x="${x(iLo)}" y="${y(lo) + 13}" text-anchor="${anchor(iLo)}">${fmt(lo)}</text>
+    <circle class="dot" cx="${x(iLast)}" cy="${y(h[iLast])}" r="4"/>`;
+  const lowDate = new Date(CB.low_30d_date + 'T00:00:00');
+  const lowLabel = lowDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  document.getElementById('cbRange').innerHTML =
+    `<span>30-day low <b class="num">${fmt(CB.low_30d)}</b> on ${lowLabel}</span><span>high <b class="num">${fmt(CB.high_30d)}</b></span>`;
+})();
+
+// --- Bank list ---
+function renderBanks() {
+  const { bestRate, bestNet } = ranked();
+  const list = DATA.banks.slice().sort((a, b) => {
+    if (a.open_now !== b.open_now) return a.open_now ? -1 : 1;
+    if (sortBy === 'dist') return a.distance_km - b.distance_km;
+    const ra = compute(a).rate, rb = compute(b).rate;
+    return mode === 'sell' ? rb - ra : ra - rb;
+  });
+  const sell = mode === 'sell';
+  document.getElementById('banksSub').textContent = sell
+    ? `What each bank pays for 1 ${USD_S}, and what ${fmt(amount)} ${USD_C} comes to`
+    : `What each bank charges for 1 ${USD_S}, and what ${fmt(amount)} ${USD_C} costs`;
+  document.getElementById('cols').innerHTML =
+    `<span>Bank</span><span>${sell ? 'Buys at' : 'Sells at'}</span><span>${sell ? 'Sells at' : 'Buys at'}</span><span>Distance</span><span>${sell ? 'You get' : 'You pay'}</span>`;
+
+  document.getElementById('rows').innerHTML = list.map(b => {
+    const c = compute(b);
+    const isBestNet = b.id === bestNet.id, isBestRate = b.id === bestRate.id;
+    const other = sell ? b.sell_usd_som : b.buy_usd_som;
+    const vsCb = c.rate - CB.usd_som;
+    const status = b.open_now
+      ? `<span class="open">Open</span> until ${b.open_until}`
+      : `<span class="shut">Closed</span>${b.opens_at ? ' · opens ' + b.opens_at : ''}`;
+    const tag = isBestNet ? `<span class="tag">Pick</span>` : isBestRate ? `<span class="tag" style="background:var(--ink);color:var(--bg)">Top rate</span>` : '';
+    return `
+    <details class="row ${isBestNet ? 'best' : ''} ${b.open_now ? '' : 'closed'}">
+      <summary>
+        <div class="r">
+          <div class="bank">
+            <div class="logo">${esc(b.short)}</div>
+            <div style="min-width:0">
+              <div class="name">${esc(b.name)}${tag}</div>
+              <div class="meta">${km(b.distance_km)} · ${status}</div>
+            </div>
+          </div>
+          <div class="rate-cell num">${fmt(c.rate)}<span class="d">${signed(vsCb)} vs CB</span></div>
+          <div class="rate-cell dim num">${fmt(other)}</div>
+          <div class="dist num">${km(b.distance_km)}<span class="d">taxi ≈ ${fmt(c.taxi)}</span></div>
+          <div class="get num">${fmt(c.gross)}<span class="d">${sell ? 'after taxi' : 'with taxi'} ${fmt(c.net)}</span></div>
+          <div class="rates-m num"><span>${sell ? 'buys' : 'sells'} <b>${fmt(c.rate)}</b></span><span class="muted">${sell ? 'sells' : 'buys'} ${fmt(other)}</span><span class="muted">taxi ≈ ${fmt(c.taxi)}</span></div>
+        </div>
+      </summary>
+      <div class="branches">
+        <ul>${b.branches.map(br => `<li><span>${esc(br.address_raw)}</span><span class="num">${km(br.distance_km)}</span></li>`).join('')}</ul>
+        <div class="hint">Taxi estimate: ${fmt(TAXI)} ${CUR} per km, one way, to the nearest branch.</div>
+      </div>
+    </details>`;
+  }).join('');
+}
+
+// --- Footer ---
+document.getElementById('foot').textContent =
+  `Rates are what banks posted at ${DATA.rates_updated_at.slice(11,16)}; they can change during the day. Distances are from your location in ${DATA.user.city}. "Pick" is the best outcome once a one-way taxi at ${fmt(TAXI)} ${CUR}/km is counted; closed banks are listed but never picked.`;
+
+// --- Wiring ---
+function rerender() { renderHero(); renderBanks(); }
+function setMode(m) {
+  mode = m;
+  document.getElementById('modeSell').setAttribute('aria-pressed', m === 'sell');
+  document.getElementById('modeBuy').setAttribute('aria-pressed', m === 'buy');
+  rerender();
+}
+function setSort(s) {
+  sortBy = s;
+  document.getElementById('sortRate').setAttribute('aria-pressed', s === 'rate');
+  document.getElementById('sortDist').setAttribute('aria-pressed', s === 'dist');
+  renderBanks();
+}
+document.getElementById('modeSell').addEventListener('click', () => setMode('sell'));
+document.getElementById('modeBuy').addEventListener('click', () => setMode('buy'));
+document.getElementById('sortRate').addEventListener('click', () => setSort('rate'));
+document.getElementById('sortDist').addEventListener('click', () => setSort('dist'));
+document.getElementById('amt').addEventListener('input', e => {
+  const v = parseInt(e.target.value, 10);
+  amount = Number.isFinite(v) && v > 0 ? v : 0;
+  if (amount === 0) amount = 1;
+  rerender();
+});
+setMode(mode);
+</script>
+</body>
+</html>

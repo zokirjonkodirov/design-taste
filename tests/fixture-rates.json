@@ -1,0 +1,32 @@
+{
+  "locale": "uz",
+  "words": { "currency": "so'm", "usd_in_sentences": "dollar", "usd_in_controls": "USD" },
+  "now": "2026-10-20T13:34:00+05:00",
+  "rates_updated_at": "2026-10-20T08:01:00+05:00",
+  "user": { "has_usd": 100, "mode": "sell_usd", "location_known": true, "city": "Toshkent" },
+  "central_bank": { "usd_som": 12045, "change_30d_som": 205, "change_30d_pct": 1.73, "high_30d": 12055, "low_30d": 11773, "low_30d_date": "2026-10-03" },
+  "taxi_som_per_km": 2400,
+  "banks": [
+    { "id": "xalq", "name": "Xalq Banki", "short": "Xalq", "buy_usd_som": 12060, "sell_usd_som": 12100, "distance_km": 7.2, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100100, Toshkent sh., Yakkasaroy tumani, ko'ch. Bobur, 45", "distance_km": 7.2 } ] },
+    { "id": "universal", "name": "Universal bank", "short": "UB", "buy_usd_som": 12015, "sell_usd_som": 12060, "distance_km": 1.0, "open_now": true, "open_until": "18:00",
+      "branches": [
+        { "address_raw": "100047, Toshkent sh., Yashnobod tumani, Maxtumquli ko`chasi, 2a uy", "distance_km": 1.0 },
+        { "address_raw": "190100, Surxondaryo viloyati, Termiz sh., ko'ch. At-Termiziy, 12", "distance_km": 1.0 },
+        { "address_raw": "100015, Toshkent sh., Mirobod tumani, ko'ch. Shahrisabz, 36", "distance_km": 3.8 }
+      ] },
+    { "id": "asia", "name": "Asia Alliance Bank", "short": "AAB", "buy_usd_som": 12010, "sell_usd_som": 12060, "distance_km": 1.4, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100000, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 107B", "distance_km": 1.4 } ] },
+    { "id": "brb", "name": "BRB", "short": "BRB", "buy_usd_som": 12005, "sell_usd_som": 12050, "distance_km": 0.6, "open_now": true, "open_until": "17:30",
+      "branches": [ { "address_raw": "100011, Toshkent sh., Shayxontoxur tumani, ko'ch. Navoiy, 18A", "distance_km": 0.6 } ] },
+    { "id": "kapital", "name": "Kapitalbank", "short": "KB", "buy_usd_som": 12060, "sell_usd_som": 12060, "distance_km": 4.1, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100096, Toshkent sh., Chilonzor tumani, ko'ch. Bunyodkor, 8", "distance_km": 4.1 } ] },
+    { "id": "orient", "name": "Orient Finans Bank", "short": "OFB", "buy_usd_som": 12000, "sell_usd_som": 12050, "distance_km": 2.3, "open_now": false, "opens_at": "09:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Abdulla Qodiriy, 1", "distance_km": 2.3 } ] },
+    { "id": "nbu", "name": "O'zbekiston Milliy banki", "short": "Milliy", "buy_usd_som": 11990, "sell_usd_som": 12040, "distance_km": 1.8, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 101", "distance_km": 1.8 } ] },
+    { "id": "trast", "name": "Trastbank", "short": "TB", "buy_usd_som": 11980, "sell_usd_som": 12030, "distance_km": 3.5, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100017, Toshkent sh., Mirobod tumani, ko'ch. Afrosiyob, 12", "distance_km": 3.5 } ] }
+  ],
+  "history_30d_usd_som": [11840, 11812, 11795, 11830, 11822, 11818, 11801, 11810, 11790, 11785, 11780, 11773, 11778, 11790, 11805, 11830, 11860, 11905, 11950, 11952, 11955, 11960, 11962, 11990, 12010, 12030, 12040, 12050, 12055, 12045]
+}

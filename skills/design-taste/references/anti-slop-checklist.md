@@ -13,7 +13,7 @@ Use during review. Each item is observable in code or on screen. Report only the
 
 ## T. Typography
 - [ ] T1 Hierarchy is readable with color removed (size, weight, spacing carry it)
-- [ ] T2 Type scale has a small set of steps (4–5, or the project's scale); each has a role
+- [ ] T2 Type scale has a small set of steps (4–5 plus one display step for the answer object, or the project's scale); each has a role
 - [ ] T3 Prose measure is roughly 45–75 characters (prose only; skip for forms, tables, and lists)
 - [ ] T4 Numbers in tables and data use tabular figures
 - [ ] T5 Font count is 1–2 families, chosen on purpose and actually loaded, not default-and-forgotten
@@ -24,7 +24,7 @@ Use during review. Each item is observable in code or on screen. Report only the
 - [ ] C1 Palette is small: neutrals plus one or two accents with clear meaning
 - [ ] C2 Text contrast meets WCAG AA (4.5:1; 3:1 for text 24px, or 19px bold, and larger)
 - [ ] C3 Interactive boundaries (input borders, off-state toggles, icons) meet 3:1 against their background
-- [ ] C4 Contrast is measured at the worst point: the lightest gradient stop, the lowest animated opacity, the composited color of any `rgba`
+- [ ] C4 Contrast is measured at the worst point the text can overlap: the lightest gradient stop under the text's own box, the lowest animated opacity, the composited color of any `rgba`
 - [ ] C5 No decorative gradient or blob backgrounds without a content reason
 - [ ] C6 Shadows are used for elevation only, and lightly; borders or spacing are tried first
 - [ ] C7 Dark mode is designed, not inverted
@@ -39,6 +39,7 @@ Use during review. Each item is observable in code or on screen. Report only the
 - [ ] I7 Empty states say what this area is for and offer one next action
 - [ ] I8 Keyboard path exists for every primary action; tab order matches visual order
 - [ ] I9 Touch targets are at least 44px on touch devices
+- [ ] I10 Controls show the current value. A form for existing data never opens blank
 
 ## M. Mobile and responsive
 - [ ] M1 No horizontal overflow at 320px wide. Measure `document.documentElement.scrollWidth`, not `body`; off-screen visually-hidden inputs and absolutely positioned elements widen the document without widening the body
@@ -64,10 +65,11 @@ Use during review. Each item is observable in code or on screen. Report only the
 - [ ] W2 Errors say what happened and what to do
 - [ ] W3 No filler headlines, no emoji as decoration anywhere (including as heading icons), no marketing voice in a utility UI
 - [ ] W4 Defaults favor the user (marketing email off, not on)
+- [ ] W5 No engagement loops in a utility screen: streaks, pulsing badges, "don't break the chain", nudges
 
 ## V. Verification
 - [ ] V1 Viewed at 320px, 375px, and 1280px
 - [ ] V2 Checked with keyboard only. By inspection this means: every control is a focusable element in the DOM, and a `:focus-visible` style exists and is not overridden by `outline: none`
-- [ ] V3 Checked in light and dark mode if both exist
+- [ ] V3 Checked in light and dark mode if both exist. A mode that is offered as a control but not built is one I4 finding, not a C7 finding as well
 - [ ] V4 Checked with reduced motion on
 - [ ] V5 Contrast measured, not guessed, for text and boundaries. If the page cannot be rendered, compute from the CSS values and say the result is computed, not observed

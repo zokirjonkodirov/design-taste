@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Valyuta — sell dollars today</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+:root {
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
+
+  --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
+  --text-lg: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-display: clamp(2.75rem, 2rem + 3.5vw, 4rem);
+  --leading-body: 1.5; --leading-tight: 1.1;
+
+  --font-display: "IBM Plex Serif", "Charter", "Source Serif Pro", "Iowan Old Style", serif;
+  --font-text: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-sm: 4px; --radius-md: 10px;
+
+  --color-bg: #f6f5f1;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0efe9;
+  --color-text: #1a1a17;
+  --color-text-muted: #5c5c56;
+  --color-border: #e2e1db;
+  --color-border-strong: #767571;
+  --color-accent: #1b6b47;       /* one meaning: good for you / where to go */
+  --color-accent-hover: #155a3b;
+  --color-accent-text: #ffffff;
+  --color-accent-soft: #e3f1e9;
+  --color-danger: #a32d22;       /* one meaning: cannot be true */
+  --color-focus: #1b6b47;
+  --color-bar-neutral: #c9c8c0;
+
+  --duration-fast: 120ms; --duration-base: 200ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --target-min: 44px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #141412; --color-surface: #1d1d1a; --color-surface-hover: #26261f;
+    --color-text: #ecebe6; --color-text-muted: #a6a59d;
+    --color-border: #2e2e2a; --color-border-strong: #7d7d77;
+    --color-accent: #6fd3a0; --color-accent-hover: #8be0b3; --color-accent-text: #0d0d0c;
+    --color-accent-soft: #1b3328;
+    --color-danger: #ff8f85; --color-focus: #6fd3a0;
+    --color-bar-neutral: #4a4a44;
+  }
+}
+:root[data-theme="dark"] {
+  --color-bg: #141412; --color-surface: #1d1d1a; --color-surface-hover: #26261f;
+  --color-text: #ecebe6; --color-text-muted: #a6a59d;
+  --color-border: #2e2e2a; --color-border-strong: #7d7d77;
+  --color-accent: #6fd3a0; --color-accent-hover: #8be0b3; --color-accent-text: #0d0d0c;
+  --color-accent-soft: #1b3328;
+  --color-danger: #ff8f85; --color-focus: #6fd3a0;
+  --color-bar-neutral: #4a4a44;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  font-variant-numeric: tabular-nums;
+  padding-inline: max(var(--space-4), env(safe-area-inset-left)) max(var(--space-4), env(safe-area-inset-right));
+  padding-top: max(var(--space-4), env(safe-area-inset-top));
+  /* room for the fixed action bar on phones */
+  padding-bottom: calc(var(--space-16) + var(--space-8) + env(safe-area-inset-bottom));
+}
+[hidden] { display: none !important; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+button, input { font: inherit; color: inherit; min-height: var(--target-min); }
+input { font-size: max(1rem, var(--text-base)); border: 1px solid var(--color-border-strong); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+input:focus-visible { outline-offset: 0; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.display { font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums lining-nums; }
+.num { font-family: var(--font-display); font-weight: 500; font-variant-numeric: tabular-nums lining-nums; }
+.muted { color: var(--color-text-muted); }
+.accent { color: var(--color-accent); }
+.danger { color: var(--color-danger); }
+
+/* ---------- layout ---------- */
+.page { max-width: 1120px; margin-inline: auto; display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); }
+.page > * { min-width: 0; }
+
+/* ---------- header ---------- */
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; }
+.wordmark { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); line-height: var(--leading-tight); letter-spacing: -0.01em; }
+.where { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* ---------- controls ---------- */
+.controls { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--space-3); align-items: end; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend, .field-label { display: block; font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-1); padding: 0; }
+.segmented { display: grid; grid-template-columns: 1fr 1fr; background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); padding: 3px; gap: 3px; }
+.segmented label {
+  display: flex; align-items: center; justify-content: center; min-height: calc(var(--target-min) - 8px);
+  border-radius: calc(var(--radius-md) - 3px); cursor: pointer; user-select: none; padding-inline: var(--space-2); white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+.segmented input:checked + label { background: var(--color-text); color: var(--color-bg); }
+.segmented input:focus-visible + label { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.segmented label:active { transform: scale(0.97); }
+@media (hover: hover) { .segmented input:not(:checked) + label:hover { background: var(--color-surface-hover); } }
+
+.amount { position: relative; }
+.amount input {
+  width: 100%; min-width: 0; padding: 0 3.25rem 0 var(--space-3); border-radius: var(--radius-md);
+  background: var(--color-surface); font-family: var(--font-display); font-weight: 500; font-size: 1.25rem;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.amount input::-webkit-outer-spin-button, .amount input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.amount input[aria-invalid="true"] { border-color: var(--color-danger); }
+.amount .suffix { position: absolute; right: var(--space-3); bottom: 0; height: var(--target-min); display: flex; align-items: center; color: var(--color-text-muted); font-size: var(--text-sm); pointer-events: none; }
+.field-error { grid-column: 1 / -1; font-size: var(--text-sm); color: var(--color-danger); }
+
+/* ---------- the answer ---------- */
+.answer { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6) var(--space-4); border: 1px solid var(--color-border); }
+.answer .kicker { font-size: var(--text-sm); color: var(--color-text-muted); display: flex; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+.answer .big { font-size: var(--text-display); line-height: var(--leading-tight); letter-spacing: -0.02em; margin-top: var(--space-2); overflow-wrap: anywhere; }
+.answer .big .unit { font-size: 0.45em; font-weight: 500; margin-left: 0.15em; letter-spacing: 0; }
+.answer .place { margin-top: var(--space-3); font-size: var(--text-lg); font-family: var(--font-display); font-weight: 500; line-height: 1.25; }
+.answer .place-detail { margin-top: var(--space-1); }
+.answer .evidence { margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--color-border); font-size: var(--text-sm); color: var(--color-text-muted); }
+.answer .decision { margin-top: var(--space-4); font-size: var(--text-base); max-width: 60ch; }
+.branches { margin-top: var(--space-3); font-size: var(--text-sm); }
+.branches summary { cursor: pointer; min-height: var(--target-min); display: flex; align-items: center; color: var(--color-text-muted); width: max-content; max-width: 100%; }
+.branches summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.branches li { padding: var(--space-2) 0; border-top: 1px solid var(--color-border); }
+.branches li:first-child { border-top: 0; }
+
+/* ---------- action ---------- */
+.action { position: fixed; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: var(--space-3) max(var(--space-4), env(safe-area-inset-right)) max(var(--space-3), env(safe-area-inset-bottom)) max(var(--space-4), env(safe-area-inset-left));
+  background: var(--color-bg); border-top: 1px solid var(--color-border); }
+.btn-primary {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2); width: 100%; min-height: 52px;
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); border: 0; text-decoration: none;
+  background: var(--color-accent); color: var(--color-accent-text); font-weight: 500; cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.btn-primary:active { transform: scale(0.97); }
+@media (hover: hover) { .btn-primary:hover { background: var(--color-accent-hover); } }
+.btn-primary[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+
+/* ---------- comparisons ---------- */
+.others h2 { font-size: var(--text-sm); font-weight: 500; color: var(--color-text-muted); margin-bottom: var(--space-2); }
+.row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--space-4); row-gap: var(--space-1);
+  width: 100%; text-align: left; padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4); margin: 0;
+  background: transparent; border: 0; border-top: 1px solid var(--color-border); border-left: 3px solid transparent; cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.others li:first-child .row { border-top: 0; }
+.row:active { background: var(--color-surface-hover); }
+@media (hover: hover) { .row:hover:not(:disabled) { background: var(--color-surface-hover); } }
+.row[aria-pressed="true"] { border-left-color: var(--color-accent); background: var(--color-surface); }
+.row:disabled { cursor: default; color: var(--color-text-muted); }
+.row:disabled .name { text-decoration: none; }
+.row .name { font-family: var(--font-display); font-weight: 500; font-size: var(--text-base); }
+.row .diff { grid-column: 2; grid-row: 1; justify-self: end; font-family: var(--font-display); font-weight: 500; white-space: nowrap; }
+.row .sub { grid-column: 1 / -1; font-size: var(--text-sm); color: var(--color-text-muted); }
+.row .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: var(--color-bar-neutral); transform-origin: left; width: 100%; margin-top: var(--space-1); }
+.row .bar.good { background: var(--color-accent); }
+.row .bar[data-w="0"] { visibility: hidden; }
+.row .note { grid-column: 1 / -1; font-size: var(--text-sm); color: var(--color-danger); }
+
+/* ---------- trend ---------- */
+.trend { border-top: 1px solid var(--color-border); padding-top: var(--space-4); }
+.trend h2 { font-size: var(--text-sm); font-weight: 500; color: var(--color-text-muted); margin-bottom: var(--space-2); }
+.trend p { max-width: 60ch; }
+.trend .chart { margin-top: var(--space-3); }
+.trend svg { display: block; width: 100%; height: auto; }
+.trend .line { fill: none; stroke: var(--color-text); stroke-width: 1.5; }
+.trend .mark { fill: var(--color-bg); stroke: var(--color-text); stroke-width: 1.5; }
+.trend .mark.today { fill: var(--color-text); }
+.trend .caption { position: relative; display: flex; justify-content: space-between; gap: var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-1); }
+.trend .caption { padding-bottom: 1.5em; }
+.trend .caption .low { position: absolute; top: 1.5em; left: 0; transform: translateX(-50%); white-space: nowrap; }
+
+/* ---------- desktop: two columns where the list no longer fits under the answer ---------- */
+@media (min-width: 760px) {
+  body { padding-bottom: var(--space-12); }
+  .page { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "top top" "controls others" "answer others" "action others" "trend others"; align-items: start; column-gap: var(--space-12); }
+  .top { grid-area: top; }
+  .controls { grid-area: controls; }
+  .answer { grid-area: answer; padding: var(--space-8) var(--space-6); }
+  .action { grid-area: action; position: static; padding: 0; border: 0; background: transparent; }
+  .others { grid-area: others; }
+  .trend { grid-area: trend; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <h1 class="wordmark">Valyuta</h1>
+    <p class="where" id="where"></p>
+  </header>
+
+  <form class="controls" id="controls" novalidate>
+    <fieldset>
+      <legend>I want to</legend>
+      <div class="segmented" role="radiogroup" aria-label="Direction">
+        <input class="visually-hidden" type="radio" name="mode" id="mode-sell" value="sell">
+        <label for="mode-sell">Sell USD</label>
+        <input class="visually-hidden" type="radio" name="mode" id="mode-buy" value="buy">
+        <label for="mode-buy">Buy USD</label>
+      </div>
+    </fieldset>
+    <div class="amount">
+      <label class="field-label" for="amount" id="amount-label">Amount</label>
+      <input type="number" inputmode="decimal" id="amount" name="amount" min="1" step="1" autocomplete="off" aria-describedby="amount-error">
+      <span class="suffix" aria-hidden="true">USD</span>
+    </div>
+    <p class="field-error" id="amount-error" role="alert" hidden></p>
+  </form>
+
+  <section class="answer" aria-labelledby="answer-kicker" aria-live="polite">
+    <p class="kicker"><span id="answer-kicker"></span><span id="answer-open"></span></p>
+    <p class="big display" id="answer-amount"></p>
+    <p class="place" id="answer-place"></p>
+    <p class="place-detail muted" id="answer-detail"></p>
+    <p class="decision" id="decision"></p>
+    <details class="branches" id="branches" hidden>
+      <summary id="branches-summary"></summary>
+      <ul id="branches-list"></ul>
+    </details>
+    <p class="evidence" id="evidence"></p>
+  </section>
+
+  <div class="action">
+    <a class="btn-primary" id="directions" href="#" target="_blank" rel="noopener">Directions</a>
+  </div>
+
+  <section class="others" aria-labelledby="others-h">
+    <h2 id="others-h"></h2>
+    <ul id="others"></ul>
+  </section>
+
+  <section class="trend" aria-labelledby="trend-h">
+    <h2 id="trend-h">Dollar at the central bank, 30 days</h2>
+    <p id="trend-text"></p>
+    <figure class="chart" id="chart"></figure>
+  </section>
+</main>
+
+<script>
+const DATA = {
+  "locale": "uz",
+  "words": { "currency": "so'm", "usd_in_sentences": "dollar", "usd_in_controls": "USD" },
+  "now": "2026-10-20T13:34:00+05:00",
+  "rates_updated_at": "2026-10-20T08:01:00+05:00",
+  "user": { "has_usd": 100, "mode": "sell_usd", "location_known": true, "city": "Toshkent" },
+  "central_bank": { "usd_som": 12045, "change_30d_som": 205, "change_30d_pct": 1.73, "high_30d": 12055, "low_30d": 11773, "low_30d_date": "2026-10-03" },
+  "taxi_som_per_km": 2400,
+  "banks": [
+    { "id": "xalq", "name": "Xalq Banki", "short": "Xalq", "buy_usd_som": 12060, "sell_usd_som": 12100, "distance_km": 7.2, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100100, Toshkent sh., Yakkasaroy tumani, ko'ch. Bobur, 45", "distance_km": 7.2 } ] },
+    { "id": "universal", "name": "Universal bank", "short": "UB", "buy_usd_som": 12015, "sell_usd_som": 12060, "distance_km": 1.0, "open_now": true, "open_until": "18:00",
+      "branches": [
+        { "address_raw": "100047, Toshkent sh., Yashnobod tumani, Maxtumquli ko`chasi, 2a uy", "distance_km": 1.0 },
+        { "address_raw": "190100, Surxondaryo viloyati, Termiz sh., ko'ch. At-Termiziy, 12", "distance_km": 1.0 },
+        { "address_raw": "100015, Toshkent sh., Mirobod tumani, ko'ch. Shahrisabz, 36", "distance_km": 3.8 }
+      ] },
+    { "id": "asia", "name": "Asia Alliance Bank", "short": "AAB", "buy_usd_som": 12010, "sell_usd_som": 12060, "distance_km": 1.4, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100000, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 107B", "distance_km": 1.4 } ] },
+    { "id": "brb", "name": "BRB", "short": "BRB", "buy_usd_som": 12005, "sell_usd_som": 12050, "distance_km": 0.6, "open_now": true, "open_until": "17:30",
+      "branches": [ { "address_raw": "100011, Toshkent sh., Shayxontoxur tumani, ko'ch. Navoiy, 18A", "distance_km": 0.6 } ] },
+    { "id": "kapital", "name": "Kapitalbank", "short": "KB", "buy_usd_som": 12060, "sell_usd_som": 12060, "distance_km": 4.1, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100096, Toshkent sh., Chilonzor tumani, ko'ch. Bunyodkor, 8", "distance_km": 4.1 } ] },
+    { "id": "orient", "name": "Orient Finans Bank", "short": "OFB", "buy_usd_som": 12000, "sell_usd_som": 12050, "distance_km": 2.3, "open_now": false, "opens_at": "09:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Abdulla Qodiriy, 1", "distance_km": 2.3 } ] },
+    { "id": "nbu", "name": "O'zbekiston Milliy banki", "short": "Milliy", "buy_usd_som": 11990, "sell_usd_som": 12040, "distance_km": 1.8, "open_now": true, "open_until": "18:00",
+      "branches": [ { "address_raw": "100084, Toshkent sh., Yunusobod tumani, ko'ch. Amir Temur, 101", "distance_km": 1.8 } ] },
+    { "id": "trast", "name": "Trastbank", "short": "TB", "buy_usd_som": 11980, "sell_usd_som": 12030, "distance_km": 3.5, "open_now": true, "open_until": "17:00",
+      "branches": [ { "address_raw": "100017, Toshkent sh., Mirobod tumani, ko'ch. Afrosiyob, 12", "distance_km": 3.5 } ] }
+  ],
+  "history_30d_usd_som": [11840, 11812, 11795, 11830, 11822, 11818, 11801, 11810, 11790, 11785, 11780, 11773, 11778, 11790, 11805, 11830, 11860, 11905, 11950, 11952, 11955, 11960, 11962, 11990, 12010, 12030, 12040, 12050, 12055, 12045]
+};
+
+/* ---------- words and formats ---------- */
+const CUR = DATA.words.currency;            // "so'm"
+const USD_WORD = DATA.words.usd_in_sentences; // "dollar"
+const THIN = ' '; // narrow no-break space: thin, and a number never wraps mid-way
+const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, THIN);
+const som = n => fmt(n) + ' ' + CUR;
+const dollars = n => fmt(n) + ' ' + (n === 1 ? USD_WORD : USD_WORD + 's');
+const km = d => d < 1 ? fmt(d * 1000) + ' m' : (Number.isInteger(d) ? d : d.toFixed(1)) + ' km';
+const WALK_KM = 2;            // up to 2 km counts as a walk; beyond it we price a taxi
+const TAXI = DATA.taxi_som_per_km;
+
+const $ = id => document.getElementById(id);
+
+const displayName = b => b.name.length > 20 ? b.short + ' bank' : b.name;
+
+/* "100011, Toshkent sh., Shayxontoxur tumani, ko'ch. Navoiy, 18A" -> {street:"Navoiy street 18A", district:"Shayxontoxur", city:"Toshkent"} */
+function parseAddress(raw) {
+  const parts = raw.split(/\s*,\s*/).filter(p => !/^\d{6}$/.test(p));
+  let city = null, district = null, region = null, street = null, number = null;
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    if (/ sh\.$/.test(p)) city = p.replace(/ sh\.$/, '');
+    else if (/ viloyati$/.test(p)) region = p.replace(/ viloyati$/, '');
+    else if (/ tumani$/.test(p)) district = p.replace(/ tumani$/, '');
+    else if (/^ko['`]ch\.\s*/.test(p)) { street = p.replace(/^ko['`]ch\.\s*/, ''); number = parts[i + 1] || null; i++; }
+    else if (/ ko['`]chasi$/.test(p)) { street = p.replace(/ ko['`]chasi$/, ''); number = parts[i + 1] || null; i++; }
+  }
+  if (number) number = number.replace(/\s*uy$/, '');
+  return { street: street ? `${street} street${number ? ' ' + number : ''}` : raw, district, city, region };
+}
+
+/* ---------- the model ---------- */
+function evaluate(amount, mode) {
+  const home = DATA.user.city;
+  const rows = DATA.banks.map(b => {
+    const rate = mode === 'sell' ? b.buy_usd_som : b.sell_usd_som;
+    const invalid = b.buy_usd_som >= b.sell_usd_som;              // a bank cannot buy at or above what it sells for
+    const branches = b.branches.map(br => {
+      const a = parseAddress(br.address_raw);
+      const elsewhere = a.city && a.city !== home;                  // distance cannot be right if the branch is in another city
+      return { ...br, ...a, elsewhere, distance: elsewhere ? null : br.distance_km };
+    });
+    const nearest = branches.filter(x => x.distance != null).sort((x, y) => x.distance - y.distance)[0] || null;
+    const dist = nearest ? nearest.distance : b.distance_km;
+    const taxi = dist > WALK_KM ? dist * TAXI : 0;
+    const total = rate * amount;
+    const net = mode === 'sell' ? total - taxi : total + taxi;       // what the trip is really worth
+    return { bank: b, name: displayName(b), rate, invalid, total, taxi, net, dist, nearest, branches, eligible: b.open_now && !invalid };
+  });
+  const better = (a, b) => mode === 'sell' ? (a > b) : (a < b);
+  const pick = (list, key) => list.reduce((best, r) => !best || better(r[key], best[key]) || (r[key] === best[key] && r.dist < best.dist) ? r : best, null);
+  const eligible = rows.filter(r => r.eligible);
+  const chosen = pick(eligible, 'net');
+  const bestRaw = pick(eligible, 'total');
+  const walkable = eligible.filter(r => r.taxi === 0);
+  const bestWalk = pick(walkable, 'net');
+  return { rows, chosen, bestRaw, bestWalk, mode, amount };
+}
+
+/* ---------- time ---------- */
+const TZ = 'Asia/Tashkent';
+const now = new Date(DATA.now);
+const updated = new Date(DATA.rates_updated_at);
+const hm = d => new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: TZ }).format(d);
+const dayLabel = d => new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'long', timeZone: TZ }).format(d);
+function ago(from, to) {
+  const min = Math.round((to - from) / 60000);
+  if (min < 60) return `${min} min ago`;
+  const h = Math.floor(min / 60), m = min % 60;
+  if (m < 15) return `${h} h ago`;
+  if (m < 45) return `${h}½ h ago`;
+  return `${h + 1} h ago`;
+}
+const sameDay = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeZone: TZ }).format(now) === new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeZone: TZ }).format(updated);
+
+/* ---------- state ---------- */
+let state = { mode: DATA.user.mode === 'sell_usd' ? 'sell' : 'buy', amount: DATA.user.has_usd, pickedId: null };
+
+/* ---------- render ---------- */
+function render() {
+  const { mode, amount } = state;
+  const model = evaluate(amount, mode);
+  const { rows, chosen, bestRaw, bestWalk } = model;
+  const selected = rows.find(r => r.bank.id === state.pickedId && r.eligible) || chosen;
+  const isSell = mode === 'sell';
+
+  /* header */
+  $('where').textContent = `${DATA.user.city} · ${dayLabel(now)}, ${hm(now)}`;
+
+  /* answer */
+  const kicker = selected === chosen ? (isSell ? 'Best place to sell today' : 'Best place to buy today')
+                                     : (isSell ? 'Your pick to sell' : 'Your pick to buy');
+  $('answer-kicker').textContent = kicker;
+  $('answer-open').textContent = selected ? `Open until ${selected.bank.open_until}` : '';
+  if (!selected) {
+    $('answer-amount').innerHTML = '—';
+    $('answer-place').textContent = 'No open bank with a usable rate';
+    $('answer-detail').textContent = '';
+    $('decision').textContent = '';
+  } else {
+    $('answer-amount').innerHTML = `${fmt(selected.total)}<span class="unit">${CUR}</span>`;
+    $('answer-place').textContent = (isSell ? 'for ' : 'costs ') + dollars(amount) + ' at ' + selected.name;
+    const nb = selected.nearest;
+    const where = nb ? `${nb.street}, ${nb.district}` : 'Address unknown';
+    const dist = selected.dist != null ? `${km(selected.dist)}${selected.taxi ? ', taxi about ' + som(Math.round(selected.taxi / 1000) * 1000) : ' walk'}` : 'distance unknown';
+    $('answer-detail').textContent = `${where} · ${dist} · ${selected.rate ? fmt(selected.rate) + ' per ' + USD_WORD : ''}`;
+    $('decision').innerHTML = decisionText(model, selected);
+  }
+
+  /* branches of the selected bank */
+  const br = selected ? selected.branches : [];
+  const branchesEl = $('branches');
+  if (br.length > 1) {
+    branchesEl.hidden = false;
+    $('branches-summary').textContent = `${br.length} branches of ${selected.name}`;
+    $('branches-list').innerHTML = br.map(x => {
+      const place = `${x.street}, ${x.district || x.city}`;
+      const d = x.elsewhere
+        ? `<span class="danger">Distance unknown: this branch is in ${x.city}${x.region ? ', ' + x.region : ''}, not in ${DATA.user.city} (listed as ${km(x.distance_km)}).</span>`
+        : `${km(x.distance)}${x === selected.nearest ? ' · nearest' : ''}`;
+      return `<li>${place}<br><span class="muted">${d}</span></li>`;
+    }).join('');
+  } else {
+    branchesEl.hidden = true;
+  }
+
+  /* evidence */
+  $('evidence').textContent = `Bank rates from ${hm(updated)}${sameDay ? ' today' : ' ' + dayLabel(updated)}, ${ago(updated, now)}. They may have moved since; the counter rate is the one that counts.`;
+
+  /* action */
+  const dir = $('directions');
+  if (selected && selected.nearest) {
+    dir.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(selected.nearest.address_raw);
+    dir.textContent = `Directions to ${selected.name}`;
+    dir.removeAttribute('aria-disabled');
+    dir.removeAttribute('tabindex');
+  } else {
+    dir.href = '#';
+    dir.textContent = 'Directions';
+    dir.setAttribute('aria-disabled', 'true');
+    dir.setAttribute('tabindex', '-1');
+  }
+
+  /* comparisons, against the chosen bank, sorted by what you get */
+  $('others-h').textContent = chosen ? `All banks for ${dollars(amount)}, compared with ${chosen.name}` : `All banks for ${dollars(amount)}`;
+  const base = chosen ? chosen.total : 0;
+  const sorted = rows.slice().sort((a, b) => {
+    const ea = a.eligible ? 0 : 1, eb = b.eligible ? 0 : 1;
+    if (ea !== eb) return ea - eb;
+    if (a.invalid !== b.invalid) return a.invalid ? 1 : -1;
+    return isSell ? b.total - a.total : a.total - b.total;
+  });
+  const maxAbs = Math.max(1, ...sorted.filter(r => !r.invalid).map(r => Math.abs(r.total - base)));
+  $('others').innerHTML = sorted.map(r => {
+    const d = r.total - base;
+    const good = isSell ? d > 0 : d < 0;
+    let diff, note = '', bar = '';
+    if (r.invalid) {
+      diff = '<span class="danger">No rate</span>';
+      note = `<span class="note">Listed buying and selling at the same ${fmt(r.bank.buy_usd_som)}. A bank cannot do both, so this rate is not shown.</span>`;
+    } else {
+      const w = Math.round(Math.abs(d) / maxAbs * 100);
+      diff = d === 0 ? (r === chosen ? 'Best' : 'Same') : `${fmt(Math.abs(d))} ${isSell ? (d > 0 ? 'more' : 'less') : (d < 0 ? 'cheaper' : 'more')}`;
+      if (good) diff = `<span class="accent">${diff}</span>`;
+      bar = `<span class="bar${good ? ' good' : ''}" data-w="${w}" style="transform: scaleX(${w / 100})" aria-hidden="true"></span>`;
+    }
+    const open = r.bank.open_now ? `until ${r.bank.open_until}` : `<strong>Closed</strong>, opens ${r.bank.opens_at}`;
+    const where = r.nearest ? `${r.nearest.street}, ${r.nearest.district}` : 'address unknown';
+    const dist = r.dist != null ? (r.taxi ? `${km(r.dist)}, taxi about ${som(Math.round(r.taxi / 1000) * 1000)}` : `${km(r.dist)} walk`) : 'distance unknown';
+    const disabled = !r.eligible;
+    const pressed = selected && r.bank.id === selected.bank.id;
+    return `<li><button type="button" class="row" data-id="${r.bank.id}" ${disabled ? 'disabled' : ''} aria-pressed="${pressed ? 'true' : 'false'}">
+      <span class="name">${r.name}</span>
+      <span class="diff">${diff}</span>
+      <span class="sub">${where} · ${dist} · ${open}</span>
+      ${note}${bar}
+    </button></li>`;
+  }).join('');
+
+  /* trend */
+  renderTrend(amount, isSell);
+}
+
+function decisionText(model, selected) {
+  const { chosen, bestRaw, bestWalk, mode, amount } = model;
+  const isSell = mode === 'sell';
+  if (!chosen) return '';
+  if (selected !== chosen) {
+    const d = selected.total - chosen.total;
+    const word = isSell ? (d >= 0 ? 'more' : 'less') : (d <= 0 ? 'cheaper' : 'more');
+    return `${fmt(Math.abs(d))} ${word} than ${chosen.name} (${km(chosen.dist)}). ${selected.taxi ? 'A taxi here costs about ' + som(Math.round(selected.taxi / 1000) * 1000) + '.' : ''}`;
+  }
+  if (bestRaw && bestRaw !== chosen) {
+    /* the best rate is far away: do the arithmetic */
+    const gain = Math.abs(bestRaw.total - chosen.total);
+    const perUsd = Math.abs(bestRaw.rate - chosen.rate);
+    const threshold = Math.ceil(bestRaw.taxi / perUsd);
+    const verb = isSell ? 'gives' : 'sells';
+    const word = isSell ? 'more' : 'cheaper';
+    return `${bestRaw.name} ${verb} ${fmt(gain)} ${word}, but it is ${km(bestRaw.dist)} away and a taxi there costs about ${som(Math.round(bestRaw.taxi / 1000) * 1000)}. <strong>Not worth it for ${dollars(amount)}.</strong> Worth it from ${dollars(threshold)}.`;
+  }
+  if (chosen.taxi > 0 && bestWalk) {
+    const d = Math.abs(chosen.net - bestWalk.net);
+    return `A taxi there costs about ${som(Math.round(chosen.taxi / 1000) * 1000)}. Even so, you end up ${fmt(d)} ahead of ${bestWalk.name} (${km(bestWalk.dist)}).`;
+  }
+  return `No open bank ${isSell ? 'pays more' : 'sells cheaper'} today.`;
+}
+
+function renderTrend(amount, isSell) {
+  const cb = DATA.central_bank, h = DATA.history_30d_usd_som;
+  const lowDate = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', timeZone: TZ }).format(new Date(cb.low_30d_date + 'T12:00:00+05:00'));
+  const vsLow = (cb.usd_som - cb.low_30d) * amount;
+  const dir = cb.change_30d_som >= 0 ? 'up' : 'down';
+  $('trend-text').innerHTML = `${fmt(cb.usd_som)} ${CUR} per ${USD_WORD}, ${dir} ${fmt(Math.abs(cb.change_30d_som))} (${cb.change_30d_pct}%) in 30 days and near the 30-day high of ${fmt(cb.high_30d)}. ` +
+    (isSell ? `Selling ${dollars(amount)} today gets about <strong>${som(vsLow)} more</strong> than at the low on ${lowDate}.`
+            : `Buying ${dollars(amount)} today costs about <strong>${som(vsLow)} more</strong> than at the low on ${lowDate}.`);
+
+  const W = 600, H = 100, padX = 6, padT = 6, padB = 6;
+  const min = Math.min(...h), max = Math.max(...h);
+  const x = i => padX + i * (W - padX * 2) / (h.length - 1);
+  const y = v => padT + (max - v) * (H - padT - padB) / (max - min);
+  const d = h.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+  const iMin = h.indexOf(min), iLast = h.length - 1;
+  $('chart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="30-day line of the central bank dollar rate, from ${fmt(h[0])} to ${fmt(h[iLast])}, low ${fmt(min)} on ${lowDate}">
+    <path class="line" d="${d}"/>
+    <circle class="mark" cx="${x(iMin).toFixed(1)}" cy="${y(min).toFixed(1)}" r="4"/>
+    <circle class="mark today" cx="${x(iLast).toFixed(1)}" cy="${y(h[iLast]).toFixed(1)}" r="4"/>
+  </svg>
+  <figcaption class="caption"><span>30 days ago ${fmt(h[0])}</span><span>today ${fmt(h[iLast])}</span><span class="low" style="left:${(x(iMin) / W * 100).toFixed(1)}%">low ${fmt(min)}, ${lowDate}</span></figcaption>`;
+}
+
+/* ---------- wiring ---------- */
+$('mode-' + state.mode).checked = true;
+$('amount').value = state.amount;
+
+$('controls').addEventListener('change', e => {
+  if (e.target.name === 'mode') { state.mode = e.target.value; state.pickedId = null; render(); }
+});
+$('controls').addEventListener('submit', e => e.preventDefault());
+$('amount').addEventListener('input', e => {
+  const v = Number(e.target.value);
+  const err = $('amount-error');
+  if (!e.target.value || !(v > 0)) {
+    err.textContent = `Enter how many ${USD_WORD}s you ${state.mode === 'sell' ? 'have' : 'want'}, 1 or more.`;
+    err.hidden = false; e.target.setAttribute('aria-invalid', 'true');
+    return;
+  }
+  err.hidden = true; e.target.removeAttribute('aria-invalid');
+  state.amount = v; render();
+});
+$('others').addEventListener('click', e => {
+  const btn = e.target.closest('button.row');
+  if (!btn || btn.disabled) return;
+  state.pickedId = btn.dataset.id;
+  render();
+  $('others').querySelector(`[data-id="${state.pickedId}"]`)?.focus();
+});
+
+render();
+</script>
+</body>
+</html>

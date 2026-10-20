@@ -10,7 +10,9 @@ Each entry is written by an AI from the designer's own public material where tha
 
 Format: **Principle** · practice · review question.
 
-Last checked: 2026-10-20. 24 entries: 18 Checked, 6 Partial, 0 Unverified.
+Last checked: 2026-10-20. 24 entries: 20 Checked, 4 Partial, 0 Unverified.
+
+`vision.md` is the higher layer: it turns these entries into questions asked of a screen. Read it first.
 
 ---
 
@@ -54,11 +56,6 @@ Last checked: 2026-10-20. 24 entries: 18 Checked, 6 Partial, 0 Unverified.
 **Status: Checked.** His page stresses craft and touch, typography as cultural infrastructure for orientation, legibility, and identity, and working within material limits over screens.
 - Practice: favor clear, durable type structure. Treat constraints as useful, not as obstacles to remove.
 - Review question: does the typography help people find their way, or just look good?
-
-### Rasmus Andersson: precision in type and tools
-**Status: Partial.** His page describes software as a creative medium, skepticism of stagnant tools, and attention to pointer latency, pixel rounding, and the Inter typeface. The emphasis on systems comes from the author's notes.
-- Practice: measure responsiveness and rendering. Keep type metrics precise.
-- Review question: does rendering stay sharp and responsive under real conditions?
 
 ### Brad Frost: atomic design
 **Status: Checked.** His essay "Atomic Web Design" argues that designers are building systems of components, not pages. It organizes them into atoms, molecules, organisms, templates, and pages, and recommends assembling from small parts so the system stays coherent from the start.
@@ -118,24 +115,24 @@ Last checked: 2026-10-20. 24 entries: 18 Checked, 6 Partial, 0 Unverified.
 ## Craft and feedback
 
 ### Emil Kowalski: taste, restraint, and motion
-**Status: Checked.** His page argues that friction filters bad ideas, that animation is often overused, that settling for good enough is not good enough, and that taste can be learned and passed to AI agents.
-- Practice: animate only where it helps. Treat taste as something that can be taught, including to tools.
-- Review question: would the user miss this animation if it were gone?
+**Status: Checked.** His page argues that friction filters bad ideas, that animation is often overused, that settling for good enough is not good enough, and that taste can be learned and passed to AI agents. His article "Developing taste" calls taste a trained instinct built by studying the best work, analyzing why something works instead of labelling it good or bad, and practicing with critique. His article "You don't need animations" gives three filters for every animation: purpose, frequency, and speed. The more often users see it, the less it should animate; keyboard-triggered actions get none; UI animation stays under about 300ms.
+- Practice: animate only where it helps. Ask why a piece of good work works. Treat taste as something that can be taught, including to tools.
+- Review question: would the user miss this animation if it were gone, and how often will they see it?
 
-### Rauno Freiberg: invisible details of interaction
-**Status: Checked.** His essay "Invisible Details of Interaction Design" argues that gestures should respond immediately and mid-gesture, that motion should keep momentum and stay interruptible, that destructive actions should wait for a gesture to end, that animations should show where things come from, and that frequent actions, such as menus opened many times a day, may be better with no animation at all.
-- Practice: give every control the same visual response to hover, press, and focus. Keep motion interruptible. Remove animation from high-frequency actions.
-- Review question: do all controls respond in the same visual language, and does the most frequent action feel instant?
+### Rauno Freiberg: invisible details, depth as meaning
+**Status: Checked.** His essay "Invisible Details of Interaction Design" argues that gestures should respond immediately and mid-gesture, that motion should keep momentum and stay interruptible, that destructive actions should wait for a gesture to end, that animations should show where things come from, and that frequent actions, such as menus opened many times a day, may be better with no animation at all. His essay "Designing depth" argues that blurring or dimming the layer behind an overlay pushes it back on the z-axis and signals that only the overlay responds, that motion should be choreographed in layers with deliberate delays, and that a layer kept sharp while others blur reads as still interactive.
+- Practice: give every control the same visual response to hover, press, and focus. Keep motion interruptible. Remove animation from high-frequency actions. Blur the layer behind a tray.
+- Review question: does each layer and motion tell the user where they are and what responds?
 
 ### Josh W. Comeau: motion that behaves
 **Status: Checked.** His article on CSS transitions advises against `transition: all`, prefers `transform` and `opacity` over layout properties, matches easing to the motion (ease-out for entering, ease-in for leaving), gives enter and exit different timings, uses delays to keep hover targets open across gaps, separates the hover trigger from the animated element to avoid flicker, and disables transitions under `prefers-reduced-motion`.
 - Practice: name the transitioned properties. Animate transform and opacity. Pick easing by direction. Honor reduced motion.
 - Review question: which property is being animated, and does its easing match what the element is doing?
 
-### Paco Coursey: simplicity and fine detail
-**Status: Partial.** His page emphasizes simplicity, magical details, and holistic craft. The "zero-latency keyboard-first" framing comes from the author's notes.
-- Practice: keep the interface simple and polished. Make keyboard paths complete.
-- Review question: can the most common workflow be done without touching the mouse?
+### Benji Taylor: trays, disclosure, and delight by rarity
+**Status: Checked.** His post "Family Values" on his own site, written from inside the Family team, states: keep core functions visible and reveal the rest when relevant; use trays for short-lived actions (they overlay the current screen and keep the user oriented) and full screens for longer or permanent tasks; make transitions show where you are going and how you got there ("we fly instead of teleport"); put delight in features used rarely and keep frequent ones subtle; and give rarely used parts the same polish, because a neglected corner makes the whole product feel unfinished.
+- Practice: decide tray or screen by how long the task lives. Spend delight where it is rare. Polish the settings page as carefully as the home screen.
+- Review question: is this a transient action in a tray and a persistent one on a screen, and is delight placed where the user will not tire of it?
 
 ---
 
@@ -156,6 +153,11 @@ Last checked: 2026-10-20. 24 entries: 18 Checked, 6 Partial, 0 Unverified.
 - Practice: favor tools that push thinking and let users adapt them. Question tools that only flatter.
 - Review question: does this tool challenge the user, or only please them?
 
+### Andy Allen: special for no one
+**Status: Checked.** His essay "No more boring apps" (signed Andy, founder of Not Boring Software, co-founder of FiftyThree) argues that app design has become formulaic because companies design for everyone, and "when you design something to work for everyone, you make it special for no one". There is no single chair for everyone. Small teams should be distinctive on purpose. Software is a medium for a point of view, not only a tool that performs on metrics.
+- Practice: say what the app knows about its users in the words, units, and defaults. Prefer one clear point of view over broad blandness.
+- Review question: could this screen belong to any app in any country? What here is ours?
+
 ---
 
 ## Using this file
@@ -164,14 +166,16 @@ Pick the two or three entries that match the problem. Do not run through all 24 
 
 | Problem | Read first |
 |---|---|
+| Screen has no clear answer or point | `vision.md` Q1–Q3; Chimero, Nielsen (heuristic 8), Case |
 | Clutter, decoration, too many elements | Rams, Maeda, Nielsen (heuristic 8) |
-| Type, reading comfort, hierarchy | Butterick, Spiekermann, Reichenstein (P) |
+| Type, reading comfort, hierarchy, numbers | Butterick, Spiekermann, Reichenstein (P) |
 | Spacing, grid, alignment, one-off values | Frost, Yablonski (proximity, common region), Vinh (P) |
 | Layout breaks with real content or widths | Shadeed, Marcotte |
 | Phone: reach, targets, one-handed use | Clark, Wroblewski, Yablonski (Fitts) |
 | Controls, states, keyboard, screen reader | Pickering, Nielsen, Freiberg |
 | Errors, feedback, status, confirmation | Nielsen (heuristics 1, 3, 5, 9), Norman (P) |
-| Motion | Kowalski, Freiberg, Comeau |
+| Tray or screen, disclosure, where delight goes | Taylor, Freiberg |
+| Motion and depth | Kowalski, Freiberg, Comeau, Taylor |
 | Notifications, badges, interruptions | Case, Nielsen (heuristic 8) |
 | Copy, tone, voice | Checklist W1–W4; Chimero for ordering; van Schneider (P) |
-| Generic, could be any product | Chimero, Appleton, van Schneider (P) |
+| Generic, could be any product | Allen, Chimero, Appleton, van Schneider (P) |
