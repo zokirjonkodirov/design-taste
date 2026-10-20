@@ -1,0 +1,19 @@
+{
+  "name": "design-taste",
+  "owner": {
+    "name": "zokirjonkodirov",
+    "url": "https://github.com/zokirjonkodirov"
+  },
+  "metadata": {
+    "description": "Design taste guidance for agents: review, suggest, and implement UI with restraint and craft."
+  },
+  "plugins": [
+    {
+      "name": "design-taste",
+      "source": "./",
+      "description": "Opinionated UI review, design, and implementation guidance distilled from 24 designers' published philosophies.",
+      "version": "0.1.0",
+      "category": "design"
+    }
+  ]
+}
