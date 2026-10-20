@@ -32,12 +32,12 @@ Last checked: 2026-10-20.
 - Review question: could someone read this for ten minutes without strain?
 
 ### Kenya Hara: emptiness
-**Status: Partial.** Publisher and library descriptions of *Designing Design* and *White* describe emptiness as a central idea, and *White* describes good communication as listening rather than imposing. The "material honesty" framing comes from the author's notes.
+**Status: Partial.** Publisher and library descriptions of *Designing Design* describe emptiness as a central concept in Japanese visual and philosophical traditions, applied to design, with examples from his MUJI and Nagano 1998 work. The Propositions page on his studio site describes the studio's approach. No primary text from Hara was readable. The Louisiana Channel interview has no transcript. The "material honesty" framing comes from the author's notes.
 - Practice: use empty space on purpose. Leave room for the user's own meaning.
 - Review question: is the empty space doing work, or is it leftover?
 
 ### Jenny Odell: calm and attention
-**Status: Partial.** Her page was a loading message. Publisher and review summaries of *How to Do Nothing* describe attention as a scarce resource and treat refusing to be measured by productivity as a form of resistance.
+**Status: Partial.** Her site was a loading message. A Tricycle review of *How to Do Nothing* by Dan Zigmond quotes her directly: "To pay attention to one thing is to resist paying attention to other things," and "the logic of advertising and clicks dictates the media experience, which is exploitative by design." The review notes she wants a "mass movement of attention" more than a mass exodus from platforms.
 - Practice: give attention room. Avoid patterns that exist mainly to hold attention.
 - Review question: does this pattern help the user, or keep them here?
 
@@ -100,7 +100,7 @@ Last checked: 2026-10-20.
 - Review question: can the most common workflow be done without touching the mouse?
 
 ### Robin Rendle: web typography
-**Status: Partial.** His site lists the essays "The New Web Typography" and "The Futures of Typography". The essay text could not be read. Coverage of "The New Web Typography" reports its principles as putting text over font and semantics over style.
+**Status: Partial.** His essay "The New Web Typography" states three principles, quoted here from Adactio's link post, which reproduces the essay: "We must prioritise the text over the font, or semantics over style." "We ought to use and/or make tools that reveal the consequences of typographic decisions." "We should acknowledge that web typography is only as strong as its weakest point." The essay page itself returned 404.
 - Practice: keep the words and their structure primary. Use fluid type sizing and a controlled measure. Respect user font settings.
 - Review question: does the text still read well at 200% zoom and on a very wide screen?
 
@@ -124,7 +124,7 @@ Last checked: 2026-10-20.
 - Review question: does this tool challenge the user, or only please them?
 
 ### Jason Yuan: a place, not a list
-**Status: Partial.** Search excerpts of his Mercury OS essays on UX Collective describe modules, reducing friction between tasks by keeping items reachable in different spaces, and human intention over fixed apps and files. The full articles could not be read.
+**Status: Partial.** Excerpts of his Mercury OS essay on UX Collective, relayed by secondary coverage, describe modules built from content and actions based on user intent, flows (horizontal rows of modules), and spaces (groups of flows for one goal). The stated design goals are humane, fluid, focused, and familiar. The full article returned 403 and his own site has no essay text.
 - Practice: present things as places the user can return to, if the task allows it.
 - Review question: does the user know where they are without reading the title?
 

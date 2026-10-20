@@ -12,12 +12,12 @@ The **Check** column records what was found on 2026-10-20. "Own page" means the 
 | Tobias van Schneider | https://vanschneider.com | Own page |
 | Don Norman | https://jnd.org | Own page |
 | Julie Zhuo | https://theyearofthelookingglass.com | Domain unreachable. Secondary summaries only. |
-| Robin Rendle | https://robinrendle.com/essays/ (essay list). Essay pages returned 404. | Own site title list. Secondary coverage for essay content. |
+| Robin Rendle | https://robinrendle.com/essays/ (essay list). Essay pages returned 404. https://adactio.com/links/10300 (link post reproducing the essay's principles) | Own site title list. Essay principles quoted via Adactio link post. |
 | John Maeda | https://lawsofsimplicity.com | Own page (laws summaries) |
 | Dan Saffer | https://odannyboy.com | Own page (bio and book list). The `dannyboy.com` domain now redirects to a parked page. |
 | Paco Coursey | https://paco.me | Own page |
 | Luke Wroblewski | https://lukew.com/ff/ | Own page (book and essay titles) |
-| Jenny Odell | https://jennyodell.com | Loading message only. Secondary: publisher and review summaries of *How to Do Nothing*. |
+| Jenny Odell | https://jennyodell.com; review at https://tricycle.org/magazine/jenny-odell-attention-economy/ (Dan Zigmond, review of *How to Do Nothing*) | Site was a loading message. Review quotes Odell directly. |
 | Erik Spiekermann | https://spiekermann.com | Own page |
 | Khoi Vinh | https://subtraction.com | Own blog posts (secondary search excerpts). `/about` did not load. Book: *Ordering Disorder*. |
 | Rauno Freiberg | https://rauno.me | Own page. Start with "Invisible Details of Interaction Design". |
@@ -25,11 +25,11 @@ The **Check** column records what was found on 2026-10-20. "Own page" means the 
 | Benji Taylor | https://benji.org | Own page |
 | Andy Allen | https://notbor.ing | Own studio storefront. No named author. |
 | Rasmus Andersson | https://rsms.me | Own page |
-| Jason Yuan | https://jasonyuan.design | Own site did not load. Mercury OS essays on uxdesign.cc returned 403; search excerpts only. |
+| Jason Yuan | https://jasonyuan.design | Own site has no essay text. Mercury OS essay on uxdesign.cc returned 403; secondary excerpts only. |
 | Alexander Obenauer | https://alexanderobenauer.com | Own page |
 | Devine Lu Linvega | https://100r.co | Own project log |
 | Oliver Reichenstein | https://ia.net/topics | Own news page |
-| Kenya Hara | https://hara.ndc.co.jp (Propositions page); *Designing Design* and *White* publisher pages (Lars Müller Publishers) | Own pages did not contain his text. Secondary: publisher blurbs. |
+| Kenya Hara | https://hara.ndc.co.jp (studio Propositions page); *Designing Design* (Lars Müller Publishers); Louisiana Channel interview (no transcript) | No primary text readable. Secondary: publisher blurbs. |
 
 ## Notes
 

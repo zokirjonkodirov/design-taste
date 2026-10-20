@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.2.3] - 2026-10-20
+
+### Changed
+- **Research pass on the remaining weak sources.** Rendle's three essay principles are now quoted from the essay via Adactio's link post (the essay page 404s). Odell's entry quotes her directly from a Tricycle review by Dan Zigmond. Yuan's and Hara's entries now state exactly what could and could not be read.
+- **No entry was upgraded to Checked.** No primary full text was readable for Yuan, Rendle, Odell, or Hara, so all stay Partial.
+- Status counts unchanged: 7 Checked, 16 Partial, 1 Unverified.
+
+### Known gaps
+- Jason Yuan: no readable primary essay text (uxdesign.cc returns 403).
+- Robin Rendle: essay page 404s; principles come via a link post.
+- Kenya Hara: no primary text; the Louisiana interview has no transcript.
+- Julie Zhuo: no working source.
+
 ## [0.2.2] - 2026-10-20
 
 ### Changed
