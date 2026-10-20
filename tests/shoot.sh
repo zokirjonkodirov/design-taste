@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Screenshot every screen.html produced by run-pure.sh at 375px (tall) and 1280px.
 # Usage: bash tests/shoot.sh <fixture>
-# Needs Google Chrome. Writes phone.png and desktop.png next to each screen.html,
-# plus overflow.txt with the document scrollWidth at 375px.
+# Needs Google Chrome. Writes phone.png and desktop.png next to each screen.html.
+# Horizontal overflow is not measured here; check document.documentElement.scrollWidth
+# at 375px in a real browser or via the chrome-devtools MCP.
 set -euo pipefail
 fixture="${1:?fixture}"
 out="${PURE_OUT:-$HOME/.cache/design-taste-pure}/$fixture"
@@ -16,7 +17,5 @@ find "$out" -name screen.html | sort | while read -r f; do
     --screenshot="$d/phone.png" "file://$f" >/dev/null 2>&1 || true
   "$chrome" --headless=new --hide-scrollbars --window-size=1280,1400 \
     --screenshot="$d/desktop.png" "file://$f" >/dev/null 2>&1 || true
-  "$chrome" --headless=new --window-size=375,812 --dump-dom "file://$f" 2>/dev/null \
-    | python3 -I -c "import sys; d=sys.stdin.read(); print('dom-bytes', len(d))" > "$d/overflow.txt" || true
   echo "$d"
 done

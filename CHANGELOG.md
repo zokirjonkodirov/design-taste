@@ -12,6 +12,9 @@ All notable changes to this project are documented here. Versions follow [Semant
 - **`tests/fixture-pharmacy.json`** and `expected-pharmacy.md`: a vision fixture in a domain unlike Kurs (a pharmacy finder in Lisbon), with its own seeded traps.
 - `tests/prompt-rates.txt`, `tests/prompt-pharmacy.txt`: the exact prompts, so runs are reproducible.
 
+### Fixed
+- **The skill did not trigger.** First pure run (headless, `--plugin-dir`, pharmacy prompt): the plugin loaded and `design-taste:design-taste` was in the session's skill list, but the agent invoked `frontend-design:frontend-design` (Anthropic's installed plugin) and never read design-taste. Every subagent test before this had told the agent to read `SKILL.md`, so triggering was never measured. The description now names the build verbs and stacks it must win on and says to use it together with frontend-design, this one first.
+
 ## [0.4.0] - 2026-10-20
 
 ### Added

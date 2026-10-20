@@ -20,6 +20,33 @@
 set -euo pipefail
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# ---- single job mode: bash run-pure.sh _one <fixture> <variant> <n> [model]
+if [ "${1:-}" = "_one" ]; then
+  fixture="$2"; variant="$3"; i="$4"; model="${5:-}"
+  out="${PURE_OUT:-$HOME/.cache/design-taste-pure}/$fixture"
+  dir="$out/$variant/$i"
+  rm -rf "$dir"; mkdir -p "$dir"
+  cp "$repo/tests/fixture-$fixture.json" "$dir/"
+  args=(-p "$(cat "$repo/tests/prompt-$fixture.txt")"
+        --output-format stream-json --verbose
+        --permission-mode acceptEdits)
+  [ -n "$model" ] && args+=(--model "$model")
+  [ "$variant" = "with" ] && args+=(--plugin-dir "$repo")
+  start=$(date +%s)
+  ( cd "$dir" && claude "${args[@]}" > transcript.jsonl 2> stderr.log ) || echo "exit=$?" > "$dir/failed"
+  secs=$(( $(date +%s) - start ))
+  python3 -I "$repo/tests/reply.py" "$dir/transcript.jsonl" > "$dir/reply.md" 2>/dev/null || true
+  # fired = the Skill tool was called with design-taste, or its SKILL.md was read
+  if grep -q '"skill": *"design-taste:design-taste"\|design-taste/SKILL.md' "$dir/transcript.jsonl"; then echo yes > "$dir/fired"; else echo no > "$dir/fired"; fi
+  # record which skills were invoked, for the comparison
+  grep -o '"skill": *"[^"]*"' "$dir/transcript.jsonl" | sort | uniq -c > "$dir/skills-invoked.txt" || true
+  printf '%-7s %2d  fired=%-3s html=%-3s %4ds%s\n' "$variant" "$i" "$(cat "$dir/fired")" \
+    "$([ -f "$dir/screen.html" ] && echo yes || echo no)" "$secs" "$([ -f "$dir/failed" ] && echo '  FAILED' || true)"
+  exit 0
+fi
+
+# ---- driver mode
 fixture="${1:?fixture name: rates or pharmacy}"
 reps="${2:-5}"
 parallel="${3:-3}"
@@ -30,39 +57,10 @@ out="${PURE_OUT:-$HOME/.cache/design-taste-pure}/$fixture"
 [ -f "$repo/tests/prompt-$fixture.txt" ]   || { echo "no prompt: $fixture" >&2; exit 1; }
 command -v claude >/dev/null || { echo "claude CLI not found" >&2; exit 1; }
 
-run_one() {
-  local variant="$1" i="$2"
-  local dir="$out/$variant/$i"
-  rm -rf "$dir"; mkdir -p "$dir"
-  cp "$repo/tests/fixture-$fixture.json" "$dir/"
-  local args=(-p "$(cat "$repo/tests/prompt-$fixture.txt")"
-              --output-format stream-json --verbose
-              --permission-mode acceptEdits)
-  [ -n "$model" ] && args+=(--model "$model")
-  [ "$variant" = "with" ] && args+=(--plugin-dir "$repo")
-  local start=$(date +%s)
-  ( cd "$dir" && claude "${args[@]}" > transcript.jsonl 2> stderr.log ) || echo "exit=$?" > "$dir/failed"
-  local secs=$(( $(date +%s) - start ))
-  # final assistant text: last "result" event
-  python3 -I - "$dir/transcript.jsonl" > "$dir/reply.md" <<'EOF' || true
-import json, sys
-last = ""
-for line in open(sys.argv[1], encoding="utf-8"):
-    try: ev = json.loads(line)
-    except Exception: continue
-    if ev.get("type") == "result" and isinstance(ev.get("result"), str):
-        last = ev["result"]
-print(last)
-EOF
-  if grep -q 'skills/design-taste/SKILL.md\|design-taste/SKILL.md' "$dir/transcript.jsonl"; then echo yes > "$dir/fired"; else echo no > "$dir/fired"; fi
-  printf '%-7s %2d  fired=%-3s html=%-3s %4ds\n' "$variant" "$i" "$(cat "$dir/fired")" "$([ -f "$dir/screen.html" ] && echo yes || echo no)" "$secs"
-}
-export -f run_one
-export repo fixture out model
-
-jobs=()
-for i in $(seq 1 "$reps"); do jobs+=("without $i" "with $i"); done
-printf '%s\n' "${jobs[@]}" | xargs -P "$parallel" -L 1 bash -c 'run_one $0 $1'
+for i in $(seq 1 "$reps"); do
+  echo "without $i"
+  echo "with $i"
+done | xargs -P "$parallel" -L 1 bash "$repo/tests/run-pure.sh" _one "$fixture" "$@" 2>&1 | sed 's/^/  /'
 
 echo
 echo "results in $out"

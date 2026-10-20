@@ -1,6 +1,6 @@
 ---
 name: design-taste
-description: Use when reviewing, designing, or implementing UI for a web or mobile project, when a screen looks generic, templated, or "AI-generated", when a screen shows data but does not answer the user's question, or when asked for design critique, layout, typography, spacing, motion, touch, or interaction polish.
+description: Use when building, implementing, reviewing, or redesigning any UI screen, page, or component for web or mobile (HTML, CSS, React, Vue, Svelte, Flutter, SwiftUI, Compose), including app home screens, dashboards, lists, forms, and settings; when a screen shows data but does not answer the user's question; when UI looks generic, templated, or AI-generated; or when asked for design critique, layout, typography, spacing, motion, touch, or interaction polish. Use it together with frontend-design when both apply, this one first - it decides what the screen is for and what to remove; frontend-design decides the look.
 ---
 
 # Design Taste
