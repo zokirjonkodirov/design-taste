@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- **`philosophy.md` rewritten into "what this article teaches you to do".** Each entry is now three to five instructions to apply to the screen in front of you, one question, and a one-word status. The attribution prose moved to `sources.md`. This is the form that worked for the owner in practice: read the article, apply it to the project.
+
+### Added
+- **Pure test.** `tests/run-pure.sh` runs the same prompt headless in a folder outside the repo, once with `--plugin-dir` and once without, N times each, and records whether the skill fired. `tests/shoot.sh` captures every result. The earlier subagent comparisons told the with-agent to read the skill and told the without-agent to avoid skills; they measured content, not the plugin.
+- **`tests/fixture-pharmacy.json`** and `expected-pharmacy.md`: a vision fixture in a domain unlike Kurs (a pharmacy finder in Lisbon), with its own seeded traps.
+- `tests/prompt-rates.txt`, `tests/prompt-pharmacy.txt`: the exact prompts, so runs are reproducible.
+
 ## [0.4.0] - 2026-10-20
 
 ### Added

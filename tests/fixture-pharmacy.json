@@ -1,0 +1,29 @@
+{
+  "locale": "pt-PT",
+  "city": "Lisboa",
+  "words": { "currency_symbol": "€", "currency_in_sentences": "euros", "decimal": ",", "price_format_example": "3,90 €" },
+  "now": "2026-10-21T13:40:00+01:00",
+  "user": { "location_known": true, "district": "Campo de Ourique", "wants": { "medicine": "Paracetamol 1000 mg", "pack": "20 comprimidos", "packs": 1, "prescription_needed": false } },
+  "transit_fare_eur": 1.80,
+  "pharmacies": [
+    { "id": "central", "name": "Farmácia Central", "distance_km": 0.4, "price_eur": 3.90, "stock": 3, "open_now": true, "open_until": "20:00", "stock_updated_at": "2026-10-21T12:55:00+01:00",
+      "branches": [ { "address_raw": "1350-186 Lisboa, R. Saraiva de Carvalho 24, R/C Esq.", "distance_km": 0.4 } ] },
+    { "id": "saldanha", "name": "Farmácia Saldanha", "distance_km": 2.1, "price_eur": 2.95, "stock": 12, "open_now": true, "open_until": "19:00", "stock_updated_at": "2026-10-21T13:10:00+01:00",
+      "branches": [ { "address_raw": "1050-094 Lisboa, Av. Fontes Pereira de Melo 17, Loja 3", "distance_km": 2.1 } ] },
+    { "id": "alameda24", "name": "Farmácia Alameda 24h", "distance_km": 3.4, "price_eur": 4.50, "stock": 20, "open_now": true, "open_until": "24h", "stock_updated_at": "2026-10-21T13:30:00+01:00",
+      "branches": [ { "address_raw": "1000-002 Lisboa, Av. Almirante Reis 180 A", "distance_km": 3.4 } ] },
+    { "id": "estrela", "name": "Farmácia da Estrela", "distance_km": 0.9, "price_eur": 3.60, "stock": 0, "open_now": true, "open_until": "19:30", "stock_updated_at": "2026-10-21T11:20:00+01:00",
+      "branches": [ { "address_raw": "1200-664 Lisboa, Calçada da Estrela 61", "distance_km": 0.9 } ] },
+    { "id": "benfica", "name": "Farmácia de Benfica", "distance_km": 5.8, "price_eur": 0.00, "stock": 8, "open_now": true, "open_until": "20:00", "stock_updated_at": "2026-10-21T12:40:00+01:00",
+      "branches": [ { "address_raw": "1500-182 Lisboa, Estrada de Benfica 436", "distance_km": 5.8 } ] },
+    { "id": "campo", "name": "Farmácia Campo de Ourique", "distance_km": 0.2, "price_eur": 3.75, "stock": 5, "open_now": false, "opens_at": "15:00", "stock_updated_at": "2026-10-21T12:58:00+01:00",
+      "branches": [ { "address_raw": "1350-116 Lisboa, R. Ferreira Borges 100, R/C", "distance_km": 0.2 } ] },
+    { "id": "lapa", "name": "Farmácia da Lapa", "distance_km": 1.3, "price_eur": 3.40, "stock": 2, "open_now": true, "open_until": "19:00", "stock_updated_at": "2026-10-21T13:05:00+01:00",
+      "branches": [
+        { "address_raw": "1200-666 Lisboa, R. de São Domingos à Lapa 8", "distance_km": 1.3 },
+        { "address_raw": "4050-313 Porto, R. de Cedofeita 141", "distance_km": 1.3 }
+      ] },
+    { "id": "rato", "name": "Farmácia do Rato", "distance_km": 1.1, "price_eur": 3.40, "stock": 6, "open_now": true, "open_until": "19:30", "stock_updated_at": "2026-10-18T09:15:00+01:00",
+      "branches": [ { "address_raw": "1250-096 Lisboa, Largo do Rato 4 B", "distance_km": 1.1 } ] }
+  ]
+}

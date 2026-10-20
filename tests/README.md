@@ -2,9 +2,32 @@
 
 The skill is tested the way a skill can be: give an agent a task with and without the skill, and compare. This folder holds the fixtures and the expected results, so the test can be repeated after any edit.
 
+## The pure test (use this one)
+
+Same prompt, same empty folder outside the repo, same model, headless. One run loads the plugin for that session only with `--plugin-dir`; the other does not. Nothing tells the agent to read the skill; it has to trigger from its own description, and the transcript shows whether it did.
+
+```bash
+bash tests/run-pure.sh pharmacy 5 3     # fixture, reps per side, parallel
+bash tests/shoot.sh pharmacy            # phone and desktop captures of every screen.html
+```
+
+Results land in `~/.cache/design-taste-pure/<fixture>/<with|without>/<n>/` with `screen.html`, `reply.md`, `transcript.jsonl`, and `fired` (whether the skill was read). Score each against `expected-<fixture>.md`. Five reps per side, because single runs lie.
+
+What this measures: the plugin's effect in your real environment. Every other plugin and setting on the machine is present in both runs. If `fired` says `no` in a with-run, the skill's description failed to trigger; that is a bug to fix before any principle.
+
+The subagent runs recorded in `CHANGELOG.md` for 0.3.0 and 0.4.0 were not pure: the with-agent was told to read `SKILL.md`, and the without-agent was told not to use skills. They measured the content, not the plugin.
+
+## Fixtures
+
+- `fixture-settings.html`: a settings page, no user question. Measures the floor.
+- `fixture-rates.json`: a currency screen. Too close to the Kurs example in `vision.md`; an agent can score well by reproducing it. Kept for continuity.
+- `fixture-pharmacy.json`: a pharmacy finder in Lisbon. Unrelated to Kurs. The vision fixture to trust.
+
 There are two implement tests because they measure different layers. The settings page has no question to answer, so it measures the floor (tokens, states, targets). The rates screen has a question, so it measures the vision layer (`references/vision.md`).
 
-## Review test (floor)
+## Subagent tests (older method, kept for reference)
+
+### Review test (floor)
 
 `fixture-settings.html` is a deliberately generic settings page: gradient background, identical shadowed cards, `div` toggles, arbitrary spacing, infinite animations, a streak widget, marketing copy, and `outline: none`.
 
