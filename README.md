@@ -4,6 +4,20 @@ An agent skill for reviewing, suggesting, and implementing web and mobile UI wit
 
 The guidance is **inspired by** public work from 24 designers. It was written by an AI and is **not endorsed by any of them**. Each entry is marked **Checked** or **Partial** according to what the designer's own page supported. See [NOTICE.md](NOTICE.md).
 
+## Example
+
+Same prompt, same model. The left agent had no skill. The right agent read `SKILL.md`. Nothing was edited afterwards.
+
+| Without skill | With skill |
+|:---:|:---:|
+| <img src="examples/settings-page/without-skill-phone.png" width="320" alt="Settings page built without the skill, phone width: sticky section nav, avatar, every section in a shadowed card, theme preview tiles"> | <img src="examples/settings-page/with-skill-phone.png" width="320" alt="Settings page built with the skill, phone width: no cards, hairline dividers, full-width inputs, segmented theme control, dashed empty state"> |
+
+| Without skill, 1280 wide | With skill, 1280 wide |
+|:---:|:---:|
+| <img src="examples/settings-page/without-skill-desktop.png" alt="Without skill at desktop width"> | <img src="examples/settings-page/with-skill-desktop.png" alt="With skill at desktop width"> |
+
+Both pages are competent. The skill's version is quieter, uses one token scale, and was verified by rendering. It also has an 18px horizontal overflow on phones that the agent's own check missed; it is kept as generated and documented. Prompt, source files, and the full diff table are in [`examples/settings-page/`](examples/settings-page/).
+
 ## What's inside
 
 ```
@@ -15,6 +29,7 @@ design-taste/
     tokens.md                           starter CSS tokens (spacing, type, color, motion, touch, a11y) + Tailwind map
     sources.md                          links, what each page showed, and removed entries
   tests/                                fixture, expected findings, and how to re-run the with/without test
+  examples/settings-page/               with/without pages, captures, and a side-by-side compare.html
   .claude-plugin/                       plugin and marketplace manifests
   scripts/install.sh                    copy-install script
   NOTICE.md                             not-endorsed statement and removal policy
