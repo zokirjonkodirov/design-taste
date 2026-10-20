@@ -21,11 +21,12 @@ set -euo pipefail
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# ---- single job mode: bash run-pure.sh _one <fixture> <variant> <n> [model]
+# ---- single job mode: bash run-pure.sh _one <fixture> <variant> <n>   (model via PURE_MODEL)
 if [ "${1:-}" = "_one" ]; then
-  fixture="$2"; variant="$3"; i="$4"; model="${5:-}"
+  fixture="$2"; variant="$3"; i="$4"; model="${PURE_MODEL:-}"
   out="${PURE_OUT:-$HOME/.cache/design-taste-pure}/$fixture"
   dir="$out/$variant/$i"
+  [ -d "$dir" ] && chmod -R u+rwx "$dir" 2>/dev/null || true
   rm -rf "$dir"; mkdir -p "$dir"
   cp "$repo/tests/fixture-$fixture.json" "$dir/"
   args=(-p "$(cat "$repo/tests/prompt-$fixture.txt")"
@@ -57,10 +58,11 @@ out="${PURE_OUT:-$HOME/.cache/design-taste-pure}/$fixture"
 [ -f "$repo/tests/prompt-$fixture.txt" ]   || { echo "no prompt: $fixture" >&2; exit 1; }
 command -v claude >/dev/null || { echo "claude CLI not found" >&2; exit 1; }
 
+export PURE_MODEL="$model"
 for i in $(seq 1 "$reps"); do
   echo "without $i"
   echo "with $i"
-done | xargs -P "$parallel" -L 1 bash "$repo/tests/run-pure.sh" _one "$fixture" "$@" 2>&1 | sed 's/^/  /'
+done | xargs -P "$parallel" -L 1 bash "$repo/tests/run-pure.sh" _one "$fixture" 2>&1 | sed 's/^/  /'
 
 echo
 echo "results in $out"
