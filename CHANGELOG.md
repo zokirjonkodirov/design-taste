@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.2.4] - 2026-10-20
+
+### Changed
+- **Swapped two designers** that had no readable primary text after repeated attempts:
+  - Kenya Hara → **Matthew Butterick** (*Practical Typography*, "Why typography matters"). Checked.
+  - Jason Yuan → **Bret Victor** ("A Brief Rant on the Future of Interaction Design"). Checked.
+- Retry results: Rendle's essay and Yuan's case study still do not load. Rendle's principles remain quoted via Adactio's link post (Partial). Odell's publisher page returned 403; her entry stays Partial via a Tricycle review that quotes her.
+- Status now: 9 Checked, 14 Partial, 1 Unverified. All 24 entries listed.
+
+### Known gaps
+- Robin Rendle: essay page 404s; principles come via a link post.
+- Jenny Odell: own site is a loading message; quotes come from a review.
+- Julie Zhuo: no working source.
+
 ## [0.2.3] - 2026-10-20
 
 ### Changed

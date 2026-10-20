@@ -31,10 +31,10 @@ Last checked: 2026-10-20.
 - Practice: keep text comfortable to read, with a reasonable line length and no decoration that competes with the words.
 - Review question: could someone read this for ten minutes without strain?
 
-### Kenya Hara: emptiness
-**Status: Partial.** Publisher and library descriptions of *Designing Design* describe emptiness as a central concept in Japanese visual and philosophical traditions, applied to design, with examples from his MUJI and Nagano 1998 work. The Propositions page on his studio site describes the studio's approach. No primary text from Hara was readable. The Louisiana Channel interview has no transcript. The "material honesty" framing comes from the author's notes.
-- Practice: use empty space on purpose. Leave room for the user's own meaning.
-- Review question: is the empty space doing work, or is it leftover?
+### Matthew Butterick: typography has consequences
+**Status: Checked.** His book *Practical Typography* argues that anyone who writes is already a typographer, that typography has real consequences, and that good typography helps readers engage with, follow, and be persuaded by text. The chapter "Why typography matters" uses the Palm Beach County butterfly ballot to show how poor design choices can cause harm.
+- Practice: treat each typographic choice as something that changes what the reader does. Choose it on purpose, and check it against the reader's task.
+- Review question: what does this typographic choice make the reader do, and was that intended?
 
 ### Jenny Odell: calm and attention
 **Status: Partial.** Her site was a loading message. A Tricycle review of *How to Do Nothing* by Dan Zigmond quotes her directly: "To pay attention to one thing is to resist paying attention to other things," and "the logic of advertising and clicks dictates the media experience, which is exploitative by design." The review notes she wants a "mass movement of attention" more than a mass exodus from platforms.
@@ -123,10 +123,10 @@ Last checked: 2026-10-20.
 - Practice: favor tools that push thinking and let users adapt them. Question tools that only flatter.
 - Review question: does this tool challenge the user, or only please them?
 
-### Jason Yuan: a place, not a list
-**Status: Partial.** Excerpts of his Mercury OS essay on UX Collective, relayed by secondary coverage, describe modules built from content and actions based on user intent, flows (horizontal rows of modules), and spaces (groups of flows for one goal). The stated design goals are humane, fluid, focused, and familiar. The full article returned 403 and his own site has no essay text.
-- Practice: present things as places the user can return to, if the task allows it.
-- Review question: does the user know where they are without reading the title?
+### Bret Victor: a medium for the whole body
+**Status: Checked.** His essay "A Brief Rant on the Future of Interaction Design" argues that touchscreen "pictures under glass" are a numb paradigm that ignores what hands do well, and urges a dynamic medium we can see, feel, and manipulate, using the whole body. Other essays on his site are listed but were not read.
+- Practice: favor interactions that use touch, space, and manipulation over passive viewing. Question interfaces that only ask for a finger swipe.
+- Review question: what can the user do with their hands here, beyond tapping and scrolling?
 
 ### Alexander Obenauer: items over apps
 **Status: Checked.** His page argues that personal software should serve people's lives, that rigid app silos are the problem, and that malleable software and unified structures are better.

@@ -25,14 +25,15 @@ The **Check** column records what was found on 2026-10-20. "Own page" means the 
 | Benji Taylor | https://benji.org | Own page |
 | Andy Allen | https://notbor.ing | Own studio storefront. No named author. |
 | Rasmus Andersson | https://rsms.me | Own page |
-| Jason Yuan | https://jasonyuan.design | Own site has no essay text. Mercury OS essay on uxdesign.cc returned 403; secondary excerpts only. |
+| Bret Victor | https://worrydream.com (essay "A Brief Rant on the Future of Interaction Design") | Own essay text |
 | Alexander Obenauer | https://alexanderobenauer.com | Own page |
 | Devine Lu Linvega | https://100r.co | Own project log |
 | Oliver Reichenstein | https://ia.net/topics | Own news page |
-| Kenya Hara | https://hara.ndc.co.jp (studio Propositions page); *Designing Design* (Lars Müller Publishers); Louisiana Channel interview (no transcript) | No primary text readable. Secondary: publisher blurbs. |
+| Matthew Butterick | https://practicaltypography.com (book, chapter "Why typography matters") | Own book text |
 
 ## Notes
 
+- Kenya Hara and Jason Yuan were replaced in 0.2.4 by Matthew Butterick and Bret Victor, because no readable primary text was found for Hara or Yuan. See CHANGELOG.
 - Rauno Freiberg appeared twice in the original source list. It is counted once here.
 - Search excerpts were used only as Partial support. Two PDF results that looked like low-quality AI-generated summaries were excluded.
 - Andy Allen's approach is polarizing. The skill keeps his entry as a counterweight to restraint and caps it with an explicit "make it optional" rule.
