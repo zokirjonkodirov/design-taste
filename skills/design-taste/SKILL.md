@@ -7,7 +7,7 @@ description: Use when reviewing, designing, or implementing UI for a web or app 
 
 ## Overview
 
-Opinionated UI guidance distilled from 24 designers' published philosophies. Principles are paraphrased; sources are in `references/sources.md`.
+Opinionated UI guidance inspired by 24 designers' public work. It is written by an AI, paraphrases their positions, and is **not endorsed by them**. Each entry in `references/philosophy.md` has a status: **Checked**, **Partial**, or **Unverified**. Treat Unverified entries as prompts, not as the designer's view. Sources are in `references/sources.md`.
 
 It exists to avoid default generated "AI slop": gradient blobs, identical shadowed cards, arbitrary spacing, one font for everything, bouncy motion everywhere, empty states with no point of view, controls with no focus, loading, or error states.
 

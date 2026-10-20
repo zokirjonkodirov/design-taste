@@ -1,20 +1,24 @@
 # design-taste
 
-An agent skill for reviewing, suggesting, and implementing UI with taste. It is built to counter default generated "AI slop" UI: generic cards, arbitrary spacing, decorative gradients, and missing interaction states.
+An agent skill for reviewing, suggesting, and implementing UI with more craft and less default output. It is aimed at generic generated UI: boilerplate cards, arbitrary spacing, decorative gradients, and missing interaction states.
 
-The guidance is distilled from 24 practitioners' published design philosophies. Each principle is paraphrased, attributed, and linked to its source.
+The guidance is **inspired by** public work from 24 designers. It was written by an AI and is **not endorsed by any of them**. Each entry is marked **Checked**, **Partial**, or **Unverified** according to what the designer's own page supported. See [NOTICE.md](NOTICE.md).
 
 ## What's inside
 
 ```
 design-taste/
-  skills/design-taste/SKILL.md     entry point: modes, core rules, quick reference
+  skills/design-taste/SKILL.md          entry point: modes, core rules, quick reference
   skills/design-taste/references/
-    philosophy.md                  one entry per designer: principle, practice, review question
-    anti-slop-checklist.md         observable checks for review
-    tokens.md                      starter CSS tokens (spacing, type, color, motion, a11y)
-    sources.md                     links and attribution
-  LICENSE                          MIT
+    philosophy.md                       one entry per designer, with status
+    anti-slop-checklist.md              observable checks for review
+    tokens.md                           starter CSS tokens (spacing, type, color, motion, a11y)
+    sources.md                          links and what each page showed
+  .claude-plugin/                       plugin and marketplace manifests
+  scripts/install.sh                    copy-install script
+  NOTICE.md                             not-endorsed statement and removal policy
+  CHANGELOG.md
+  LICENSE                               MIT
 ```
 
 ## Install
@@ -35,6 +39,8 @@ Update later with:
 /plugin update design-taste
 ```
 
+Restart Claude Code after updating.
+
 ### Option 2: Install script
 
 ```bash
@@ -48,26 +54,33 @@ To update, run `git pull` and re-run the script.
 
 ## Use
 
-Invoke when working on UI. Modes:
-
 - **Review:** critique existing screens or components against the checklist
-- **Suggest:** offer 2–3 directions, each tied to a named principle
+- **Suggest:** offer 2–3 directions, each tied to a named principle and its trade-off
 - **Implement:** build with the token scale and complete interaction states
 
 If the project has its own design system, the project wins on conflicts.
 
-## Open-source notes
+## Reliability
 
-- Designers' work is paraphrased, not quoted. Check `references/sources.md` before quoting directly.
-- The one-line summaries that seed `philosophy.md` were written from notes and should be verified against each designer's own writing.
-- Several philosophies pull in different directions (restraint vs. expressive character). The skill asks for the trade-off to be named rather than resolved by default.
+- Prefer entries marked **Checked**. Treat **Unverified** entries as prompts, not as designers' positions.
+- Each release records which pages were re-checked, in `CHANGELOG.md`.
+- Dead or redirected sources are listed in `sources.md` rather than hidden.
 
 ## Contributing
 
 Pull requests welcome, especially:
 
-- Corrections to a designer's paraphrased position, with a link to the source
-- Additional checklist items that are observable in code or on screen
-- Token sets for other stacks (Tailwind, native mobile)
+- Corrections, with a link to the designer's own page or statement. A correction that cites the source can raise an entry to **Checked**.
+- Working sources for **Unverified** entries.
+- Observable checklist items (something you can see in code or on screen).
+- Token sets for other stacks (Tailwind, native mobile).
 
-Please keep entries paraphrased, and keep each principle tied to a review question.
+Keep entries as paraphrases, and keep each principle tied to a review question.
+
+## Removal
+
+Any named designer can ask for their entry to be removed or corrected. See [NOTICE.md](NOTICE.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE). The designers' own work is not covered by this license.

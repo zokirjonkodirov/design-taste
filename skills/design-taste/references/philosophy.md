@@ -1,147 +1,150 @@
 # Philosophy Reference
 
-Each entry is a paraphrase of the designer's published position, written as working guidance. It is not a quotation. Check the source in `sources.md` before relying on the nuance.
+Each entry is written by an AI from the designer's public pages where those were readable, and from the author's notes where they were not. It is a paraphrase, not a quotation, and it is **not endorsed by the designer**.
 
-Format: **Principle** · what it means in practice · review question.
+**Status** tells you how far to trust an entry:
+
+- **Checked:** the designer's page was read and supports the core of the entry.
+- **Partial:** the page supports some of the entry. The rest comes from the author's notes.
+- **Unverified:** the page was empty, redirected, unreachable, or did not support the entry. The entry comes only from the author's notes. Do not cite it as the designer's view.
+
+Format: **Principle** · practice · review question.
+
+Last checked: 2026-10-20.
 
 ---
 
 ## Restraint and utility
 
-### Dieter Rams — less, but better
-Design should serve unobtrusive utility and not compete for attention. Every element should justify itself; removing one should make the thing worse.
-- In practice: fewer colors, fewer borders, fewer competing emphases. Default to removing.
+### Dieter Rams: less, but better
+**Status: Checked.** His page describes design as useful, honest, understandable, durable, and restrained. It asks designers to avoid trends and reduce waste and clutter over a product's life.
+- Practice: remove what does not serve the product. Prefer lasting choices over fashion.
 - Review question: what breaks if this element is deleted?
 
-### Maeda — subtraction reveals meaning
-Computation and art meet when the obvious is subtracted until the meaningful part is visible.
-- In practice: strip chrome until the content or task is the loudest thing on screen.
-- Review question: what here is there only because it was easy to add?
+### Oliver Reichenstein: typography as interface
+**Status: Partial.** His iA news page supports simplicity that takes effort and design that recedes. The typography-as-interface view comes from the author's notes.
+- Practice: keep text comfortable to read, with a reasonable line length and no decoration that competes with the words.
+- Review question: could someone read this for ten minutes without strain?
 
-### Jenny Odell — calm interfaces
-Interfaces should give attention room to breathe rather than extract engagement.
-- In practice: no unnecessary notifications, badges, or infinite pulls. Let empty space be empty.
-- Review question: does this pattern exist to help the user, or to keep them here?
-
-### Oliver Reichenstein — typography as interface
-Text is the interface. Setting, measure, and contrast carry most of the usability, and should be treated as the primary design material.
-- In practice: body measure of roughly 45–75 characters, sensible line height, no decorative fonts for running text.
-- Review question: could the content be read comfortably for ten minutes?
-
-### Kenya Hara — emptiness and material honesty
-Emptiness is not absence; it is a deliberate quality that lets things be felt. Materials should look like what they are.
-- In practice: generous whitespace used on purpose, no faux textures that pretend to be physical, no skeuomorphism for its own sake.
+### Kenya Hara: emptiness and material honesty
+**Status: Unverified.** The page redirected and was not followed.
+- Practice: use empty space on purpose. Avoid faux materials.
 - Review question: is the empty space doing work, or is it leftover?
+
+### John Maeda: subtraction reveals meaning
+**Status: Unverified.** The page at the listed URL did not clearly support "subtraction".
+- Practice: strip what is not the content or task, until the meaningful part is clear.
+- Review question: what here exists only because it was easy to add?
+
+### Jenny Odell: calm interfaces
+**Status: Unverified.** The page returned a loading message.
+- Practice: give attention room. Avoid patterns that exist mainly to hold attention.
+- Review question: does this pattern help the user, or keep them here?
 
 ---
 
 ## Structure and system
 
-### Khoi Vinh — grid discipline
-Order, structural symmetry, and mathematical alignment make an interface intuitive.
-- In practice: one column grid, aligned baselines and edges, consistent gutters.
-- Review question: can you draw the grid lines that these elements sit on?
+### Khoi Vinh: grid discipline
+**Status: Unverified.** The page returned navigation and titles only.
+- Practice: one grid, aligned edges, consistent gutters.
+- Review question: can you name the grid lines these elements sit on?
 
-### Erik Spiekermann — typography as voice
-Information architecture depends on typographic hierarchy, weight, and rhythm. Type is how the content speaks.
-- In practice: a small set of weights and sizes, each with a job. Hierarchy by type first.
-- Review question: can you tell the reading order from the type alone, with color removed?
+### Erik Spiekermann: craft, material, and typography as infrastructure
+**Status: Checked.** His page stresses craft and touch, typography as cultural infrastructure for orientation, legibility, and identity, and working within material limits over screens.
+- Practice: favor clear, durable type structure. Treat constraints as useful, not as obstacles to remove.
+- Review question: does the typography help people find their way, or just look good?
 
-### Rasmus Andersson — rigor in type, systems, and tools
-Careful type metrics, systematic scales, and well-made tools produce good results. Details compound.
-- In practice: tabular numerals for data, optical sizing where available, a documented scale rather than eyeballed sizes.
-- Review question: is every size on the scale, or did someone pick one by feel?
+### Rasmus Andersson: precision in type and tools
+**Status: Partial.** His page describes software as a creative medium, skepticism of stagnant tools, and attention to pointer latency, pixel rounding, and the Inter typeface. The emphasis on systems comes from the author's notes.
+- Practice: measure responsiveness and rendering. Keep type metrics precise.
+- Review question: does rendering stay sharp and responsive under real conditions?
 
-### Don Norman — human-centered design
-Systems must match human psychological expectations. The user should not have to learn the designer's logic.
-- In practice: standard affordances for standard controls, visible state, clear feedback after every action, error messages that say what to do.
+### Don Norman: human-centered design
+**Status: Partial.** His page asks designers to design for people as they are, not as designers wish they were, and to learn from being wrong.
+- Practice: fit the design to how people actually think and act. Make complex tasks understandable.
 - Review question: would a first-time user guess what this does without help?
 
-### Luke Wroblewski — interaction geometry
-Design around thumb reach and device physics, not around an idealized desktop.
-- In practice: primary actions within thumb reach on mobile, adequate hit areas, layouts that survive real screen sizes.
+### Luke Wroblewski: interaction on real devices
+**Status: Unverified.** The page is navigation with book titles about mobile usability. The thumb-reach guidance comes from the author's notes.
+- Practice: put primary actions within thumb reach. Use hit areas that work on real screens.
 - Review question: can the main action be reached one-handed on the smallest supported device?
 
 ---
 
 ## Craft and feedback
 
-### Emil Kowalski — motion as craft
-Easing, springs, and duration are craft decisions. Often the right choice is to not animate at all.
-- In practice: short durations for UI feedback, easing that matches the motion's meaning, no animation on repeated high-frequency actions.
+### Emil Kowalski: taste, restraint, and motion
+**Status: Checked.** His page argues that friction filters bad ideas, that animation is often overused, that settling for good enough is not good enough, and that taste can be learned and passed to AI agents.
+- Practice: animate only where it helps. Treat taste as something that can be taught, including to tools.
 - Review question: would the user miss this animation if it were gone?
 
-### Rauno Freiberg — invisible details of interaction
-Microscopic details (hover timing, focus rings, subtle depth, cursor changes) separate "clean" from "crafted".
-- In practice: consistent focus rings, responsive hover, tactile press states, subtle depth that reads as light rather than decoration.
-- Review question: does every control respond to hover, press, and focus in the same visual language?
+### Rauno Freiberg: speed, polish, and consistency
+**Status: Partial.** His page values fast, careful work, consistency, and designs that stay relevant. The focus on invisible interaction details comes from the author's notes.
+- Practice: give every control the same visual response to hover, press, and focus.
+- Review question: do all controls respond in the same visual language?
 
-### Benji Taylor — simplicity, fluidity, delight in a utility app
-A utility app can be simple, fluid, and delightful at once. Delight comes from the quality of the basics.
-- In practice: smooth transitions between states, clear hierarchy, small moments of care in routine tasks.
-- Review question: does the most frequent task feel better after the delight was added, not worse?
+### Benji Taylor: craft in small tools
+**Status: Partial.** His page describes craft-focused tooling. The "Family Values" essay summary comes from the author's notes.
+- Practice: keep basic transitions smooth. Make small, careful choices in routine tasks.
+- Review question: does the most frequent task feel better after the detail was added?
 
-### Dan Saffer — single-purpose micro-interactions
-A micro-interaction has a trigger, rules, feedback, and loops or modes. One interaction should do one thing well.
-- In practice: define trigger, feedback, and end state for each. Keep it single-purpose.
+### Dan Saffer: single-purpose micro-interactions
+**Status: Unverified.** The domain redirects to a parked-domain page.
+- Practice: define trigger, feedback, and end state for each interaction. Keep each to one purpose.
 - Review question: can you state this interaction's single purpose in one sentence?
 
-### Paco Coursey — extreme tactility
-Zero-latency feedback, fluid keyboard navigation, and physical responsiveness make software feel direct.
-- In practice: immediate optimistic feedback, complete keyboard paths, no input lag, keyboard shortcuts for frequent actions.
+### Paco Coursey: simplicity and fine detail
+**Status: Partial.** His page emphasizes simplicity, magical details, and holistic craft. The "zero-latency keyboard-first" framing comes from the author's notes.
+- Practice: keep the interface simple and polished. Make keyboard paths complete.
 - Review question: can the most common workflow be done without touching the mouse?
 
-### Julie Zhou — metrics-informed craft
-Aesthetic polish is valuable when it measurably improves comprehension, intent, and clarity. Polish that does not move a metric is still open to question.
-- In practice: tie each craft change to a task outcome (completion, error rate, time to understand). Keep the ones that move it.
-- Review question: what measurable change should this polish produce, and how would we know?
-
-### Robin Rendle — elastic typography
-The browser is a dynamic typographic canvas. Fluid sizing and readable measure are part of the design, not afterthoughts.
-- In practice: fluid type with clamp(), respect for user font-size settings, measure controlled by container.
+### Robin Rendle: elastic typography
+**Status: Unverified.** The page returned titles only.
+- Practice: use fluid type sizing and a controlled measure. Respect user font settings.
 - Review question: does the text still read well at 200% zoom and on a very wide screen?
 
 ---
 
 ## Character and humanity
 
-### Frank Chimero — design as narrative framing
-Form, pacing, and visual voice reveal context over time. The order of what the user sees tells a story.
-- In practice: intentional sequence in onboarding and empty states; clear entry points; progressive disclosure.
-- Review question: does the order of the screens tell the user what matters first?
+### Frank Chimero: narrative framing
+**Status: Unverified.** The page returned navigation only.
+- Practice: order what the user sees so it tells the story of what matters first.
+- Review question: does the order of screens tell the user what matters first?
 
-### Tobias van Schneider — anti-sterility
-Functional elegance benefits from emotional personality and a distinct character.
-- In practice: a specific tone in copy, type, and color; a point of view. Avoid defaults nobody chose.
+### Tobias van Schneider: a point of view
+**Status: Partial.** His page describes brands and products that have a point of view, personal and crafted design, and calm digital tools. "Anti-sterility" as a label comes from the author's notes.
+- Practice: make deliberate choices in tone, type, and color. Avoid defaults nobody chose.
 - Review question: could this screen belong to any product? If yes, it has no character.
 
-### Maggie Appleton — embodied cognition
-Abstract ideas become easier to grasp as tactile, spatial metaphors.
-- In practice: use spatial relationships (containment, adjacency, layering) to show structure. Metaphors must be earned, not decorative.
-- Review question: does the spatial layout match the mental model of the data?
+### Maggie Appleton: tools as cultural practice
+**Status: Checked.** Her page argues that software for thinking should be understood as cultural practice, that challenging tools are better than flattering ones, and that users should shape their own tools. Note: the earlier "embodied cognition" summary is not on the page and has been removed.
+- Practice: favor tools that push thinking and let users adapt them. Question tools that only flatter.
+- Review question: does this tool challenge the user, or only please them?
 
-### Jason Yuan — a place, not a list
-Interfaces can feel humane and emotional when they present things as places the user returns to.
-- In practice: spatial organization, persistent landmarks, a sense of home. Use sparingly, and check it against the task.
+### Jason Yuan: a place, not a list
+**Status: Unverified.** The page returned only the name.
+- Practice: present things as places the user can return to, if the task allows it.
 - Review question: does the user know where they are without reading the title?
 
-### Alexander Obenauer — items over apps
-Personal computing can be organized around items and their relationships rather than around apps.
-- In practice: surface the object the user cares about; show how saved things relate.
+### Alexander Obenauer: items over apps
+**Status: Checked.** His page argues that personal software should serve people's lives, that rigid app silos are the problem, and that malleable software and unified structures are better.
+- Practice: organize around the user's items and their relationships, not around app boundaries.
 - Review question: is the user organizing things, or organizing apps?
 
-### Devine Lu Linvega — radical personal software
-Austere, personal software has a clear vision because it refuses to accommodate everyone. Clarity of purpose matters more than breadth.
-- In practice: decide who the product is for and remove features outside that. Accept that some people will bounce.
-- Review question: what would this look like if it served only one person well?
+### Devine Lu Linvega: radical personal software
+**Status: Unverified.** The page returned the title only.
+- Practice: decide who the product is for. Remove features outside that.
+- Review question: what would this look like if it served one person well?
 
-### Andy Allen — delight and sensory richness
-Utility apps can use sound, haptics, materials, and shaders to create a sense of game-like quality. This approach is polarizing and easy to overdo.
-- In practice: use sensory feedback where it confirms a meaningful action. Cap intensity. Always provide a way to disable it.
+### Andy Allen: sensory richness, used with care
+**Status: Unverified.** The redirect was not followed. The entry rests on the author's notes, which call his approach polarizing.
+- Practice: use sound and haptics only to confirm meaningful actions. Cap intensity. Always provide an off switch.
 - Review question: does the richness make the task faster or more pleasant, or only more noticeable?
 
 ---
 
 ## Using this file
 
-When reviewing, pick the two or three principles that match the problem. Do not run through all 24 every time. The point is decisions, not a checklist of quotes.
+Pick the two or three entries that match the problem. Do not run through all 24 each time. Prefer entries marked **Checked**. Treat **Unverified** entries as prompts to think, not as the designer's position.

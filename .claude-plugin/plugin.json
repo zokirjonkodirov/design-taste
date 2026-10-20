@@ -1,7 +1,7 @@
 {
   "name": "design-taste",
-  "version": "0.1.1",
-  "description": "Opinionated UI review, design, and implementation guidance distilled from 24 designers' published philosophies. Counters generic AI-generated UI.",
+  "version": "0.2.0",
+  "description": "Opinionated UI review, design, and implementation guidance inspired by 24 designers' public work. AI-written; not endorsed by the designers. Counters generic AI-generated UI.",
   "author": {
     "name": "zokirjonkodirov",
     "url": "https://github.com/zokirjonkodirov"
