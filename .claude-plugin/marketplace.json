@@ -11,8 +11,8 @@
     {
       "name": "design-taste",
       "source": "./",
-      "description": "Opinionated UI review, design, and implementation guidance inspired by 24 designers' public work. AI-written; not endorsed by the designers.",
-      "version": "0.2.5",
+      "description": "Opinionated UI review, design, and implementation guidance for web and mobile, inspired by 24 designers' public work. AI-written; not endorsed by the designers.",
+      "version": "0.3.0",
       "category": "design"
     }
   ]

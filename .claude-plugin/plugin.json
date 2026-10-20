@@ -1,7 +1,7 @@
 {
   "name": "design-taste",
-  "version": "0.2.5",
-  "description": "Opinionated UI review, design, and implementation guidance inspired by 24 designers' public work. AI-written; not endorsed by the designers. Counters generic AI-generated UI.",
+  "version": "0.3.0",
+  "description": "Opinionated UI review, design, and implementation guidance for web and mobile, inspired by 24 designers' public work. AI-written; not endorsed by the designers. Counters generic AI-generated UI.",
   "author": {
     "name": "zokirjonkodirov",
     "url": "https://github.com/zokirjonkodirov"
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/zokirjonkodirov/design-taste",
   "repository": "https://github.com/zokirjonkodirov/design-taste",
   "license": "MIT",
-  "keywords": ["design", "ui", "ux", "review", "typography", "motion", "accessibility"]
+  "keywords": ["design", "ui", "ux", "review", "typography", "motion", "accessibility", "mobile", "responsive", "touch"]
 }

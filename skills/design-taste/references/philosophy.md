@@ -4,13 +4,13 @@ Each entry is written by an AI from the designer's own public material where tha
 
 **Status** tells you how far to trust an entry:
 
-- **Checked:** the designer's own page or text was read, and it supports the core of the entry.
-- **Partial:** some support exists, from a designer's own page, from publisher or review summaries, or from search excerpts of their writing. The rest comes from the author's notes or was not confirmed.
+- **Checked:** the designer's own page or text was read, and it supports the core of the entry. Cite these by name in findings.
+- **Partial:** some support exists, from a designer's own page, from publisher or review summaries, or from search excerpts of their writing. The rest comes from the author's notes or was not confirmed. Never cite these by name in a finding; cite the checklist item.
 - **Unverified:** no usable material was found, or it did not support the entry. Do not cite it as the designer's view.
 
 Format: **Principle** · practice · review question.
 
-Last checked: 2026-10-20.
+Last checked: 2026-10-20. 24 entries: 18 Checked, 6 Partial, 0 Unverified.
 
 ---
 
@@ -60,22 +60,58 @@ Last checked: 2026-10-20.
 - Practice: measure responsiveness and rendering. Keep type metrics precise.
 - Review question: does rendering stay sharp and responsive under real conditions?
 
+### Brad Frost: atomic design
+**Status: Checked.** His essay "Atomic Web Design" argues that designers are building systems of components, not pages. It organizes them into atoms, molecules, organisms, templates, and pages, and recommends assembling from small parts so the system stays coherent from the start.
+- Practice: name and reuse the smallest parts, such as labels and buttons, before composing screens. Build pages from components rather than one-off layouts.
+- Review question: is this element an existing component, or a one-off that should become one?
+
+### Ahmad Shadeed: defensive CSS
+**Status: Checked.** His article "Defensive CSS" and the defensivecss.dev project argue that CSS should anticipate dynamic content, user uploads, and unusual viewports. Techniques include `flex-wrap`, `min-width: 0` on flex items, `minmax(0, 1fr)` in grids, `object-fit` on images, `overscroll-behavior` on modals, `scrollbar-gutter: stable`, fallbacks for CSS variables, and testing short viewports as well as narrow ones.
+- Practice: assume text will be longer, images will be the wrong ratio, and counts will change. Write the layout so it survives that.
+- Review question: what happens to this layout with a 40-character name, a missing image, or a 320px wide viewport?
+
+---
+
+## Usability and access
+
+### Jakob Nielsen: ten usability heuristics
+**Status: Checked.** His article lists ten heuristics: visibility of system status, match between system and real world, user control and freedom, consistency and standards, error prevention, recognition rather than recall, flexibility and efficiency, aesthetic and minimalist design, help users recognize and recover from errors, and help and documentation.
+- Practice: show status for every async action, give every destructive action an exit, write errors that name the problem and the fix, and keep rarely needed content out of the way.
+- Review question: which heuristic does this screen break, and what would the user see at that moment?
+
 ### Don Norman: human-centered design
 **Status: Partial.** His page asks designers to design for people as they are, not as designers wish they were, and to learn from being wrong.
 - Practice: fit the design to how people actually think and act. Make complex tasks understandable.
 - Review question: would a first-time user guess what this does without help?
 
-### Luke Wroblewski: mobile-first clarity
-**Status: Partial.** His site and book list describe mobile-first thinking, clarity over cleverness, and a preference for avoiding dropdowns as a primary UI. The thumb-reach guidance comes from the author's notes.
-- Practice: design for the smallest screen first. Prefer clear, visible controls to hidden ones.
-- Review question: can the main action be reached one-handed on the smallest supported device?
+### Jon Yablonski: laws of UX
+**Status: Checked.** His site Laws of UX lists psychology principles with design takeaways. Relevant ones: Fitts's law (large, close, well-spaced targets), Hick's law (fewer choices decide faster), Jakob's law (users expect your product to work like the ones they already use), Doherty threshold (respond under about 400ms), Miller's law (chunk information), law of proximity and common region (grouping by space and bounds), and Tesler's law (complexity can only move, not vanish).
+- Practice: size and place targets for the hand, cut choices, follow platform conventions, and group by spacing before adding boxes.
+- Review question: which law explains why this feels slow, confusing, or hard to hit?
+
+### Heydon Pickering: inclusive components
+**Status: Checked.** His site Inclusive Components builds common patterns piece by piece with accessibility first. The toggle button article says to use a real `<button type="button">` with `aria-pressed` set explicitly to true or false, to change either the label or the state but not both, and to use `role="switch"` with `aria-checked` for on/off controls, noting uneven assistive technology support.
+- Practice: build from native elements. Expose on/off state through `checked`, `aria-checked`, or `aria-pressed`, set explicitly. Test what a screen reader announces.
+- Review question: what does a keyboard or screen reader user get from this control, and is it the same thing a mouse user gets?
 
 ---
 
-### Brad Frost: atomic design
-**Status: Checked.** His essay "Atomic Web Design" argues that designers are building systems of components, not pages. It organizes them into atoms, molecules, organisms, templates, and pages, and recommends assembling from small parts so the system stays coherent from the start.
-- Practice: name and reuse the smallest parts, such as labels and buttons, before composing screens. Build pages from components rather than one-off layouts.
-- Review question: is this element an existing component, or a one-off that should become one?
+## Mobile and responsive
+
+### Luke Wroblewski: mobile first
+**Status: Checked.** His essay "Mobile First" argues for designing the mobile version before the desktop one, because small screens force teams to prioritize the most important content and actions, and because phones add capabilities such as location and touch. His book list and site also show a preference for clear, visible controls over dropdowns.
+- Practice: design for the smallest screen first. Prefer clear, visible controls to hidden ones. Cut what the small screen cannot hold rather than hiding it.
+- Review question: what did the phone layout force out, and was it worth keeping on desktop?
+
+### Josh Clark: designing for touch
+**Status: Checked.** His A List Apart excerpt from *Designing for Touch* reports that thumbs drive about three quarters of phone use, that only about a third of the screen is easy to reach one-handed, and that the top of the screen always needs a stretch. He advises designing for the most constrained grip, keeping core controls near the bottom and middle of phones, enlarging targets placed in hard-to-reach zones, and keeping tablet controls near the sides.
+- Practice: put the primary action and frequent controls in the lower half of phone screens. Put rare and destructive actions where they need a stretch. Make hard-to-reach targets bigger.
+- Review question: can the main action be hit with one thumb on the largest supported phone?
+
+### Ethan Marcotte: responsive web design
+**Status: Checked.** His A List Apart article argues for one flexible layout that adapts to the viewing context instead of separate device sites, built from fluid grids, flexible images, and media queries, and enhanced progressively.
+- Practice: lay out in proportions and `rem`, let images scale, and add breakpoints where the content breaks, not at device sizes.
+- Review question: at which width does this layout break, and is that where the breakpoint sits?
 
 ---
 
@@ -86,25 +122,22 @@ Last checked: 2026-10-20.
 - Practice: animate only where it helps. Treat taste as something that can be taught, including to tools.
 - Review question: would the user miss this animation if it were gone?
 
-### Rauno Freiberg: speed, polish, and consistency
-**Status: Partial.** His page values fast, careful work, consistency, and designs that stay relevant. The focus on invisible interaction details comes from the author's notes.
-- Practice: give every control the same visual response to hover, press, and focus.
-- Review question: do all controls respond in the same visual language?
+### Rauno Freiberg: invisible details of interaction
+**Status: Checked.** His essay "Invisible Details of Interaction Design" argues that gestures should respond immediately and mid-gesture, that motion should keep momentum and stay interruptible, that destructive actions should wait for a gesture to end, that animations should show where things come from, and that frequent actions, such as menus opened many times a day, may be better with no animation at all.
+- Practice: give every control the same visual response to hover, press, and focus. Keep motion interruptible. Remove animation from high-frequency actions.
+- Review question: do all controls respond in the same visual language, and does the most frequent action feel instant?
 
-### Benji Taylor: craft in small tools
-**Status: Partial.** His page describes craft-focused tooling and product work. The "Family Values" essay summary comes from the author's notes.
-- Practice: keep basic transitions smooth. Make small, careful choices in routine tasks.
-- Review question: does the most frequent task feel better after the detail was added?
-
-### Dan Saffer: micro-interactions
-**Status: Partial.** His site lists the books *Designing for Interaction*, *Designing Gestural Interfaces*, and *Microinteractions*. The definition of single-purpose interactions comes from the author's notes.
-- Practice: define trigger, feedback, and end state for each interaction. Keep each to one purpose.
-- Review question: can you state this interaction's single purpose in one sentence?
+### Josh W. Comeau: motion that behaves
+**Status: Checked.** His article on CSS transitions advises against `transition: all`, prefers `transform` and `opacity` over layout properties, matches easing to the motion (ease-out for entering, ease-in for leaving), gives enter and exit different timings, uses delays to keep hover targets open across gaps, separates the hover trigger from the animated element to avoid flicker, and disables transitions under `prefers-reduced-motion`.
+- Practice: name the transitioned properties. Animate transform and opacity. Pick easing by direction. Honor reduced motion.
+- Review question: which property is being animated, and does its easing match what the element is doing?
 
 ### Paco Coursey: simplicity and fine detail
 **Status: Partial.** His page emphasizes simplicity, magical details, and holistic craft. The "zero-latency keyboard-first" framing comes from the author's notes.
 - Practice: keep the interface simple and polished. Make keyboard paths complete.
 - Review question: can the most common workflow be done without touching the mouse?
+
+---
 
 ## Character and humanity
 
@@ -119,41 +152,26 @@ Last checked: 2026-10-20.
 - Review question: could this screen belong to any product? If yes, it has no character.
 
 ### Maggie Appleton: tools as cultural practice
-**Status: Checked.** Her page argues that software for thinking should be understood as cultural practice, that challenging tools are better than flattering ones, and that users should shape their own tools. The earlier "embodied cognition" summary is not on the page and has been removed.
+**Status: Checked.** Her page argues that software for thinking should be understood as cultural practice, that challenging tools are better than flattering ones, and that users should shape their own tools.
 - Practice: favor tools that push thinking and let users adapt them. Question tools that only flatter.
 - Review question: does this tool challenge the user, or only please them?
-
-### Bret Victor: a medium for the whole body
-**Status: Checked.** His essay "A Brief Rant on the Future of Interaction Design" argues that touchscreen "pictures under glass" are a numb paradigm that ignores what hands do well, and urges a dynamic medium we can see, feel, and manipulate, using the whole body. Other essays on his site are listed but were not read.
-- Practice: favor interactions that use touch, space, and manipulation over passive viewing. Question interfaces that only ask for a finger swipe.
-- Review question: what can the user do with their hands here, beyond tapping and scrolling?
-
-### Alexander Obenauer: items over apps
-**Status: Checked.** His page argues that personal software should serve people's lives, that rigid app silos are the problem, and that malleable software and unified structures are better.
-- Practice: organize around the user's items and their relationships, not around app boundaries.
-- Review question: is the user organizing things, or organizing apps?
-
-### Devine Lu Linvega: software that outlasts its toolchain
-**Status: Partial.** The 100r.co project log describes preservation of software against crumbling toolchains, lean self-built tools over heavy ones, and self-reliance and privacy. It is a log, not a manifesto. The "radical personal software" framing comes from the author's notes.
-- Practice: prefer small, lean tools that can be maintained over time. Keep tools understandable to one maker.
-- Review question: could a single person understand and maintain this tool?
-
-### Andy Allen: sensory richness, used with care
-**Status: Partial.** The notbor.ing storefront describes apps "built like a game, runs like an app" with haptics and sound, and states the rule "not a button more". It is a studio page, not a named author's writing. The notes describe the approach as polarizing.
-- Practice: use sound and haptics only to confirm meaningful actions. Cap intensity. Always provide an off switch.
-- Review question: does the richness make the task faster or more pleasant, or only more noticeable?
-
----
-
-## Unverified
-
-### Julie Zhuo: craft and measurable outcomes
-**Status: Unverified.** The domain for *The Year of the Looking Glass* was unreachable. Secondary summaries describe her as valuing intentional, clear design over decoration, and as judging a screen by its first impression, first use, and long-term use. None of the material found supported the metrics claim, which comes from the author's notes. The name is spelled Zhuo, not Zhou.
-- Practice: tie each craft change to an outcome you can measure, such as task completion, error rate, or time to understand. Keep the changes that move it.
-- Review question: what measurable change should this polish produce, and how would we know?
 
 ---
 
 ## Using this file
 
-Pick the two or three entries that match the problem. Do not run through all 24 each time. Prefer **Checked** entries. Treat **Partial** entries as summaries that need the source behind them. Treat **Unverified** entries as prompts to think, not as the designer's position.
+Pick the two or three entries that match the problem. Do not run through all 24 each time. Names in the table are **Checked** unless marked (P) for Partial; Partial entries are background reading, not citations.
+
+| Problem | Read first |
+|---|---|
+| Clutter, decoration, too many elements | Rams, Maeda, Nielsen (heuristic 8) |
+| Type, reading comfort, hierarchy | Butterick, Spiekermann, Reichenstein (P) |
+| Spacing, grid, alignment, one-off values | Frost, Yablonski (proximity, common region), Vinh (P) |
+| Layout breaks with real content or widths | Shadeed, Marcotte |
+| Phone: reach, targets, one-handed use | Clark, Wroblewski, Yablonski (Fitts) |
+| Controls, states, keyboard, screen reader | Pickering, Nielsen, Freiberg |
+| Errors, feedback, status, confirmation | Nielsen (heuristics 1, 3, 5, 9), Norman (P) |
+| Motion | Kowalski, Freiberg, Comeau |
+| Notifications, badges, interruptions | Case, Nielsen (heuristic 8) |
+| Copy, tone, voice | Checklist W1–W4; Chimero for ordering; van Schneider (P) |
+| Generic, could be any product | Chimero, Appleton, van Schneider (P) |

@@ -2,6 +2,35 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-20
+
+### Changed
+- **Roster refocused on web and mobile interface work.** Seven entries removed and seven added, all new entries Checked against the designer's own text:
+  - Removed: Julie Zhuo (no source), Bret Victor (argues against touchscreens), Alexander Obenauer and Devine Lu Linvega (not interface craft), Benji Taylor and Andy Allen (no primary text by the named person), Dan Saffer (microinteractions.com now redirects elsewhere).
+  - Added: Jakob Nielsen (ten usability heuristics), Jon Yablonski (Laws of UX), Heydon Pickering (Inclusive Components), Josh Clark (*Designing for Touch* excerpt), Ethan Marcotte ("Responsive Web Design"), Ahmad Shadeed ("Defensive CSS"), Josh W. Comeau (CSS transitions).
+  - Upgraded to Checked from their own essays: Luke Wroblewski ("Mobile First"), Rauno Freiberg ("Invisible Details of Interaction Design").
+  - Status now: 18 Checked, 6 Partial, 0 Unverified. Removed entries and reasons are listed in `sources.md`.
+- **`philosophy.md`** regrouped into six sections (added "Usability and access" and "Mobile and responsive") with a problem → entry table at the end, so a reviewer reads two or three entries instead of all 24. Fixed the stray rule that split Brad Frost from his section.
+- **Review mode** now states which references to read, adds severity bands (Blocking, High, Medium), requires measured contrast and target sizes, and allows citing a designer by name only for Checked entries. Partial entries are cited as checklist items.
+- **Implement mode** adds a phone-first step and a concrete verification list (375px and 1280px, light and dark, one error state, one empty state, tab through every control).
+- **Core rules** name the Checked designers behind each rule. "Ergonomics" in the quick reference, which matched no rule, is now "Interaction is complete".
+- **Checklist** items now have IDs (S1, T1, C1, I1, M1, A1, W1, V1…) so findings cite them without quoting. New: a Mobile and responsive section (320px overflow, thumb reach within the first viewport, 16px inputs, `hover: hover`, safe-area insets, `100dvh`, `min-width: 0`, image dimensions, content breakpoints), a 3:1 boundary contrast item, measuring contrast at the worst point of gradients and animated opacity, native-element and visible-label items, a "every control does something" item, a destructive-confirmation item, clipped or transparent text, stretched grid rows, and a definition of what "checked with keyboard" means by inspection. Measure (T3) is marked prose-only. Viewports are 320px, 375px, 1280px everywhere.
+- **Severity** now says keyboard and screen-reader blockers are Blocking, text contrast under 3:1 is Blocking, AA failures and phone breakage are High, and within a band findings are ordered by how many users hit them.
+- **Switch default** stated once: `<input type="checkbox" role="switch">` with a label; `<button role="switch">` only when the value must not be in a form.
+- **Tokens** gain `--color-border-strong` (meets 3:1 on both surfaces; the old `--color-border` was 1.2:1 and is now documented as divider-only), hover and danger-border variants, `--target-min`, 16px inputs, safe-area padding, `[hidden]` guard, input focus offset, `hover: hover` gate, a sticky bottom bar, and a Tailwind mapping. All text and boundary pairs were computed: lowest is 3.99:1 (dark border on dark surface), all text ≥ 5.9:1.
+- `README.md` install script now invoked as `bash scripts/install.sh` in case packaging strips the executable bit.
+
+### Added
+- `tests/`: the review fixture, the expected findings, and the procedure for running the with/without comparison.
+
+### Tested
+- Four runs on the fixture settings page before this release, with the 0.2.5 skill: review and implement, each with and without the skill.
+- **Review, no skill:** caught every item now in `tests/expected-findings.md`. Flat list, no severity, no measurement, no rendering.
+- **Review, 0.2.5 skill:** same coverage, plus rendered at 375px and 1280px, measured contrast ratios and target sizes, grouped by severity. Reported six frictions in the skill, all fixed above.
+- **Implement, no skill vs. 0.2.5 skill:** both produced working, accessible pages. The skill run used dividers instead of cards, one token scale, a segmented theme control, and verified by screenshot. The no-skill run used shadowed cards and theme preview tiles. Neither failed the checklist. The skill's value in this run was restraint and verification, not correctness.
+- **Review, 0.3.0 skill (before the refactor pass):** rendered at 320px, 375px, and 1280px; measured contrast at both gradient stops and at the lowest animated opacity; counted focusable elements; 34 findings in three severity bands; caught every item in `tests/expected-findings.md`, including the 320px grid overflow the two earlier runs missed; cited only Checked entries and checklist items. Reported 11 ambiguities (viewport list stated three ways, severity for accessibility-only blockers, no checklist IDs, contrast on gradients, Partial rule stated two ways, tokens' role in review, dead controls, "lower half" of what, switch markup default, measure on forms, clipped text). All eleven are fixed in this release.
+- **Consistency read of the fixed files** by a separate agent found eight more cross-file mismatches (motion property list differing between checklist and tokens, confirm-vs-undo for destructive actions, Clark's practice wording, "Measure claims" attributed to Nielsen, Quick Reference using rule names instead of checklist IDs, danger-border contrast, Partial rule scoped to Review only, severity bands with gaps). All fixed. The fixed files were not re-run on the fixture; that is the first thing to do in 0.3.1.
+
 ## [0.2.5] - 2026-10-20
 
 ### Changed

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings - TaskFlow Pro</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { color: white; font-size: 42px; font-weight: 800; margin-bottom: 13px; text-align: center; animation: fadeIn 1.2s ease-in-out infinite alternate; }
+  .subtitle { color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 37px; font-size: 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .card h2 { font-size: 22px; font-weight: 700; margin-bottom: 11px; background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .card p { color: #888; font-size: 14px; margin-bottom: 18px; }
+  .toggle { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #eee; }
+  .toggle label { font-size: 15px; color: #333; }
+  .switch { width: 36px; height: 18px; background: #ccc; border-radius: 9px; position: relative; cursor: pointer; }
+  .switch.on { background: #667eea; }
+  .switch::after { content: ''; position: absolute; width: 14px; height: 14px; background: white; border-radius: 50%; top: 2px; left: 2px; }
+  .switch.on::after { left: 20px; }
+  input[type="text"], input[type="email"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; margin-bottom: 15px; outline: none; }
+  .btn { background: linear-gradient(90deg, #667eea, #764ba2); color: white; border: none; padding: 10px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 14px; outline: none; transition: all 0.3s; }
+  .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(102,126,234,0.4); }
+  .btn-danger { background: #ff4757; }
+  .badge { display: inline-block; background: #ff4757; color: white; font-size: 10px; padding: 2px 6px; border-radius: 10px; margin-left: 6px; animation: pulse 1s infinite; }
+  .streak { text-align: center; padding: 15px; }
+  .streak .fire { font-size: 48px; }
+  .streak p { font-size: 13px; color: #888; }
+  .empty { text-align: center; color: #aaa; padding: 30px; }
+  .footer { text-align: center; color: rgba(255,255,255,0.6); margin-top: 45px; font-size: 12px; }
+  @keyframes fadeIn { from { opacity: 0.7; } to { opacity: 1; } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚙️ Settings</h1>
+  <p class="subtitle">Customize your experience and unlock your productivity potential! 🚀</p>
+  <div class="grid">
+    <div class="card">
+      <h2>👤 Profile</h2>
+      <p>Manage your personal information</p>
+      <input type="text" placeholder="Display name">
+      <input type="email" placeholder="Email address">
+      <button class="btn">Submit</button>
+    </div>
+    <div class="card">
+      <h2>🔔 Notifications <span class="badge">NEW</span></h2>
+      <p>Stay in the loop with real-time updates</p>
+      <div class="toggle"><label>Push notifications</label><div class="switch on"></div></div>
+      <div class="toggle"><label>Email digest</label><div class="switch"></div></div>
+      <div class="toggle"><label>Marketing emails</label><div class="switch on"></div></div>
+      <div class="toggle"><label>Daily reminder</label><div class="switch on"></div></div>
+    </div>
+    <div class="card">
+      <h2>🔥 Your Streak</h2>
+      <div class="streak">
+        <div class="fire">🔥</div>
+        <p>12 days in a row! Don't break the chain!</p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>🔗 Integrations</h2>
+      <p>Connect your favorite tools</p>
+      <div class="empty">No integrations yet</div>
+    </div>
+    <div class="card">
+      <h2>🎨 Appearance</h2>
+      <p>Make it yours</p>
+      <div class="toggle"><label>Dark mode</label><div class="switch"></div></div>
+      <div class="toggle"><label>Compact view</label><div class="switch"></div></div>
+      <div class="toggle"><label>Animations</label><div class="switch on"></div></div>
+    </div>
+    <div class="card">
+      <h2>⚠️ Danger Zone</h2>
+      <p>Irreversible actions</p>
+      <button class="btn btn-danger">Delete Account</button>
+    </div>
+  </div>
+  <p class="footer">Made with ❤️ by TaskFlow Team</p>
+</div>
+<script>
+  document.querySelectorAll('.switch').forEach(s => s.addEventListener('click', () => s.classList.toggle('on')));
+  document.querySelector('.btn').addEventListener('click', () => { fetch('/api/profile', {method:'POST'}); });
+</script>
+</body>
+</html>
