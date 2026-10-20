@@ -1,12 +1,12 @@
 # Philosophy Reference
 
-Each entry is written by an AI from the designer's public pages where those were readable, and from the author's notes where they were not. It is a paraphrase, not a quotation, and it is **not endorsed by the designer**.
+Each entry is written by an AI from the designer's own public material where that could be read, from secondary summaries where it could not, and from the author's notes where neither was available. It is a paraphrase, not a quotation, and it is **not endorsed by the designer**.
 
 **Status** tells you how far to trust an entry:
 
-- **Checked:** the designer's page was read and supports the core of the entry.
-- **Partial:** the page supports some of the entry. The rest comes from the author's notes.
-- **Unverified:** the page was empty, redirected, unreachable, or did not support the entry. The entry comes only from the author's notes. Do not cite it as the designer's view.
+- **Checked:** the designer's own page or text was read, and it supports the core of the entry.
+- **Partial:** some support exists, from a designer's own page, from publisher or review summaries, or from search excerpts of their writing. The rest comes from the author's notes or was not confirmed.
+- **Unverified:** no usable material was found, or it did not support the entry. Do not cite it as the designer's view.
 
 Format: **Principle** · practice · review question.
 
@@ -21,23 +21,23 @@ Last checked: 2026-10-20.
 - Practice: remove what does not serve the product. Prefer lasting choices over fashion.
 - Review question: what breaks if this element is deleted?
 
+### John Maeda: reduction and meaning
+**Status: Checked.** His "Laws of Simplicity" page says simplicity comes from thoughtful reduction, that simplicity and complexity need each other, and that good design subtracts the obvious and adds the meaningful.
+- Practice: remove what is self-evident. Add back only what carries meaning.
+- Review question: what here exists only because it was easy to add?
+
 ### Oliver Reichenstein: typography as interface
-**Status: Partial.** His iA news page supports simplicity that takes effort and design that recedes. The typography-as-interface view comes from the author's notes.
+**Status: Partial.** His iA news page supports simplicity that takes effort, design that recedes, and criticism of AI-generated imagery and formatting-heavy software. The typography-as-interface view comes from the author's notes.
 - Practice: keep text comfortable to read, with a reasonable line length and no decoration that competes with the words.
 - Review question: could someone read this for ten minutes without strain?
 
-### Kenya Hara: emptiness and material honesty
-**Status: Unverified.** The page redirected and was not followed.
-- Practice: use empty space on purpose. Avoid faux materials.
+### Kenya Hara: emptiness
+**Status: Partial.** Publisher and library descriptions of *Designing Design* and *White* describe emptiness as a central idea, and *White* describes good communication as listening rather than imposing. The "material honesty" framing comes from the author's notes.
+- Practice: use empty space on purpose. Leave room for the user's own meaning.
 - Review question: is the empty space doing work, or is it leftover?
 
-### John Maeda: subtraction reveals meaning
-**Status: Unverified.** The page at the listed URL did not clearly support "subtraction".
-- Practice: strip what is not the content or task, until the meaningful part is clear.
-- Review question: what here exists only because it was easy to add?
-
-### Jenny Odell: calm interfaces
-**Status: Unverified.** The page returned a loading message.
+### Jenny Odell: calm and attention
+**Status: Partial.** Her page was a loading message. Publisher and review summaries of *How to Do Nothing* describe attention as a scarce resource and treat refusing to be measured by productivity as a form of resistance.
 - Practice: give attention room. Avoid patterns that exist mainly to hold attention.
 - Review question: does this pattern help the user, or keep them here?
 
@@ -45,10 +45,10 @@ Last checked: 2026-10-20.
 
 ## Structure and system
 
-### Khoi Vinh: grid discipline
-**Status: Unverified.** The page returned navigation and titles only.
-- Practice: one grid, aligned edges, consistent gutters.
-- Review question: can you name the grid lines these elements sit on?
+### Khoi Vinh: the grid as a tool
+**Status: Partial.** His own blog posts describe the typographic grid as a main layout tool. A 2007 post also says he is not a methodical grid designer and sizes items by eye. His book *Ordering Disorder* covers grid principles. The emphasis on order and symmetry comes from the author's notes.
+- Practice: use a grid as a starting structure, not a rule to follow everywhere. Align edges and keep rhythm consistent.
+- Review question: where do these elements sit on the grid, and does that position do any work?
 
 ### Erik Spiekermann: craft, material, and typography as infrastructure
 **Status: Checked.** His page stresses craft and touch, typography as cultural infrastructure for orientation, legibility, and identity, and working within material limits over screens.
@@ -65,9 +65,9 @@ Last checked: 2026-10-20.
 - Practice: fit the design to how people actually think and act. Make complex tasks understandable.
 - Review question: would a first-time user guess what this does without help?
 
-### Luke Wroblewski: interaction on real devices
-**Status: Unverified.** The page is navigation with book titles about mobile usability. The thumb-reach guidance comes from the author's notes.
-- Practice: put primary actions within thumb reach. Use hit areas that work on real screens.
+### Luke Wroblewski: mobile-first clarity
+**Status: Partial.** His site and book list describe mobile-first thinking, clarity over cleverness, and a preference for avoiding dropdowns as a primary UI. The thumb-reach guidance comes from the author's notes.
+- Practice: design for the smallest screen first. Prefer clear, visible controls to hidden ones.
 - Review question: can the main action be reached one-handed on the smallest supported device?
 
 ---
@@ -85,12 +85,12 @@ Last checked: 2026-10-20.
 - Review question: do all controls respond in the same visual language?
 
 ### Benji Taylor: craft in small tools
-**Status: Partial.** His page describes craft-focused tooling. The "Family Values" essay summary comes from the author's notes.
+**Status: Partial.** His page describes craft-focused tooling and product work. The "Family Values" essay summary comes from the author's notes.
 - Practice: keep basic transitions smooth. Make small, careful choices in routine tasks.
 - Review question: does the most frequent task feel better after the detail was added?
 
-### Dan Saffer: single-purpose micro-interactions
-**Status: Unverified.** The domain redirects to a parked-domain page.
+### Dan Saffer: micro-interactions
+**Status: Partial.** His site lists the books *Designing for Interaction*, *Designing Gestural Interfaces*, and *Microinteractions*. The definition of single-purpose interactions comes from the author's notes.
 - Practice: define trigger, feedback, and end state for each interaction. Keep each to one purpose.
 - Review question: can you state this interaction's single purpose in one sentence?
 
@@ -99,24 +99,19 @@ Last checked: 2026-10-20.
 - Practice: keep the interface simple and polished. Make keyboard paths complete.
 - Review question: can the most common workflow be done without touching the mouse?
 
-### Julie Zhou: polish that moves a measure
-**Status: Unverified.** The domain was unreachable. The entry rests on the author's notes.
-- Practice: tie each craft change to a measurable outcome such as task completion, error rate, or time to understand. Keep the changes that move it.
-- Review question: what measurable change should this polish produce, and how would we know?
-
-### Robin Rendle: elastic typography
-**Status: Unverified.** The page returned titles only.
-- Practice: use fluid type sizing and a controlled measure. Respect user font settings.
+### Robin Rendle: web typography
+**Status: Partial.** His site lists the essays "The New Web Typography" and "The Futures of Typography". The essay text could not be read. Coverage of "The New Web Typography" reports its principles as putting text over font and semantics over style.
+- Practice: keep the words and their structure primary. Use fluid type sizing and a controlled measure. Respect user font settings.
 - Review question: does the text still read well at 200% zoom and on a very wide screen?
 
 ---
 
 ## Character and humanity
 
-### Frank Chimero: narrative framing
-**Status: Unverified.** The page returned navigation only.
-- Practice: order what the user sees so it tells the story of what matters first.
-- Review question: does the order of screens tell the user what matters first?
+### Frank Chimero: narrative and gaps
+**Status: Checked.** The "Stories and Voids" chapter of *The Shape of Design* argues that good design carries a story, that stories are change over time, and that gaps invite the audience to contribute. It discusses designers controlling the experience of time through ordering and pacing.
+- Practice: pace what the user sees so it shows what matters first. Leave room for the user to fill in.
+- Review question: does the order of screens tell the user what matters first, and leave room for them?
 
 ### Tobias van Schneider: a point of view
 **Status: Partial.** His page describes brands and products that have a point of view, personal and crafted design, and calm digital tools. "Anti-sterility" as a label comes from the author's notes.
@@ -124,12 +119,12 @@ Last checked: 2026-10-20.
 - Review question: could this screen belong to any product? If yes, it has no character.
 
 ### Maggie Appleton: tools as cultural practice
-**Status: Checked.** Her page argues that software for thinking should be understood as cultural practice, that challenging tools are better than flattering ones, and that users should shape their own tools. Note: the earlier "embodied cognition" summary is not on the page and has been removed.
+**Status: Checked.** Her page argues that software for thinking should be understood as cultural practice, that challenging tools are better than flattering ones, and that users should shape their own tools. The earlier "embodied cognition" summary is not on the page and has been removed.
 - Practice: favor tools that push thinking and let users adapt them. Question tools that only flatter.
 - Review question: does this tool challenge the user, or only please them?
 
 ### Jason Yuan: a place, not a list
-**Status: Unverified.** The page returned only the name.
+**Status: Partial.** Search excerpts of his Mercury OS essays on UX Collective describe modules, reducing friction between tasks by keeping items reachable in different spaces, and human intention over fixed apps and files. The full articles could not be read.
 - Practice: present things as places the user can return to, if the task allows it.
 - Review question: does the user know where they are without reading the title?
 
@@ -138,18 +133,27 @@ Last checked: 2026-10-20.
 - Practice: organize around the user's items and their relationships, not around app boundaries.
 - Review question: is the user organizing things, or organizing apps?
 
-### Devine Lu Linvega: radical personal software
-**Status: Unverified.** The page returned the title only.
-- Practice: decide who the product is for. Remove features outside that.
-- Review question: what would this look like if it served one person well?
+### Devine Lu Linvega: software that outlasts its toolchain
+**Status: Partial.** The 100r.co project log describes preservation of software against crumbling toolchains, lean self-built tools over heavy ones, and self-reliance and privacy. It is a log, not a manifesto. The "radical personal software" framing comes from the author's notes.
+- Practice: prefer small, lean tools that can be maintained over time. Keep tools understandable to one maker.
+- Review question: could a single person understand and maintain this tool?
 
 ### Andy Allen: sensory richness, used with care
-**Status: Unverified.** The redirect was not followed. The entry rests on the author's notes, which call his approach polarizing.
+**Status: Partial.** The notbor.ing storefront describes apps "built like a game, runs like an app" with haptics and sound, and states the rule "not a button more". It is a studio page, not a named author's writing. The notes describe the approach as polarizing.
 - Practice: use sound and haptics only to confirm meaningful actions. Cap intensity. Always provide an off switch.
 - Review question: does the richness make the task faster or more pleasant, or only more noticeable?
 
 ---
 
+## Unverified
+
+### Julie Zhuo: craft and measurable outcomes
+**Status: Unverified.** The domain for *The Year of the Looking Glass* was unreachable. Secondary summaries describe her as valuing intentional, clear design over decoration, and as judging a screen by its first impression, first use, and long-term use. None of the material found supported the metrics claim, which comes from the author's notes. The name is spelled Zhuo, not Zhou.
+- Practice: tie each craft change to an outcome you can measure, such as task completion, error rate, or time to understand. Keep the changes that move it.
+- Review question: what measurable change should this polish produce, and how would we know?
+
+---
+
 ## Using this file
 
-Pick the two or three entries that match the problem. Do not run through all 24 each time. Prefer entries marked **Checked**. Treat **Unverified** entries as prompts to think, not as the designer's position.
+Pick the two or three entries that match the problem. Do not run through all 24 each time. Prefer **Checked** entries. Treat **Partial** entries as summaries that need the source behind them. Treat **Unverified** entries as prompts to think, not as the designer's position.

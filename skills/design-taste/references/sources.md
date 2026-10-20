@@ -2,39 +2,39 @@
 
 Each entry in `philosophy.md` is paraphrased, not quoted. No text is copied from these sites. Verify against the source before citing a designer's exact words.
 
-The **Check** column records what was found when the page was read on 2026-10-20.
+The **Check** column records what was found on 2026-10-20. "Own page" means the designer's own site or book page was read. "Secondary" means a publisher, review, or search excerpt was read instead, or in addition.
 
 | Designer | Where to read | Check |
 |---|---|---|
-| Dieter Rams | https://www.vitsoe.com/us/about/good-design | Checked |
-| Frank Chimero | https://frankchimero.com | Navigation only |
-| Maggie Appleton | https://maggieappleton.com | Checked |
-| Tobias van Schneider | https://vanschneider.com | Checked (partial) |
-| Don Norman | https://jnd.org | Checked (partial) |
-| Julie Zhou | https://theyearofthelookingglass.com | Domain unreachable |
-| Robin Rendle | https://robinrendle.com | Titles only |
-| John Maeda | https://maedastudio.com | Did not support entry |
-| Dan Saffer | https://dannyboy.com | Redirects to a parked domain. No working source. |
-| Paco Coursey | https://paco.me | Checked (partial) |
-| Luke Wroblewski | https://lukew.com | Navigation only |
-| Jenny Odell | https://jennyodell.com | Loading message only |
-| Erik Spiekermann | https://spiekermann.com | Checked |
-| Khoi Vinh | https://subtraction.com | Navigation only |
-| Rauno Freiberg | https://rauno.me | Checked (partial). Start with "Invisible Details of Interaction Design". |
-| Emil Kowalski | https://emilkowal.ski | Checked |
-| Benji Taylor | https://benji.org | Checked (partial). "Family Values" essay not confirmed on the page. |
-| Andy Allen | https://notbor.ing | Redirected from notboring.software. Not followed. |
-| Rasmus Andersson | https://rsms.me | Checked (partial) |
-| Jason Yuan | https://jasonyuan.design | Name only |
-| Alexander Obenauer | https://alexanderobenauer.com | Checked |
-| Devine Lu Linvega | https://100r.co | Title only |
-| Oliver Reichenstein | https://ia.net/topics | Checked (partial) |
-| Kenya Hara | https://hara.ndc.co.jp | Redirected from ndc.co.jp/hara. Not followed. |
+| Dieter Rams | https://www.vitsoe.com/us/about/good-design | Own page |
+| Frank Chimero | https://shapeofdesignbook.com/chapters/07-stories-and-voids/ (*The Shape of Design*, ch. 7); https://frankchimero.com | Own book page. Homepage was navigation only. |
+| Maggie Appleton | https://maggieappleton.com | Own page |
+| Tobias van Schneider | https://vanschneider.com | Own page |
+| Don Norman | https://jnd.org | Own page |
+| Julie Zhuo | https://theyearofthelookingglass.com | Domain unreachable. Secondary summaries only. |
+| Robin Rendle | https://robinrendle.com/essays/ (essay list). Essay pages returned 404. | Own site title list. Secondary coverage for essay content. |
+| John Maeda | https://lawsofsimplicity.com | Own page (laws summaries) |
+| Dan Saffer | https://odannyboy.com | Own page (bio and book list). The `dannyboy.com` domain now redirects to a parked page. |
+| Paco Coursey | https://paco.me | Own page |
+| Luke Wroblewski | https://lukew.com/ff/ | Own page (book and essay titles) |
+| Jenny Odell | https://jennyodell.com | Loading message only. Secondary: publisher and review summaries of *How to Do Nothing*. |
+| Erik Spiekermann | https://spiekermann.com | Own page |
+| Khoi Vinh | https://subtraction.com | Own blog posts (secondary search excerpts). `/about` did not load. Book: *Ordering Disorder*. |
+| Rauno Freiberg | https://rauno.me | Own page. Start with "Invisible Details of Interaction Design". |
+| Emil Kowalski | https://emilkowal.ski | Own page |
+| Benji Taylor | https://benji.org | Own page |
+| Andy Allen | https://notbor.ing | Own studio storefront. No named author. |
+| Rasmus Andersson | https://rsms.me | Own page |
+| Jason Yuan | https://jasonyuan.design | Own site did not load. Mercury OS essays on uxdesign.cc returned 403; search excerpts only. |
+| Alexander Obenauer | https://alexanderobenauer.com | Own page |
+| Devine Lu Linvega | https://100r.co | Own project log |
+| Oliver Reichenstein | https://ia.net/topics | Own news page |
+| Kenya Hara | https://hara.ndc.co.jp (Propositions page); *Designing Design* and *White* publisher pages (Lars Müller Publishers) | Own pages did not contain his text. Secondary: publisher blurbs. |
 
 ## Notes
 
 - Rauno Freiberg appeared twice in the original source list. It is counted once here.
-- Julie Zhou's entry was added from the author's notes and stays unverified until a working source is found.
+- Search excerpts were used only as Partial support. Two PDF results that looked like low-quality AI-generated summaries were excluded.
 - Andy Allen's approach is polarizing. The skill keeps his entry as a counterweight to restraint and caps it with an explicit "make it optional" rule.
 - Designers were not asked to review or endorse this work. See `NOTICE.md` in the repository root.
 

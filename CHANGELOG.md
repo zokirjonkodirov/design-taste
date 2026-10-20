@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.2.2] - 2026-10-20
+
+### Changed
+- **Re-checked the 12 Unverified entries** against each designer's own pages, their book pages, and secondary summaries. Result: 7 Checked, 16 Partial, 1 Unverified (down from 12 Unverified).
+- **Checked** (own text supports the entry): Rams, Maeda, Spiekermann, Kowalski, Chimero, Appleton, Obenauer.
+- **Corrected the name:** "Julie Zhou" is "Julie Zhuo". Her entry stays Unverified because the domain was unreachable and the metrics claim was not found in any source.
+- **Rewrote entries to match sources:** Maeda (laws page), Chimero (*The Shape of Design*, "Stories and Voids"), Vinh (own blog posts on grids), Rendle (essay titles on his site), Linvega (project log), Allen (studio storefront), Hara (publisher blurbs), Odell (book summaries).
+- **`sources.md`:** added source URLs that worked, with a Check column stating what each page provided. Dead links are kept and labeled.
+
+### Known gaps
+- Jason Yuan: his uxdesign.cc essays returned 403. Support is from search excerpts.
+- Rendle, Odell, Hara: the primary essay or book text could not be read.
+- Julie Zhuo: no working source found.
+
 ## [0.2.1] - 2026-10-20
 
 ### Fixed
