@@ -99,6 +99,11 @@ Last checked: 2026-10-20.
 - Practice: keep the interface simple and polished. Make keyboard paths complete.
 - Review question: can the most common workflow be done without touching the mouse?
 
+### Julie Zhou: polish that moves a measure
+**Status: Unverified.** The domain was unreachable. The entry rests on the author's notes.
+- Practice: tie each craft change to a measurable outcome such as task completion, error rate, or time to understand. Keep the changes that move it.
+- Review question: what measurable change should this polish produce, and how would we know?
+
 ### Robin Rendle: elastic typography
 **Status: Unverified.** The page returned titles only.
 - Practice: use fluid type sizing and a controlled measure. Respect user font settings.

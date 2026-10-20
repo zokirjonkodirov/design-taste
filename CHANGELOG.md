@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-10-20
+
+### Fixed
+- Restored the Julie Zhou entry, which was dropped from `philosophy.md` in 0.2.0. It is marked Unverified. All 24 designers are now present (5 Checked, 7 Partial, 12 Unverified).
+
 ## [0.2.0] - 2026-10-20
 
 ### Changed
