@@ -15,6 +15,10 @@ Results land in `~/.cache/design-taste-pure/<fixture>/<with|without>/<n>/` with 
 
 What this measures: the plugin's effect in your real environment. Every other plugin and setting on the machine is present in both runs. If `fired` says `no` in a with-run, the skill's description failed to trigger; that is a bug to fix before any principle.
 
+Two traps the runner now handles, found the hard way:
+- **An installed copy of design-taste fires on both sides.** The first full batch showed `fired=yes` in all five "without" runs, because the plugin was installed from the marketplace (at 0.2.5, three releases stale). The runner now passes `--settings '{"enabledPlugins":{"design-taste@design-taste":false}}'` to both sides, so "without" has no design-taste and "with" tests the repo copy via `--plugin-dir`. Check `skills-invoked.txt` in each run folder.
+- **Another design skill can win the trigger.** With `frontend-design` installed, the first with-run invoked that and never touched design-taste. The description was rewritten to win on build prompts; both skills now fire in with-runs, design-taste first.
+
 The subagent runs recorded in `CHANGELOG.md` for 0.3.0 and 0.4.0 were not pure: the with-agent was told to read `SKILL.md`, and the without-agent was told not to use skills. They measured the content, not the plugin.
 
 ## Fixtures

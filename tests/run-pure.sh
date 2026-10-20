@@ -29,9 +29,12 @@ if [ "${1:-}" = "_one" ]; then
   [ -d "$dir" ] && chmod -R u+rwx "$dir" 2>/dev/null || true
   rm -rf "$dir"; mkdir -p "$dir"
   cp "$repo/tests/fixture-$fixture.json" "$dir/"
+  # Disable any installed copy of design-taste for BOTH sides, so "without" is
+  # really without and "with" tests the repo copy, not a stale marketplace install.
   args=(-p "$(cat "$repo/tests/prompt-$fixture.txt")"
         --output-format stream-json --verbose
-        --permission-mode acceptEdits)
+        --permission-mode acceptEdits
+        --settings '{"enabledPlugins":{"design-taste@design-taste":false}}')
   [ -n "$model" ] && args+=(--model "$model")
   [ "$variant" = "with" ] && args+=(--plugin-dir "$repo")
   start=$(date +%s)
