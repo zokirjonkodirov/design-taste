@@ -5,7 +5,7 @@ All notable changes to this project are documented here. Versions follow [Semant
 ## [0.1.1] - 2026-10-20
 
 ### Changed
-- `SKILL.md` trimmed from about 920 to about 600 words. Principles condensed; details remain in `references/`.
+- `SKILL.md` trimmed from about 920 to about 690 words. Principles condensed; details remain in `references/`.
 
 ## [0.1.0] - 2026-10-20
 
