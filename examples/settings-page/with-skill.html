@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Settings</title>
+<script>
+  /* Apply a stored theme before first paint so the page doesn't flash. */
+  (function () {
+    try {
+      var t = localStorage.getItem('fieldnote.theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    color-scheme: light;
+
+    /* Spacing: 4px base, closed scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+    /* Type: fluid, body 16px minimum */
+    --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+    --text-base: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
+    --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+    --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    --leading-body: 1.55;
+    --leading-tight: 1.2;
+    --measure: 65ch;
+
+    /* Radius: two steps */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+
+    /* Color: neutrals, one accent, one danger. Names describe meaning. */
+    --color-bg: #fafaf9;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f1f1ef;
+    --color-surface-active: #e8e8e5;
+    --color-text: #1c1c1a;
+    --color-text-muted: #5f5f5a;
+    --color-border: #e4e4e0;            /* dividers, non-interactive */
+    --color-border-strong: #8c8c86;     /* interactive boundaries, 3:1 on surface */
+    --color-accent: #2f5bd3;
+    --color-accent-hover: #2a52c0;
+    --color-accent-active: #244aad;
+    --color-accent-text: #ffffff;
+    --color-danger: #b42318;
+    --color-danger-hover: #9f1f15;
+    --color-danger-bg: #fef3f2;
+    --color-danger-border: #e9a9a3;
+    --color-danger-text: #ffffff;
+    --color-focus: #2f5bd3;
+
+    /* Motion */
+    --duration-fast: 120ms;
+    --duration-base: 200ms;
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --color-bg: #121211;
+      --color-surface: #1b1b19;
+      --color-surface-hover: #242422;
+      --color-surface-active: #2c2c29;
+      --color-text: #ededea;
+      --color-text-muted: #a3a39c;
+      --color-border: #2c2c29;
+      --color-border-strong: #6b6b66;
+      --color-accent: #7b9cff;
+      --color-accent-hover: #8fabff;
+      --color-accent-active: #a3baff;
+      --color-accent-text: #0d0d0c;
+      --color-danger: #ff8a80;
+      --color-danger-hover: #ffa099;
+      --color-danger-bg: #2a1917;
+      --color-danger-border: #6b3330;
+      --color-danger-text: #0d0d0c;
+      --color-focus: #7b9cff;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --color-bg: #121211;
+    --color-surface: #1b1b19;
+    --color-surface-hover: #242422;
+    --color-surface-active: #2c2c29;
+    --color-text: #ededea;
+    --color-text-muted: #a3a39c;
+    --color-border: #2c2c29;
+    --color-border-strong: #6b6b66;
+    --color-accent: #7b9cff;
+    --color-accent-hover: #8fabff;
+    --color-accent-active: #a3baff;
+    --color-accent-text: #0d0d0c;
+    --color-danger: #ff8a80;
+    --color-danger-hover: #ffa099;
+    --color-danger-bg: #2a1917;
+    --color-danger-border: #6b3330;
+    --color-danger-text: #0d0d0c;
+    --color-focus: #7b9cff;
+  }
+
+  /* ---------- Base ---------- */
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  [hidden] { display: none !important; }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  p { margin: 0; }
+
+  .container {
+    max-width: 58rem;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+
+  @media (min-width: 48rem) {
+    .container { padding-inline: var(--space-8); }
+  }
+
+  /* ---------- Top bar ---------- */
+
+  .topbar {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .topbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: 3.5rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    color: var(--color-text);
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .wordmark::before {
+    content: "";
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 2px;
+    background: var(--color-accent);
+  }
+
+  .topbar-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: var(--space-2);
+    margin-inline-end: calc(-1 * var(--space-2));
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .topbar-link:hover { color: var(--color-text); text-decoration: underline; text-underline-offset: 0.2em; }
+
+  /* ---------- Page header ---------- */
+
+  .page-header {
+    padding-block: var(--space-8) var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .page-header { padding-block: var(--space-12) var(--space-8); }
+  }
+
+  h1 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+  }
+
+  .page-header p {
+    max-width: var(--measure);
+    color: var(--color-text-muted);
+  }
+
+  /* ---------- Sections ---------- */
+
+  .settings-section {
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .settings-section:last-of-type { padding-block-end: var(--space-16); }
+
+  @media (min-width: 48rem) {
+    .settings-section {
+      display: grid;
+      grid-template-columns: 14rem minmax(0, 36rem);
+      column-gap: var(--space-12);
+      padding-block: var(--space-12);
+    }
+  }
+
+  .section-intro { margin-block-end: var(--space-6); }
+
+  @media (min-width: 48rem) {
+    .section-intro { margin-block-end: 0; }
+  }
+
+  .section-intro h2 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro p {
+    max-width: 48ch;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .section-intro p { max-width: 32ch; }
+  }
+
+  .hint {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .status {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .status:empty { display: none; }
+
+  .status.is-error { color: var(--color-danger); }
+
+  /* ---------- Fields ---------- */
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .field + .field { margin-block-start: var(--space-6); }
+
+  .field label,
+  .field legend {
+    padding: 0;
+    font-weight: 500;
+  }
+
+  .field input {
+    width: 100%;
+    max-width: 26rem;
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .field input:hover { border-color: var(--color-text); }
+
+  .field input:focus-visible {
+    border-color: var(--color-focus);
+    outline-offset: 0;
+  }
+
+  .field input[aria-invalid="true"] { border-color: var(--color-danger); }
+
+  .field input:disabled {
+    background: var(--color-surface-hover);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+
+  .error {
+    color: var(--color-danger);
+    font-size: var(--text-sm);
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-block-start: var(--space-8);
+  }
+
+  .form-actions .status { flex-basis: 100%; }
+
+  @media (min-width: 30rem) {
+    .form-actions .status { flex-basis: auto; margin-inline-start: var(--space-1); }
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+
+  .btn:disabled,
+  .btn[aria-busy="true"] {
+    cursor: not-allowed;
+  }
+
+  .btn:disabled:not([aria-busy="true"]) { opacity: 0.5; }
+
+  .btn[aria-busy="true"] { pointer-events: none; }
+
+  .btn-primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+  .btn-primary:active:not(:disabled) { background: var(--color-accent-active); border-color: var(--color-accent-active); }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+  .btn-secondary:hover:not(:disabled) { background: var(--color-surface-hover); border-color: var(--color-text); }
+  .btn-secondary:active:not(:disabled) { background: var(--color-surface-active); }
+
+  .btn-quiet {
+    color: var(--color-text-muted);
+  }
+  .btn-quiet:hover:not(:disabled) { background: var(--color-surface-hover); color: var(--color-text); }
+  .btn-quiet:active:not(:disabled) { background: var(--color-surface-active); }
+
+  .btn-danger-outline {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+  }
+  .btn-danger-outline:hover:not(:disabled) { background: var(--color-danger-bg); }
+  .btn-danger-outline:active:not(:disabled) { background: var(--color-danger-bg); border-color: var(--color-danger-hover); color: var(--color-danger-hover); }
+
+  .btn-danger {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: var(--color-danger-text);
+  }
+  .btn-danger:hover:not(:disabled) { background: var(--color-danger-hover); border-color: var(--color-danger-hover); }
+  .btn-danger:active:not(:disabled) { background: var(--color-danger-hover); }
+
+  .btn .spinner { display: none; }
+  .btn[aria-busy="true"] .spinner { display: inline-block; }
+
+  .spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Toggle rows ---------- */
+
+  .toggle-list { margin: 0; padding: 0; list-style: none; }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+  }
+
+  .toggle-row + .toggle-row { border-top: 1px solid var(--color-border); }
+
+  .toggle-row label {
+    display: block;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .toggle-row .hint { display: block; }
+
+  .switch {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .switch-track {
+    position: relative;
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--color-border-strong);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .switch-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .switch:hover .switch-track { background: var(--color-text-muted); }
+  .switch[aria-checked="true"] .switch-track { background: var(--color-accent); }
+  .switch[aria-checked="true"]:hover .switch-track { background: var(--color-accent-hover); }
+  .switch[aria-checked="true"] .switch-knob { transform: translateX(1rem); }
+  .switch:active .switch-track { background: var(--color-text); }
+  .switch[aria-checked="true"]:active .switch-track { background: var(--color-accent-active); }
+
+  .switch:focus-visible { outline: none; }
+  .switch:focus-visible .switch-track {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .switch:disabled { cursor: not-allowed; opacity: 0.5; }
+
+  .section-status { margin-block-start: var(--space-4); }
+
+  /* ---------- Segmented choice (theme) ---------- */
+
+  fieldset.field { margin: 0; border: 0; padding: 0; min-width: 0; }
+
+  .segmented {
+    display: flex;
+    gap: 2px;
+    max-width: 26rem;
+    padding: 2px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .segmented .option {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+
+  .segmented .option:hover { background: var(--color-surface-hover); color: var(--color-text); }
+  .segmented .option:active { background: var(--color-surface-active); }
+
+  .segmented input:checked + .option {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  .segmented input:focus-visible + .option {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Empty state ---------- */
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+  }
+
+  .empty-title { font-weight: 500; }
+
+  .empty .hint { max-width: 48ch; }
+
+  .empty .btn { margin-block-start: var(--space-1); }
+
+  /* ---------- Danger zone ---------- */
+
+  .danger-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--color-danger-border);
+    border-radius: var(--radius-md);
+  }
+
+  .danger-box .row-label { font-weight: 500; }
+
+  .danger-box .hint { max-width: 48ch; }
+
+  .danger-box .btn { margin-block-start: var(--space-1); }
+
+  /* ---------- Dialog ---------- */
+
+  dialog {
+    width: calc(100% - 2 * var(--space-4));
+    max-width: 28rem;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+
+  dialog[open] { animation: dialog-in var(--duration-base) var(--ease-out); }
+  dialog[open]::backdrop { animation: fade-in var(--duration-base) var(--ease-out); }
+
+  @keyframes dialog-in {
+    from { opacity: 0; transform: translateY(var(--space-2)); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  dialog h2 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+  }
+
+  dialog > form > p { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+  dialog .field { margin-block-start: var(--space-6); }
+
+  dialog .field input { max-width: none; }
+
+  .dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    margin-block-start: var(--space-6);
+  }
+
+  @media (max-width: 30rem) {
+    .dialog-actions { flex-direction: column-reverse; }
+    .dialog-actions .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container">
+    <a class="wordmark" href="#">Fieldnote</a>
+    <a class="topbar-link" href="#">Back to tasks</a>
+  </div>
+</header>
+
+<main class="container">
+  <div class="page-header">
+    <h1>Settings</h1>
+    <p>Your profile, how Fieldnote notifies you, and how it looks. Changes outside the profile form save as you make them.</p>
+  </div>
+
+  <!-- Profile -->
+  <section class="settings-section" id="profile" aria-labelledby="profile-heading">
+    <div class="section-intro">
+      <h2 id="profile-heading">Profile</h2>
+      <p>How you appear to teammates on tasks and comments.</p>
+    </div>
+    <form id="profile-form" novalidate>
+      <div class="field">
+        <label for="display-name">Display name</label>
+        <input id="display-name" name="displayName" type="text" autocomplete="name" value="Mara Lindqvist" aria-describedby="display-name-error" maxlength="80">
+        <p class="error" id="display-name-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" value="mara@lindqvist.dev" aria-describedby="email-hint email-error">
+        <p class="hint" id="email-hint">Changing it sends a confirmation link to the new address.</p>
+        <p class="error" id="email-error" hidden></p>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="save-btn" disabled>
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">Save changes</span>
+        </button>
+        <button type="button" class="btn btn-quiet" id="discard-btn" hidden>Discard</button>
+        <p class="status" id="profile-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
+
+  <!-- Notifications -->
+  <section class="settings-section" id="notifications" aria-labelledby="notifications-heading">
+    <div class="section-intro">
+      <h2 id="notifications-heading">Notifications</h2>
+      <p>Which events reach you by email and push. Each change saves on its own.</p>
+    </div>
+    <div>
+      <ul class="toggle-list">
+        <li class="toggle-row">
+          <div>
+            <label for="notify-assigned">Tasks assigned to me</label>
+            <span class="hint" id="notify-assigned-desc">When a teammate assigns or reassigns a task to you.</span>
+          </div>
+          <button type="button" class="switch" id="notify-assigned" role="switch" aria-checked="true" aria-describedby="notify-assigned-desc">
+            <span class="switch-track"><span class="switch-knob"></span></span>
+          </button>
+        </li>
+        <li class="toggle-row">
+          <div>
+            <label for="notify-due">Due date reminders</label>
+            <span class="hint" id="notify-due-desc">The morning a task is due, and again if it slips past.</span>
+          </div>
+          <button type="button" class="switch" id="notify-due" role="switch" aria-checked="true" aria-describedby="notify-due-desc">
+            <span class="switch-track"><span class="switch-knob"></span></span>
+          </button>
+        </li>
+        <li class="toggle-row">
+          <div>
+            <label for="notify-mentions">Comments and mentions</label>
+            <span class="hint" id="notify-mentions-desc">Replies on your tasks and anywhere you're @mentioned.</span>
+          </div>
+          <button type="button" class="switch" id="notify-mentions" role="switch" aria-checked="true" aria-describedby="notify-mentions-desc">
+            <span class="switch-track"><span class="switch-knob"></span></span>
+          </button>
+        </li>
+        <li class="toggle-row">
+          <div>
+            <label for="notify-weekly">Weekly summary</label>
+            <span class="hint" id="notify-weekly-desc">One email on Monday with what's due this week.</span>
+          </div>
+          <button type="button" class="switch" id="notify-weekly" role="switch" aria-checked="false" aria-describedby="notify-weekly-desc">
+            <span class="switch-track"><span class="switch-knob"></span></span>
+          </button>
+        </li>
+      </ul>
+      <p class="status section-status" id="notifications-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Appearance -->
+  <section class="settings-section" id="appearance" aria-labelledby="appearance-heading">
+    <div class="section-intro">
+      <h2 id="appearance-heading">Appearance</h2>
+      <p>Applies right away, on this device only.</p>
+    </div>
+    <div>
+      <fieldset class="field">
+        <legend>Theme</legend>
+        <div class="segmented" role="presentation">
+          <input class="visually-hidden" type="radio" name="theme" id="theme-system" value="system" checked>
+          <label class="option" for="theme-system">System</label>
+          <input class="visually-hidden" type="radio" name="theme" id="theme-light" value="light">
+          <label class="option" for="theme-light">Light</label>
+          <input class="visually-hidden" type="radio" name="theme" id="theme-dark" value="dark">
+          <label class="option" for="theme-dark">Dark</label>
+        </div>
+        <p class="hint" id="theme-hint">System follows your device's light or dark setting.</p>
+      </fieldset>
+      <p class="status section-status" id="appearance-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="settings-section" id="integrations" aria-labelledby="integrations-heading">
+    <div class="section-intro">
+      <h2 id="integrations-heading">Integrations</h2>
+      <p>Other tools that can read or create your tasks.</p>
+    </div>
+    <div>
+      <div class="empty">
+        <p class="empty-title">No integrations connected</p>
+        <p class="hint">Connect Slack, GitHub, or Google Calendar to turn messages, issues, and events into tasks, and to get updates where you already work.</p>
+        <button type="button" class="btn btn-secondary" id="browse-integrations">Browse integrations</button>
+      </div>
+      <p class="status section-status" id="integrations-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Danger zone -->
+  <section class="settings-section" id="danger" aria-labelledby="danger-heading">
+    <div class="section-intro">
+      <h2 id="danger-heading">Danger zone</h2>
+      <p>Actions here can't be undone.</p>
+    </div>
+    <div>
+      <div class="danger-box">
+        <p class="row-label">Delete account</p>
+        <p class="hint">Removes your account and every task you own. Projects shared with your team stay with them.</p>
+        <button type="button" class="btn btn-danger-outline" id="delete-open">Delete account…</button>
+      </div>
+      <p class="status section-status" id="danger-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<dialog id="delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-desc">
+  <form id="delete-form" novalidate>
+    <h2 id="delete-title">Delete your account?</h2>
+    <p id="delete-desc">This deletes your account and every task you own. It can't be undone. Shared projects stay with your team.</p>
+    <div class="field">
+      <label for="delete-confirm">Type <strong>delete</strong> to confirm</label>
+      <input id="delete-confirm" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-secondary" id="delete-cancel">Cancel</button>
+      <button type="submit" class="btn btn-danger" id="delete-submit" disabled>
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">Delete account</span>
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function setStatus(el, text, isError) {
+    el.textContent = text;
+    el.classList.toggle('is-error', !!isError);
+  }
+
+  function setBusy(btn, busy, label) {
+    btn.setAttribute('aria-busy', busy ? 'true' : 'false');
+    btn.disabled = busy;
+    btn.querySelector('.btn-label').textContent = label;
+  }
+
+  /* ---------- Theme ---------- */
+
+  var THEME_KEY = 'fieldnote.theme';
+  var root = document.documentElement;
+  var themeRadios = document.querySelectorAll('input[name="theme"]');
+  var appearanceStatus = $('appearance-status');
+
+  function applyTheme(value) {
+    if (value === 'light' || value === 'dark') root.setAttribute('data-theme', value);
+    else root.removeAttribute('data-theme');
+  }
+
+  var storedTheme = null;
+  try { storedTheme = localStorage.getItem(THEME_KEY); } catch (e) {}
+  if (storedTheme === 'light' || storedTheme === 'dark') {
+    for (var i = 0; i < themeRadios.length; i++) themeRadios[i].checked = themeRadios[i].value === storedTheme;
+  }
+
+  Array.prototype.forEach.call(themeRadios, function (radio) {
+    radio.addEventListener('change', function () {
+      if (!radio.checked) return;
+      applyTheme(radio.value);
+      try {
+        if (radio.value === 'system') localStorage.removeItem(THEME_KEY);
+        else localStorage.setItem(THEME_KEY, radio.value);
+      } catch (e) {}
+      setStatus(appearanceStatus, 'Saved.');
+    });
+  });
+
+  /* ---------- Profile form ---------- */
+
+  var form = $('profile-form');
+  var nameInput = $('display-name');
+  var emailInput = $('email');
+  var saveBtn = $('save-btn');
+  var discardBtn = $('discard-btn');
+  var profileStatus = $('profile-status');
+  var saved = { name: nameInput.value, email: emailInput.value };
+  var saving = false;
+
+  function isDirty() {
+    return nameInput.value.trim() !== saved.name || emailInput.value.trim() !== saved.email;
+  }
+
+  function refreshActions() {
+    var dirty = isDirty();
+    if (!saving) saveBtn.disabled = !dirty;
+    discardBtn.hidden = !dirty || saving;
+  }
+
+  function showError(input, message) {
+    var errorEl = $(input.id + '-error');
+    if (message) {
+      input.setAttribute('aria-invalid', 'true');
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+    } else {
+      input.removeAttribute('aria-invalid');
+      errorEl.textContent = '';
+      errorEl.hidden = true;
+    }
+  }
+
+  function validateName() {
+    if (nameInput.value.trim() === '') return 'Enter a display name so teammates can recognize you.';
+    return '';
+  }
+
+  function validateEmail() {
+    var v = emailInput.value.trim();
+    if (v === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Enter an email address like name@example.com.';
+    return '';
+  }
+
+  [nameInput, emailInput].forEach(function (input) {
+    input.addEventListener('input', function () {
+      if (input.getAttribute('aria-invalid') === 'true') {
+        showError(input, input === nameInput ? validateName() : validateEmail());
+      }
+      if (profileStatus.textContent) setStatus(profileStatus, '');
+      refreshActions();
+    });
+    input.addEventListener('blur', function () {
+      if (!isDirty()) return;
+      showError(input, input === nameInput ? validateName() : validateEmail());
+    });
+  });
+
+  discardBtn.addEventListener('click', function () {
+    nameInput.value = saved.name;
+    emailInput.value = saved.email;
+    showError(nameInput, '');
+    showError(emailInput, '');
+    setStatus(profileStatus, 'Changes discarded.');
+    refreshActions();
+    nameInput.focus();
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (saving) return;
+
+    var nameError = validateName();
+    var emailError = validateEmail();
+    showError(nameInput, nameError);
+    showError(emailInput, emailError);
+
+    if (nameError || emailError) {
+      setStatus(profileStatus, "Couldn't save. Fix the field marked above.", true);
+      (nameError ? nameInput : emailInput).focus();
+      return;
+    }
+
+    var emailChanged = emailInput.value.trim() !== saved.email;
+    saving = true;
+    setStatus(profileStatus, '');
+    setBusy(saveBtn, true, 'Saving…');
+    discardBtn.hidden = true;
+
+    window.setTimeout(function () {
+      saved = { name: nameInput.value.trim(), email: emailInput.value.trim() };
+      nameInput.value = saved.name;
+      emailInput.value = saved.email;
+      saving = false;
+      setBusy(saveBtn, false, 'Save changes');
+      setStatus(profileStatus, emailChanged
+        ? 'Saved. Check ' + saved.email + ' for a confirmation link.'
+        : 'Saved.');
+      refreshActions();
+    }, 900);
+  });
+
+  refreshActions();
+
+  /* ---------- Notification switches ---------- */
+
+  var notificationsStatus = $('notifications-status');
+
+  Array.prototype.forEach.call(document.querySelectorAll('.switch[role="switch"]'), function (sw) {
+    sw.addEventListener('click', function () {
+      var next = sw.getAttribute('aria-checked') !== 'true';
+      sw.setAttribute('aria-checked', next ? 'true' : 'false');
+      setStatus(notificationsStatus, 'Saved.');
+    });
+  });
+
+  /* ---------- Integrations ---------- */
+
+  $('browse-integrations').addEventListener('click', function () {
+    setStatus($('integrations-status'), 'The integrations directory opens in the full app; it is not part of this preview.');
+  });
+
+  /* ---------- Account deletion ---------- */
+
+  var dialog = $('delete-dialog');
+  var deleteOpen = $('delete-open');
+  var deleteForm = $('delete-form');
+  var deleteInput = $('delete-confirm');
+  var deleteSubmit = $('delete-submit');
+  var deleteCancel = $('delete-cancel');
+  var dangerStatus = $('danger-status');
+  var deleting = false;
+
+  deleteOpen.addEventListener('click', function () {
+    deleteInput.value = '';
+    deleteSubmit.disabled = true;
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    deleteInput.focus();
+  });
+
+  deleteInput.addEventListener('input', function () {
+    if (!deleting) deleteSubmit.disabled = deleteInput.value.trim().toLowerCase() !== 'delete';
+  });
+
+  function closeDialog() {
+    if (typeof dialog.close === 'function') dialog.close();
+    else dialog.removeAttribute('open');
+  }
+
+  deleteCancel.addEventListener('click', closeDialog);
+
+  dialog.addEventListener('cancel', function (event) {
+    if (deleting) event.preventDefault();
+  });
+
+  deleteForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (deleting || deleteSubmit.disabled) return;
+    deleting = true;
+    deleteCancel.disabled = true;
+    deleteInput.disabled = true;
+    setBusy(deleteSubmit, true, 'Deleting…');
+
+    window.setTimeout(function () {
+      deleting = false;
+      deleteCancel.disabled = false;
+      deleteInput.disabled = false;
+      setBusy(deleteSubmit, false, 'Delete account');
+      deleteSubmit.disabled = true;
+      closeDialog();
+      deleteOpen.disabled = true;
+      deleteOpen.textContent = 'Deletion requested';
+      setStatus(dangerStatus, 'We emailed a confirmation link to ' + saved.email + '. Your account is deleted when you open it; ignore the email to keep it.');
+      deleteOpen.focus();
+    }, 1000);
+  });
+})();
+</script>
+</body>
+</html>

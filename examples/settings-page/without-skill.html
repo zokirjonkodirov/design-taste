@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings – Tally</title>
+<meta name="description" content="Account settings for the Tally task manager: profile, notifications, appearance, integrations and account deletion.">
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #f6f5f2;
+    --surface: #ffffff;
+    --surface-2: #f1f0ec;
+    --border: #e4e2dc;
+    --border-strong: #cfccc4;
+    --text: #1c1b18;
+    --text-2: #5f5d56;
+    --text-3: #8c8a82;
+    --accent: #3f5fd6;
+    --accent-hover: #3450bd;
+    --accent-soft: #e8ecfb;
+    --accent-text: #2f48ad;
+    --on-accent: #ffffff;
+    --danger: #c0392b;
+    --danger-hover: #a83125;
+    --danger-soft: #fbecea;
+    --danger-border: #f0c4bf;
+    --success: #2e7d4f;
+    --success-soft: #e6f4ec;
+    --ring: 0 0 0 3px rgba(63, 95, 214, .28);
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,.18);
+    --radius: 14px;
+    --radius-sm: 9px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131312;
+      --surface: #1d1d1b;
+      --surface-2: #262624;
+      --border: #2f2f2c;
+      --border-strong: #46453f;
+      --text: #ecebe6;
+      --text-2: #a7a59d;
+      --text-3: #777570;
+      --accent: #7b93f0;
+      --accent-hover: #93a7f4;
+      --accent-soft: #252b45;
+      --accent-text: #a9b8f7;
+      --on-accent: #0f1430;
+      --danger: #e5655a;
+      --danger-hover: #ee7d73;
+      --danger-soft: #3a1f1c;
+      --danger-border: #5a2b26;
+      --success: #5cc48a;
+      --success-soft: #1d3326;
+      --ring: 0 0 0 3px rgba(123, 147, 240, .35);
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131312;
+    --surface: #1d1d1b;
+    --surface-2: #262624;
+    --border: #2f2f2c;
+    --border-strong: #46453f;
+    --text: #ecebe6;
+    --text-2: #a7a59d;
+    --text-3: #777570;
+    --accent: #7b93f0;
+    --accent-hover: #93a7f4;
+    --accent-soft: #252b45;
+    --accent-text: #a9b8f7;
+    --on-accent: #0f1430;
+    --danger: #e5655a;
+    --danger-hover: #ee7d73;
+    --danger-soft: #3a1f1c;
+    --danger-border: #5a2b26;
+    --success: #5cc48a;
+    --success-soft: #1d3326;
+    --ring: 0 0 0 3px rgba(123, 147, 240, .35);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, p { margin: 0; }
+  button, input { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus-visible { outline: none; box-shadow: var(--ring); }
+  a { color: var(--accent-text); }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    max-width: 1040px; margin: 0 auto; padding: 0 16px;
+    height: 56px; display: flex; align-items: center; gap: 14px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -.01em; text-decoration: none; color: var(--text); }
+  .brand-mark {
+    width: 26px; height: 26px; border-radius: 8px; background: var(--accent); color: var(--on-accent);
+    display: grid; place-items: center;
+  }
+  .brand-mark svg { width: 15px; height: 15px; }
+  .crumb { color: var(--text-3); }
+  .crumb-sep { color: var(--text-3); margin: 0 2px; }
+  .topbar-spacer { flex: 1; }
+  .avatar-sm {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-text);
+    font-size: 12px; font-weight: 650; display: grid; place-items: center;
+  }
+
+  /* ---------- Layout ---------- */
+  .page { max-width: 1040px; margin: 0 auto; padding: 28px 16px 96px; }
+  .page-head { margin-bottom: 22px; }
+  .page-head h1 { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+  .page-head p { color: var(--text-2); margin-top: 4px; }
+
+  .layout { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 820px) {
+    .layout { grid-template-columns: 200px minmax(0, 1fr); gap: 36px; align-items: start; }
+  }
+
+  /* ---------- Section nav ---------- */
+  .nav {
+    position: sticky; top: 56px; z-index: 10;
+    background: var(--bg);
+    margin: 0 -16px; padding: 6px 16px 10px;
+    display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 0 0 auto;
+    padding: 7px 12px; border-radius: 999px; text-decoration: none;
+    color: var(--text-2); font-weight: 500; font-size: 14px; white-space: nowrap;
+    transition: background .15s, color .15s;
+  }
+  .nav a:hover { background: var(--surface-2); color: var(--text); }
+  .nav a.active { background: var(--accent-soft); color: var(--accent-text); }
+  .nav a.danger-link.active { background: var(--danger-soft); color: var(--danger); }
+  @media (min-width: 820px) {
+    .nav {
+      top: 76px; margin: 0; padding: 0; border: none; background: transparent;
+      flex-direction: column; gap: 2px; overflow: visible;
+    }
+    .nav a { padding: 8px 12px; border-radius: var(--radius-sm); }
+  }
+
+  /* ---------- Cards / sections ---------- */
+  .content { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
+  section { scroll-margin-top: 120px; }
+  @media (min-width: 820px) { section { scroll-margin-top: 80px; } }
+
+  .section-title { font-size: 17px; font-weight: 650; letter-spacing: -.01em; margin-bottom: 4px; }
+  .section-desc { color: var(--text-2); font-size: 14px; margin-bottom: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-body { padding: 20px; }
+  .card-foot {
+    padding: 12px 20px; background: var(--surface-2); border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .card-foot .hint { color: var(--text-3); font-size: 13px; }
+  @media (max-width: 480px) { .card-body { padding: 16px; } .card-foot { padding: 12px 16px; } }
+
+  /* ---------- Forms ---------- */
+  .profile-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 600px) { .profile-grid { grid-template-columns: auto 1fr; gap: 24px; align-items: start; } }
+  .avatar-lg {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #9d4fd6));
+    color: #fff; font-size: 26px; font-weight: 650; letter-spacing: .02em;
+    display: grid; place-items: center; user-select: none;
+  }
+  .avatar-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .avatar-wrap small { color: var(--text-3); font-size: 12px; text-align: center; }
+
+  .fields { display: grid; gap: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .help { color: var(--text-3); font-size: 12.5px; margin-top: 6px; }
+  .field .error { color: var(--danger); font-size: 12.5px; margin-top: 6px; display: none; }
+  .field.invalid .error { display: block; }
+  .field.invalid input { border-color: var(--danger); }
+  .input {
+    width: 100%; height: 40px; padding: 0 12px;
+    background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+    color: var(--text); transition: border-color .15s, box-shadow .15s;
+  }
+  .input::placeholder { color: var(--text-3); }
+  .input:focus-visible { border-color: var(--accent); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 38px; padding: 0 16px; border-radius: var(--radius-sm);
+    border: 1px solid transparent; font-weight: 600; font-size: 14px;
+    transition: background .15s, border-color .15s, color .15s, opacity .15s, transform .05s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:not(:disabled):hover { background: var(--accent-hover); }
+  .btn-secondary { background: var(--surface); border-color: var(--border-strong); color: var(--text); }
+  .btn-secondary:not(:disabled):hover { background: var(--surface-2); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:not(:disabled):hover { background: var(--danger-hover); }
+  .btn-danger-outline { background: transparent; border-color: var(--danger-border); color: var(--danger); }
+  .btn-danger-outline:hover { background: var(--danger-soft); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* ---------- Toggle rows ---------- */
+  .rows { display: flex; flex-direction: column; }
+  .row {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 20px; border-top: 1px solid var(--border);
+  }
+  .row:first-child { border-top: none; }
+  .row-text { min-width: 0; }
+  .row-title { font-weight: 600; font-size: 14.5px; }
+  .row-sub { color: var(--text-2); font-size: 13px; margin-top: 2px; }
+  @media (max-width: 480px) { .row { padding: 14px 16px; } }
+
+  .switch {
+    flex: 0 0 auto; position: relative;
+    width: 44px; height: 26px; border-radius: 999px; border: none; padding: 0;
+    background: var(--border-strong); transition: background .2s;
+  }
+  .switch::after {
+    content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    transition: transform .2s cubic-bezier(.2,.8,.2,1);
+  }
+  .switch[aria-checked="true"] { background: var(--accent); }
+  .switch[aria-checked="true"]::after { transform: translateX(18px); }
+
+  /* ---------- Theme picker ---------- */
+  .themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 480px) { .themes { grid-template-columns: 1fr; } }
+  .theme-opt { position: relative; cursor: pointer; }
+  .theme-opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .theme-card {
+    border: 2px solid var(--border); border-radius: 12px; overflow: hidden;
+    background: var(--surface); transition: border-color .15s, box-shadow .15s;
+  }
+  .theme-opt:hover .theme-card { border-color: var(--border-strong); }
+  .theme-opt input:checked + .theme-card { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .theme-opt input:focus-visible + .theme-card { box-shadow: var(--ring); }
+  .preview { height: 84px; padding: 10px; display: flex; gap: 8px; }
+  .preview .pane { flex: 1; border-radius: 6px; padding: 7px; display: flex; flex-direction: column; gap: 5px; }
+  .preview .line { height: 6px; border-radius: 3px; }
+  .preview .side { width: 26%; border-radius: 6px; display: flex; flex-direction: column; gap: 5px; padding: 7px; }
+  .preview.light, .preview .light { background: #f6f5f2; }
+  .preview.light .pane, .preview .light .pane { background: #fff; border: 1px solid #e4e2dc; }
+  .preview.light .side, .preview .light .side { background: #ebe9e4; }
+  .preview.light .line, .preview .light .line { background: #d8d6cf; }
+  .preview.light .line.acc, .preview .light .line.acc { background: #3f5fd6; width: 55%; }
+  .preview.dark, .preview .dark { background: #131312; }
+  .preview.dark .pane, .preview .dark .pane { background: #1d1d1b; border: 1px solid #2f2f2c; }
+  .preview.dark .side, .preview .dark .side { background: #262624; }
+  .preview.dark .line, .preview .dark .line { background: #3e3e3a; }
+  .preview.dark .line.acc, .preview .dark .line.acc { background: #7b93f0; width: 55%; }
+  .preview.split { position: relative; overflow: hidden; padding: 0; }
+  .preview.split > div { position: absolute; inset: 0; padding: 10px; display: flex; gap: 8px; }
+  .preview.split > .dark { clip-path: polygon(55% 0, 100% 0, 100% 100%, 45% 100%); }
+  .theme-label { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-top: 1px solid var(--border); font-weight: 600; font-size: 14px; }
+  .theme-label .check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-strong); display: grid; place-items: center; }
+  .theme-label .check svg { width: 10px; height: 10px; opacity: 0; }
+  .theme-opt input:checked + .theme-card .check { background: var(--accent); border-color: var(--accent); }
+  .theme-opt input:checked + .theme-card .check svg { opacity: 1; color: var(--on-accent); }
+
+  /* ---------- Empty state ---------- */
+  .empty {
+    padding: 40px 20px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .empty-art {
+    width: 72px; height: 72px; border-radius: 20px; background: var(--surface-2);
+    display: grid; place-items: center; margin-bottom: 10px; color: var(--text-3);
+  }
+  .empty-art svg { width: 32px; height: 32px; }
+  .empty h3 { font-size: 15.5px; font-weight: 650; }
+  .empty p { color: var(--text-2); font-size: 14px; max-width: 360px; }
+  .empty .btn { margin-top: 12px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+  .chip {
+    font-size: 12.5px; color: var(--text-2); border: 1px dashed var(--border-strong);
+    padding: 4px 10px; border-radius: 999px;
+  }
+
+  /* ---------- Danger zone ---------- */
+  .card.danger { border-color: var(--danger-border); }
+  .card.danger .card-body { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .card.danger .row-title { color: var(--text); }
+  .section-title.danger { color: var(--danger); }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 16px);
+    background: var(--text); color: var(--bg);
+    padding: 10px 14px 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+    z-index: 50; max-width: calc(100vw - 32px);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex: 0 0 auto; }
+  .toast.err .dot { background: var(--danger); }
+
+  /* ---------- Dialog ---------- */
+  dialog {
+    border: 1px solid var(--border); border-radius: 16px; padding: 0;
+    background: var(--surface); color: var(--text);
+    width: min(440px, calc(100vw - 32px)); box-shadow: var(--shadow-lg);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.45); backdrop-filter: blur(2px); }
+  .dlg-body { padding: 24px; }
+  .dlg-icon {
+    width: 40px; height: 40px; border-radius: 12px; background: var(--danger-soft); color: var(--danger);
+    display: grid; place-items: center; margin-bottom: 14px;
+  }
+  .dlg-icon svg { width: 20px; height: 20px; }
+  dialog h2 { font-size: 18px; font-weight: 650; letter-spacing: -.01em; margin-bottom: 6px; }
+  dialog p { color: var(--text-2); font-size: 14px; }
+  dialog .consequences { margin: 14px 0 18px; padding: 0 0 0 18px; color: var(--text-2); font-size: 14px; }
+  dialog .consequences li { margin: 3px 0; }
+  dialog code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+  .dlg-foot { padding: 14px 24px; background: var(--surface-2); border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+  @media (max-width: 480px) {
+    .dlg-foot { flex-direction: column-reverse; }
+    .dlg-foot .btn { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#" aria-label="Tally home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+      </span>
+      Tally
+    </a>
+    <span class="crumb-sep" aria-hidden="true">/</span>
+    <span class="crumb">Settings</span>
+    <span class="topbar-spacer"></span>
+    <div class="avatar-sm" id="avatarSm" aria-hidden="true">AR</div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <h1>Settings</h1>
+    <p>Manage your account, notifications and how Tally looks.</p>
+  </div>
+
+  <div class="layout">
+    <nav class="nav" aria-label="Settings sections">
+      <a href="#profile" class="active">Profile</a>
+      <a href="#notifications">Notifications</a>
+      <a href="#appearance">Appearance</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#danger" class="danger-link">Danger zone</a>
+    </nav>
+
+    <div class="content">
+
+      <!-- Profile -->
+      <section id="profile" aria-labelledby="profile-h">
+        <h2 class="section-title" id="profile-h">Profile</h2>
+        <p class="section-desc">How you appear to teammates on tasks and comments.</p>
+        <form class="card" id="profileForm" novalidate>
+          <div class="card-body profile-grid">
+            <div class="avatar-wrap">
+              <div class="avatar-lg" id="avatarLg" aria-hidden="true">AR</div>
+              <small>Initials follow<br>your display name</small>
+            </div>
+            <div class="fields">
+              <div class="field" id="nameField">
+                <label for="displayName">Display name</label>
+                <input class="input" id="displayName" name="displayName" type="text" autocomplete="name" maxlength="60" value="Ada Rivera" required>
+                <div class="error">Enter a display name.</div>
+              </div>
+              <div class="field" id="emailField">
+                <label for="email">Email</label>
+                <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" value="ada@example.com" required>
+                <div class="help">Used for sign-in and notification emails.</div>
+                <div class="error">Enter a valid email address.</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-foot">
+            <span class="hint" id="profileHint">No unsaved changes</span>
+            <div style="display:flex;gap:8px">
+              <button type="button" class="btn btn-secondary" id="resetBtn" disabled>Discard</button>
+              <button type="submit" class="btn btn-primary" id="saveBtn" disabled>Save changes</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Notifications -->
+      <section id="notifications" aria-labelledby="notif-h">
+        <h2 class="section-title" id="notif-h">Notifications</h2>
+        <p class="section-desc">Choose what Tally should tell you about. Changes save instantly.</p>
+        <div class="card">
+          <div class="rows" id="notifRows">
+            <div class="row">
+              <div class="row-text" id="n1-label">
+                <div class="row-title">Tasks assigned to me</div>
+                <div class="row-sub">When someone assigns or reassigns a task to you.</div>
+              </div>
+              <button class="switch" role="switch" aria-checked="true" aria-labelledby="n1-label" data-key="assigned"></button>
+            </div>
+            <div class="row">
+              <div class="row-text" id="n2-label">
+                <div class="row-title">Due date reminders</div>
+                <div class="row-sub">A heads-up the day before a task is due.</div>
+              </div>
+              <button class="switch" role="switch" aria-checked="true" aria-labelledby="n2-label" data-key="due"></button>
+            </div>
+            <div class="row">
+              <div class="row-text" id="n3-label">
+                <div class="row-title">Comments and mentions</div>
+                <div class="row-sub">Replies on your tasks and anywhere you're @mentioned.</div>
+              </div>
+              <button class="switch" role="switch" aria-checked="true" aria-labelledby="n3-label" data-key="mentions"></button>
+            </div>
+            <div class="row">
+              <div class="row-text" id="n4-label">
+                <div class="row-title">Weekly digest</div>
+                <div class="row-sub">A Monday summary of what's done and what's coming up.</div>
+              </div>
+              <button class="switch" role="switch" aria-checked="false" aria-labelledby="n4-label" data-key="digest"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Appearance -->
+      <section id="appearance" aria-labelledby="appear-h">
+        <h2 class="section-title" id="appear-h">Appearance</h2>
+        <p class="section-desc">Pick a theme. "System" follows your device setting.</p>
+        <div class="card">
+          <div class="card-body">
+            <fieldset style="border:none;padding:0;margin:0">
+              <legend style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Theme</legend>
+              <div class="themes" id="themePicker">
+                <label class="theme-opt">
+                  <input type="radio" name="theme" value="light">
+                  <div class="theme-card">
+                    <div class="preview light" aria-hidden="true">
+                      <div class="side"><div class="line"></div><div class="line"></div><div class="line"></div></div>
+                      <div class="pane"><div class="line acc"></div><div class="line"></div><div class="line"></div></div>
+                    </div>
+                    <div class="theme-label">Light <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div>
+                  </div>
+                </label>
+                <label class="theme-opt">
+                  <input type="radio" name="theme" value="dark">
+                  <div class="theme-card">
+                    <div class="preview dark" aria-hidden="true">
+                      <div class="side"><div class="line"></div><div class="line"></div><div class="line"></div></div>
+                      <div class="pane"><div class="line acc"></div><div class="line"></div><div class="line"></div></div>
+                    </div>
+                    <div class="theme-label">Dark <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div>
+                  </div>
+                </label>
+                <label class="theme-opt">
+                  <input type="radio" name="theme" value="system" checked>
+                  <div class="theme-card">
+                    <div class="preview split" aria-hidden="true">
+                      <div class="light"><div class="side"><div class="line"></div><div class="line"></div><div class="line"></div></div><div class="pane"><div class="line acc"></div><div class="line"></div><div class="line"></div></div></div>
+                      <div class="dark"><div class="side"><div class="line"></div><div class="line"></div><div class="line"></div></div><div class="pane"><div class="line acc"></div><div class="line"></div><div class="line"></div></div></div>
+                    </div>
+                    <div class="theme-label">System <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div>
+                  </div>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section id="integrations" aria-labelledby="integ-h">
+        <h2 class="section-title" id="integ-h">Integrations</h2>
+        <p class="section-desc">Connect the tools your team already uses.</p>
+        <div class="card">
+          <div class="empty">
+            <div class="empty-art" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 7V4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v3"/>
+                <path d="M15 7V4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v3"/>
+                <path d="M6 7h14v4a7 7 0 0 1-14 0V7z"/>
+                <path d="M13 18v3"/>
+              </svg>
+            </div>
+            <h3>No integrations yet</h3>
+            <p>Nothing is connected to this account. When integrations are available, they'll appear here with their sync status.</p>
+            <button type="button" class="btn btn-secondary" id="browseBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+              Browse integrations
+            </button>
+            <div class="chips" aria-label="Planned integrations">
+              <span class="chip">Slack</span>
+              <span class="chip">Google Calendar</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">Figma</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Danger zone -->
+      <section id="danger" aria-labelledby="danger-h">
+        <h2 class="section-title danger" id="danger-h">Danger zone</h2>
+        <p class="section-desc">Irreversible actions. Please read carefully.</p>
+        <div class="card danger">
+          <div class="card-body">
+            <div class="row-text">
+              <div class="row-title">Delete account</div>
+              <div class="row-sub">Permanently removes your account, your tasks and your comments. Shared projects stay with their other members.</div>
+            </div>
+            <button type="button" class="btn btn-danger-outline" id="deleteBtn">Delete account…</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<dialog id="deleteDialog" aria-labelledby="dlg-h">
+  <form method="dialog" id="deleteForm">
+    <div class="dlg-body">
+      <div class="dlg-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      </div>
+      <h2 id="dlg-h">Delete your account?</h2>
+      <p>This can't be undone. Deleting your account will:</p>
+      <ul class="consequences">
+        <li>Remove all tasks you own and every comment you've written</li>
+        <li>Remove you from all shared projects</li>
+        <li>Cancel any active subscription immediately</li>
+      </ul>
+      <div class="field">
+        <label for="confirmInput">Type <code>DELETE</code> to confirm</label>
+        <input class="input" id="confirmInput" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="DELETE">
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn btn-secondary" id="cancelDelete">Cancel</button>
+      <button type="submit" class="btn btn-danger" id="confirmDelete" disabled>Delete account</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="dot"></span><span id="toastMsg"></span></div>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---------- Storage helpers (never required for the page to work) ---------- */
+  var store = {
+    get: function (k) { try { var v = localStorage.getItem('tally.' + k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem('tally.' + k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastMsg = $('#toastMsg'), toastTimer;
+  function toast(msg, isErr) {
+    toastMsg.textContent = msg;
+    toastEl.classList.toggle('err', !!isErr);
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+
+  /* ---------- Theme ---------- */
+  var root = document.documentElement;
+  function applyTheme(t) {
+    if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t);
+    else root.removeAttribute('data-theme');
+  }
+  var savedTheme = store.get('theme') || 'system';
+  applyTheme(savedTheme);
+  var radio = $('#themePicker input[value="' + savedTheme + '"]');
+  if (radio) radio.checked = true;
+  $('#themePicker').addEventListener('change', function (e) {
+    if (e.target.name !== 'theme') return;
+    applyTheme(e.target.value);
+    store.set('theme', e.target.value);
+    toast('Theme set to ' + e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1));
+  });
+
+  /* ---------- Profile ---------- */
+  var nameIn = $('#displayName'), emailIn = $('#email');
+  var saveBtn = $('#saveBtn'), resetBtn = $('#resetBtn'), hint = $('#profileHint');
+  var saved = store.get('profile') || { name: nameIn.value, email: emailIn.value };
+  nameIn.value = saved.name; emailIn.value = saved.email;
+
+  function initials(name) {
+    var parts = name.trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return '?';
+    return (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
+  }
+  function renderAvatar() {
+    var i = initials(nameIn.value);
+    $('#avatarLg').textContent = i;
+    $('#avatarSm').textContent = i;
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+  function isDirty() { return nameIn.value !== saved.name || emailIn.value !== saved.email; }
+  function validate(show) {
+    var okName = nameIn.value.trim().length > 0;
+    var okEmail = validEmail(emailIn.value);
+    if (show) {
+      $('#nameField').classList.toggle('invalid', !okName);
+      $('#emailField').classList.toggle('invalid', !okEmail);
+    }
+    return okName && okEmail;
+  }
+  function refreshProfile() {
+    var dirty = isDirty();
+    saveBtn.disabled = !dirty;
+    resetBtn.disabled = !dirty;
+    hint.textContent = dirty ? 'You have unsaved changes' : 'No unsaved changes';
+    renderAvatar();
+  }
+  nameIn.addEventListener('input', function () { $('#nameField').classList.remove('invalid'); refreshProfile(); });
+  emailIn.addEventListener('input', function () { $('#emailField').classList.remove('invalid'); refreshProfile(); });
+  resetBtn.addEventListener('click', function () {
+    nameIn.value = saved.name; emailIn.value = saved.email;
+    $('#nameField').classList.remove('invalid'); $('#emailField').classList.remove('invalid');
+    refreshProfile();
+  });
+  $('#profileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate(true)) { toast('Please fix the highlighted fields', true); return; }
+    saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+    setTimeout(function () {
+      saved = { name: nameIn.value.trim(), email: emailIn.value.trim() };
+      nameIn.value = saved.name; emailIn.value = saved.email;
+      store.set('profile', saved);
+      saveBtn.textContent = 'Save changes';
+      refreshProfile();
+      toast('Profile saved');
+    }, 450);
+  });
+  refreshProfile();
+
+  // Warn before leaving with unsaved profile changes
+  window.addEventListener('beforeunload', function (e) {
+    if (isDirty()) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* ---------- Notifications ---------- */
+  var notif = store.get('notifications') || {};
+  $$('#notifRows .switch').forEach(function (sw) {
+    var key = sw.getAttribute('data-key');
+    if (key in notif) sw.setAttribute('aria-checked', notif[key] ? 'true' : 'false');
+    sw.addEventListener('click', function () {
+      var on = sw.getAttribute('aria-checked') !== 'true';
+      sw.setAttribute('aria-checked', on ? 'true' : 'false');
+      notif[key] = on;
+      store.set('notifications', notif);
+      var label = $('.row-title', sw.parentNode).textContent;
+      toast(label + (on ? ' on' : ' off'));
+    });
+  });
+
+  /* ---------- Integrations ---------- */
+  $('#browseBtn').addEventListener('click', function () {
+    toast('The integrations directory is coming soon');
+  });
+
+  /* ---------- Danger zone ---------- */
+  var dlg = $('#deleteDialog'), confirmIn = $('#confirmInput'), confirmBtn = $('#confirmDelete');
+  function openDialog() {
+    confirmIn.value = ''; confirmBtn.disabled = true;
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else dlg.setAttribute('open', '');
+    setTimeout(function () { confirmIn.focus(); }, 30);
+  }
+  function closeDialog() { if (dlg.open) dlg.close(); else dlg.removeAttribute('open'); }
+  $('#deleteBtn').addEventListener('click', openDialog);
+  $('#cancelDelete').addEventListener('click', closeDialog);
+  confirmIn.addEventListener('input', function () {
+    confirmBtn.disabled = confirmIn.value.trim().toUpperCase() !== 'DELETE';
+  });
+  dlg.addEventListener('click', function (e) {
+    // click on backdrop closes
+    if (e.target === dlg) closeDialog();
+  });
+  $('#deleteForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (confirmBtn.disabled) return;
+    confirmBtn.disabled = true; confirmBtn.textContent = 'Deleting…';
+    setTimeout(function () {
+      closeDialog();
+      confirmBtn.textContent = 'Delete account';
+      toast('Account deletion requested. Check your email to finish.', true);
+    }, 700);
+  });
+
+  /* ---------- Section nav highlighting ---------- */
+  var links = $$('.nav a');
+  var sections = links.map(function (a) { return $(a.getAttribute('href')); });
+  function setActive(id) {
+    links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+  }
+  if ('IntersectionObserver' in window) {
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { visible[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      sections.forEach(function (s) { if (visible[s.id] > bestRatio) { best = s.id; bestRatio = visible[s.id]; } });
+      if (best) setActive(best);
+    }, { rootMargin: '-25% 0px -55% 0px', threshold: [0, .25, .5, .75, 1] });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+  links.forEach(function (a) {
+    a.addEventListener('click', function () {
+      setActive(a.getAttribute('href').slice(1));
+      // keep the active pill visible on the mobile strip
+      if (a.scrollIntoView) a.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

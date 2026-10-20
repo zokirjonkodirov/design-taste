@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Design Taste Comparison</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: two equal columns, phone captures in fixed-height scroll frames, desktop captures below. */
+  :root {
+    --bg: #f6f5f2;
+    --surface: #ffffff;
+    --fg: #1d1c19;
+    --muted: #625f58;
+    --line: #dedbd4;
+    --line-strong: #8a867d;
+    --accent: #2a52be;
+    --frame: #e9e7e1;
+    --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14130f; --surface: #1d1c18; --fg: #ecebe6; --muted: #a39f95;
+      --line: #2e2c26; --line-strong: #6f6b62; --accent: #8fa8ff; --frame: #26241f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14130f; --surface: #1d1c18; --fg: #ecebe6; --muted: #a39f95;
+    --line: #2e2c26; --line-strong: #6f6b62; --accent: #8fa8ff; --frame: #26241f;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    padding-block: 2rem 4rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 2.5rem; }
+  header { display: grid; gap: 0.75rem; max-width: 65ch; }
+  h1 { font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  h2 { font-size: 1.125rem; margin: 0; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .prompt {
+    border-left: 3px solid var(--line-strong);
+    padding: 0.25rem 0 0.25rem 1rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.01em; }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 720px) { .pair { grid-template-columns: 1fr; } }
+  .col { display: grid; gap: 0.75rem; min-width: 0; }
+  .label {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    border-bottom: 1px solid var(--line); padding-bottom: 0.5rem;
+  }
+  .label strong { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .label span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+  .phone {
+    height: 680px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--frame);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .phone img { width: 375px; max-width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  .desktop { background: var(--frame); border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+  .desktop img { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: #fff; }
+  .hint { font-size: 0.8rem; color: var(--muted); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem 0.6rem 0; border-bottom: 1px solid var(--line); }
+  th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  .tablewrap { overflow-x: auto; }
+  ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="meta">design-taste 0.3.0 · implement test · 2026-10-20</p>
+    <h1>Same prompt, same model. One agent had the skill.</h1>
+    <p class="muted">Two agents built a settings page from the prompt below. Neither saw the other's work. Nothing was edited afterwards. Scroll inside each phone frame.</p>
+    <p class="prompt">Build a settings page for a task-management web app as one self-contained HTML file. Profile section (display name, email, save), four notification toggles, appearance section (theme choice), an integrations section that is currently empty, and a danger zone with account deletion. It must work on phones and desktops. Make it look good.</p>
+  </header>
+
+  <section>
+    <div class="pair">
+      <div class="col">
+        <div class="label"><strong>Without skill</strong><span>375 × 812, light</span></div>
+        <div class="phone" tabindex="0" aria-label="Without skill, phone capture, scrollable"><img src="without-skill-phone.png" alt="Settings page built without the skill at phone width: sticky section nav, avatar, every section in a white card with shadow, theme preview tiles, integrations empty state with icon and chips, red danger zone card."></div>
+      </div>
+      <div class="col">
+        <div class="label"><strong>With skill</strong><span>375 × 812, light</span></div>
+        <div class="phone" tabindex="0" aria-label="With skill, phone capture, scrollable"><img src="with-skill-phone.png" alt="Settings page built with the skill at phone width: no cards, sections separated by hairlines, full-width inputs, Save disabled until edited, switches in a list, segmented theme control, dashed empty state box, red-bordered danger zone."></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pair">
+      <div class="col">
+        <div class="label"><strong>Without skill</strong><span>1280 wide</span></div>
+        <div class="desktop"><img src="without-skill-desktop.png" alt="Without skill at desktop width: left sticky navigation column, content column with cards."></div>
+      </div>
+      <div class="col">
+        <div class="label"><strong>With skill</strong><span>1280 wide</span></div>
+        <div class="desktop"><img src="with-skill-desktop.png" alt="With skill at desktop width: two-column grid with section intro on the left and controls on the right, hairline dividers."></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="col">
+    <h2>What differs</h2>
+    <p class="muted">Both pages have labelled inputs, real switches with ARIA state, focus rings, a confirmed delete step, a dark theme, and a reduced-motion rule. The base model already knows this. The skill changed what was forbidden and what was forced.</p>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th></th><th>Without skill</th><th>With skill</th></tr></thead>
+      <tbody>
+        <tr><td>Grouping</td><td>Every section is a white card with border and shadow</td><td>Hairline dividers; a box only where it carries meaning (empty state, danger zone)</td></tr>
+        <tr><td>Extra elements</td><td>Avatar with initials, sticky section nav, three theme preview tiles, planned-integration chips</td><td>None of these. One segmented control for theme</td></tr>
+        <tr><td>Spacing and type</td><td>Its own values, consistent within the page</td><td>The starter token scale verbatim: 4px base, fluid type, two radii</td></tr>
+        <tr><td>Motion</td><td>Transitions on most controls</td><td>Named properties only, 120–200ms, nothing on load</td></tr>
+        <tr><td>Verification</td><td>Agent did not render the page</td><td>Agent rendered at 375px and 1280px, light and dark, error state, dialog, and said so</td></tr>
+        <tr><td>Agent's report</td><td>10 decisions, no sources</td><td>10 decisions, each tied to a checklist item or a Checked designer</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="muted">Which is better is partly taste. The skill's version is quieter and every choice is traceable. The other has more product polish and more to maintain. The skill did not make the page correct. It made it restrained, on one scale, and verified.</p>
+  </section>
+
+  <section class="col">
+    <h2>A defect only the skill version has</h2>
+    <p>The with-skill page scrolls 18px sideways on a 375px phone. Its three visually-hidden theme radios use <span class="meta">position: absolute</span> with no offset and no positioned ancestor, so they land at x=393 and widen the document. The body stays 375px wide, which is why the agent's own overflow check passed. That is checklist item M1 failing on the page meant to pass it.</p>
+    <p class="muted">The page is kept as generated. The checklist was changed instead: M1 now says to measure the document width, not the body. The no-skill page does not have this problem.</p>
+  </section>
+
+  <section class="col">
+    <h2>Reproduce</h2>
+    <ul>
+      <li>Repo: <a href="https://github.com/zokirjonkodirov/design-taste">zokirjonkodirov/design-taste</a>, folder <span class="meta">examples/settings-page/</span></li>
+      <li>Procedure and expected results: <span class="meta">tests/README.md</span></li>
+      <li>Captures: Chrome, light color scheme, 375×812 at 2x and 1280 wide, full page</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>

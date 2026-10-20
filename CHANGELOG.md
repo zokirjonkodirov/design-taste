@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- `examples/settings-page/`: the two pages from the 0.3.0 implement test, unedited, with phone and desktop captures, a side-by-side `compare.html`, and a README of what differs.
+
+### Changed
+- M1 now says to measure `document.documentElement.scrollWidth`, not `body`. Found while capturing the example: the with-skill page scrolls 18px sideways on a 375px phone because its visually-hidden theme radios are positioned past the right edge. The implement agent had reported "no horizontal overflow" after checking the body. The example is kept as generated, defect included.
+
 ## [0.3.0] - 2026-10-20
 
 ### Changed

@@ -41,7 +41,7 @@ Use during review. Each item is observable in code or on screen. Report only the
 - [ ] I9 Touch targets are at least 44px on touch devices
 
 ## M. Mobile and responsive
-- [ ] M1 No horizontal overflow at 320px wide
+- [ ] M1 No horizontal overflow at 320px wide. Measure `document.documentElement.scrollWidth`, not `body`; off-screen visually-hidden inputs and absolutely positioned elements widen the document without widening the body
 - [ ] M2 Primary action, if the page has one, is in the lower half of the first viewport on a 375×812 phone, or in a sticky bottom bar
 - [ ] M3 Inputs are at least 16px, so iOS does not zoom on focus
 - [ ] M4 Hover-only affordances have a touch equivalent; hover effects are inside `@media (hover: hover)`
