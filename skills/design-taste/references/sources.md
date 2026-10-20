@@ -12,12 +12,12 @@ The **Check** column records what was found on 2026-10-20. "Own page" means the 
 | Tobias van Schneider | https://vanschneider.com | Own page |
 | Don Norman | https://jnd.org | Own page |
 | Julie Zhuo | https://theyearofthelookingglass.com | Domain unreachable. Secondary summaries only. |
-| Robin Rendle | https://robinrendle.com/essays/ (essay list). Essay pages returned 404. https://adactio.com/links/10300 (link post reproducing the essay's principles) | Own site title list. Essay principles quoted via Adactio link post. |
+| Brad Frost | https://bradfrost.com/blog/post/atomic-web-design/ | Own essay text |
 | John Maeda | https://lawsofsimplicity.com | Own page (laws summaries) |
 | Dan Saffer | https://odannyboy.com | Own page (bio and book list). The `dannyboy.com` domain now redirects to a parked page. |
 | Paco Coursey | https://paco.me | Own page |
 | Luke Wroblewski | https://lukew.com/ff/ | Own page (book and essay titles) |
-| Jenny Odell | https://jennyodell.com; review at https://tricycle.org/magazine/jenny-odell-attention-economy/ (Dan Zigmond, review of *How to Do Nothing*) | Site was a loading message. Review quotes Odell directly. |
+| Amber Case | https://calmtech.com (Calm Technology principles) | Own page (principles list) |
 | Erik Spiekermann | https://spiekermann.com | Own page |
 | Khoi Vinh | https://subtraction.com | Own blog posts (secondary search excerpts). `/about` did not load. Book: *Ordering Disorder*. |
 | Rauno Freiberg | https://rauno.me | Own page. Start with "Invisible Details of Interaction Design". |
@@ -33,7 +33,7 @@ The **Check** column records what was found on 2026-10-20. "Own page" means the 
 
 ## Notes
 
-- Kenya Hara and Jason Yuan were replaced in 0.2.4 by Matthew Butterick and Bret Victor, because no readable primary text was found for Hara or Yuan. See CHANGELOG.
+- Robin Rendle and Jenny Odell were replaced in 0.2.5 by Brad Frost and Amber Case, because their primary pages did not load. Kenya Hara and Jason Yuan were replaced in 0.2.4 by Matthew Butterick and Bret Victor, because no readable primary text was found for Hara or Yuan. See CHANGELOG.
 - Rauno Freiberg appeared twice in the original source list. It is counted once here.
 - Search excerpts were used only as Partial support. Two PDF results that looked like low-quality AI-generated summaries were excluded.
 - Andy Allen's approach is polarizing. The skill keeps his entry as a counterweight to restraint and caps it with an explicit "make it optional" rule.

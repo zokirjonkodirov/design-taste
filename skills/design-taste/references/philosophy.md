@@ -36,10 +36,10 @@ Last checked: 2026-10-20.
 - Practice: treat each typographic choice as something that changes what the reader does. Choose it on purpose, and check it against the reader's task.
 - Review question: what does this typographic choice make the reader do, and was that intended?
 
-### Jenny Odell: calm and attention
-**Status: Partial.** Her site was a loading message. A Tricycle review of *How to Do Nothing* by Dan Zigmond quotes her directly: "To pay attention to one thing is to resist paying attention to other things," and "the logic of advertising and clicks dictates the media experience, which is exploitative by design." The review notes she wants a "mass movement of attention" more than a mass exodus from platforms.
-- Practice: give attention room. Avoid patterns that exist mainly to hold attention.
-- Review question: does this pattern help the user, or keep them here?
+### Amber Case: calm technology
+**Status: Checked.** Her calm technology principles state that technology should require the smallest possible amount of attention, should inform and create calm, should use the periphery, should work even when it fails, and should be the minimum needed to solve the problem.
+- Practice: keep interruptions rare, and let information sit at the edge of attention. Keep the interface working when something breaks.
+- Review question: does this interruption need the user's attention now, or can it wait at the edge?
 
 ---
 
@@ -72,6 +72,13 @@ Last checked: 2026-10-20.
 
 ---
 
+### Brad Frost: atomic design
+**Status: Checked.** His essay "Atomic Web Design" argues that designers are building systems of components, not pages. It organizes them into atoms, molecules, organisms, templates, and pages, and recommends assembling from small parts so the system stays coherent from the start.
+- Practice: name and reuse the smallest parts, such as labels and buttons, before composing screens. Build pages from components rather than one-off layouts.
+- Review question: is this element an existing component, or a one-off that should become one?
+
+---
+
 ## Craft and feedback
 
 ### Emil Kowalski: taste, restraint, and motion
@@ -98,13 +105,6 @@ Last checked: 2026-10-20.
 **Status: Partial.** His page emphasizes simplicity, magical details, and holistic craft. The "zero-latency keyboard-first" framing comes from the author's notes.
 - Practice: keep the interface simple and polished. Make keyboard paths complete.
 - Review question: can the most common workflow be done without touching the mouse?
-
-### Robin Rendle: web typography
-**Status: Partial.** His essay "The New Web Typography" states three principles, quoted here from Adactio's link post, which reproduces the essay: "We must prioritise the text over the font, or semantics over style." "We ought to use and/or make tools that reveal the consequences of typographic decisions." "We should acknowledge that web typography is only as strong as its weakest point." The essay page itself returned 404.
-- Practice: keep the words and their structure primary. Use fluid type sizing and a controlled measure. Respect user font settings.
-- Review question: does the text still read well at 200% zoom and on a very wide screen?
-
----
 
 ## Character and humanity
 

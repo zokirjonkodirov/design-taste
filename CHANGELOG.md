@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.2.5] - 2026-10-20
+
+### Changed
+- **Swapped two more designers** whose primary pages would not load:
+  - Robin Rendle → **Brad Frost** ("Atomic Web Design"). Full essay text. Checked.
+  - Jenny Odell → **Amber Case** (Calm Technology principles). Principles list on her site. Checked.
+- Status now: 11 Checked, 12 Partial, 1 Unverified.
+
+### Known gaps
+- Julie Zhuo: no working source. Still Unverified.
+- Partial entries (12): their sources are secondhand, a bio or title list, or the author's notes. Each entry says which.
+
 ## [0.2.4] - 2026-10-20
 
 ### Changed
